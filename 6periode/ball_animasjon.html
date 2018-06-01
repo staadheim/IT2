@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ballen</title>
+    <script>
+        window.onload = oppstart;
+
+        var storrelse = 500;
+        var ball;
+        var interval;
+        var trykket = 0;
+
+        function oppstart() {
+            ball = d("ballen");
+
+            //startposisjon
+            ball.style.margin = "auto";
+            ball.height = storrelse + "px";
+            ball.width = storrelse + "px";
+
+            //spillet når du trykker på den
+            ball.onclick = trykketBall;
+
+            //flytter ballen ved start
+            d("btnStart").onclick = function() {
+                if(trykket > 0) {
+                    nullstillBall;
+                }
+                else {
+                     trykket = 1;
+                     interval = setInterval(flyttBallen, 1000);
+                }
+            };
+
+            //nullstiller ballen
+            d("btnReset").onclick = nullstillBall;
+        }
+
+        function trykketBall() {
+            storrelse = Math.floor(storrelse/2);
+            
+
+        }
+
+        function flyttBallen() {
+            var toppen = Math.random() * 700;
+            var venstre = Math.random() * 1000;
+            ball.style.marginTop = toppen + "px";
+            ball.style.marginLeft = venstre + "px";
+        }
+
+        function nullstillBall() {
+            trykket = 0;
+            clearInterval(interval);
+            //startposisjon
+            ball.style.margin = "auto";
+        }
+
+        //funksjon så jeg slipper å skrive document.getElementById() hele tiden - denne kommer til å være med i alle oppgavene
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+    </script>
+    <style>
+        .innpakning {
+            text-align: center;
+            padding-bottom: 20px;
+            font-family: Helvetica;
+            color: red;
+        }
+        #divscore {
+            font-size: 30px;
+            padding: 5px;
+        }
+        #ballen {
+            background-color: red;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="innpakning">
+    <h1>Det beste ballspillet</h1>
+    <div id="divscore">
+        Score: <span id="score"></span> <br/>
+    </div>
+    <button type="button" id="btnStart">Start</button>
+    <button type="button" id="btnReset">Reset</button>
+</div>
+
+<div id="ballen"></div>
+
+</body>
+</html>

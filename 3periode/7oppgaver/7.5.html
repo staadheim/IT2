@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>7.5</title>
+    <script>
+        window.onload = oppstart;
+
+        var sum = 0;
+
+        function oppstart() {
+            var talliste = [3, -2, 5, 1, 2, 10, -10];
+            var tall1 = 2;
+            var tall2 = 5;
+
+            var oppgaveA = finnSum(talliste);
+            var oppgaveB = gjennomsnitt(talliste, oppgaveA);
+            var oppgaveC = storsteTall(talliste);
+            var oppgaveD = antallNegative(talliste);
+            var oppgaveE = sjekkOmtallfinnes(talliste,tall1);
+            var oppgaveF = gjennomsnittMedgrenser(talliste,tall1,tall2);
+
+
+            document.getElementById("btnA").onclick = function() {
+                document.getElementById("txtUtskrift").innerHTML = "Summen av alle tallene er " + oppgaveA;
+            }
+            document.getElementById("btnB").onclick = function() {
+                document.getElementById("txtUtskrift").innerHTML = "Gjennomsnittet av alle tallene er " + oppgaveB;
+            }
+            document.getElementById("btnC").onclick = function() {
+                document.getElementById("txtUtskrift").innerHTML = "Det største tallet er " + oppgaveC;
+            }
+            document.getElementById("btnD").onclick = function() {
+                document.getElementById("txtUtskrift").innerHTML = "Det er " + oppgaveD + " negative tall i arrayet.";
+            }
+            document.getElementById("btnE").onclick = function() {
+                document.getElementById("txtUtskrift").innerHTML = "Finnes tallet " + tall1 + " i arrayet?<br>" + oppgaveE;
+            }
+            document.getElementById("btnF").onclick = function() {
+                document.getElementById("txtUtskrift").innerHTML = "Gjennomsnittet av tallene mellon index " + tall1 + " og " + tall2 + " er " + oppgaveF;
+            }
+
+        }
+
+        function finnSum(tallene) {
+            for(var i=0; i<tallene.length;i++) {
+                 sum += tallene[i];
+            }
+            return sum;
+        }
+
+       function gjennomsnitt(alleTallene,sum) {
+            var gjennomsnittet = parseFloat(sum/alleTallene.length).toFixed(2);
+            return gjennomsnittet;
+        }
+
+        function storsteTall(tallArray) {
+            var storst = 0; //-1e32;
+            for(var i=0; i<tallArray.length; i++) {
+                if(tallArray[i] > storst) {
+                    var storst = tallArray[i];
+                }
+            }
+            return storst;
+        }
+
+        function antallNegative(arrayTall) {
+            var teller = 0;
+            for(var i=0; i<arrayTall.length; i++) {
+                if(arrayTall[i] < 0) {
+                    teller++;
+                }
+            }
+            return teller;
+        }
+
+        function sjekkOmtallfinnes(arrayet,tallet) {
+            for(var i=0; i<arrayet.length; i++) {
+                if(arrayet[i]===tallet) {
+                    return "Ja";
+                    break;
+                }
+            }
+            return "Nei";
+        }
+        
+        function gjennomsnittMedgrenser(helearray,nedregrense,ovregrense) {
+            var antall = 0;
+            for(var i=nedregrense; i<ovregrense; i++) {
+                sum += helearray[i];
+                antall++;
+            }
+            var gjennomsnitt = parseFloat(sum/antall).toFixed(2);
+            return gjennomsnitt;
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="btnA">Oppgave a: sum av array</button><br>
+<button type="button" id="btnB">Oppgave b: gjennomsnitt av array</button><br>
+<button type="button" id="btnC">Oppgave c: største tall i array</button><br>
+<button type="button" id="btnD">Oppgave d: antall negative tall i array</button><br>
+<button type="button" id="btnE">Oppgave e: sjekk om tallet finnes i arrayet</button><br>
+<button type="button" id="btnF">Oppgave f: gjennomsnitt mellom nedre og øvre index i arrayet</button><br>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

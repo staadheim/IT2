@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>s. 193</title>
+    <script>
+        window.onload = oppstart;
+
+        var ctx;
+        var canvasTop = 0;
+        var canvasLeft = 0;
+        var taster = {R:82,G:71,B:66,S:83};
+
+        function oppstart() {
+            ctx = document.getElementById("tegneflate").getContext("2d");
+            document.getElementById("tegneflate").onmousedown = musNed;
+            document.getElementById("tegneflate").onmouseup = musOpp;
+            document.getElementById("tegneflate").onselectstart = function () {
+                return false;
+            };
+            document.onkeyup = tastSluppet;
+            var rect = document.getElementById("tegneflate").getBoundingClientRect();
+            canvasTop = rect.top;
+            canvasLeft = rect.left;
+        }
+
+        function musNed(evt) {
+            document.getElementById("tegneflate").onmousemove = musFlytt;
+            ctx.beginPath();
+            ctx.moveTo(evt.clientX - canvasLeft, evt.clientY - canvasTop);
+        }
+
+        function musOpp(evt) {
+            document.getElementById("tegneflate").onmousemove = null;
+        }
+
+        function musFlytt(evt) {
+            ctx.lineTo(evt.clientX - canvasLeft, evt.clientY - canvasTop);
+            ctx.stroke();
+
+        }
+
+        function tastSluppet(evt) {
+            if(evt.keyCode === taster.R) {
+                ctx.strokeStyle = "red";
+            }
+            else if(evt.keyCode === taster.G) {
+                ctx.strokeStyle = "green";
+            }
+            else if(evt.keyCode === taster.B) {
+                ctx.strokeStyle = "blue";
+            }
+            else if(evt.keyCode === taster.S) {
+                ctx.strokeStyle = "black";
+            }
+
+
+            document.getElementById("farge").style.backgroundColor = ctx.strokeStyle;
+        }
+
+    </script>
+    <style>
+        #tegneflate {
+            border-style: solid;
+        }
+
+        #farge {
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            background-color: black;
+        }
+
+    </style>
+</head>
+<body>
+
+<canvas id="tegneflate" width="500" height="500"></canvas> <br/>
+
+Farge: <span id="farge"></span> (R=Rød, G=Grønn, B=Blå, S=Sort)
+
+</body>
+</html>

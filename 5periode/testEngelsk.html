@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>English</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("norway2").ondragstart = dra;
+            document.getElementById("norway1").ondrop = slipp;
+            document.getElementById("norway1").ondragover = tillat;
+
+            document.getElementById("mountains2").ondragstart = dra;
+            document.getElementById("mountains1").ondrop = slipp;
+            document.getElementById("mountains1").ondragover = tillat;
+
+            document.getElementById("trolls2").ondragstart = dra;
+            document.getElementById("trolls1").ondrop = slipp;
+            document.getElementById("trolls1").ondragover = tillat;
+
+            document.getElementById("children2").ondragstart = dra;
+            document.getElementById("children1").ondrop = slipp;
+            document.getElementById("children1").ondragover = tillat;
+
+            document.getElementById("sun2").ondragstart = dra;
+            document.getElementById("sun1").ondrop = slipp;
+            document.getElementById("sun1").ondragover = tillat;
+
+            document.getElementById("stone2").ondragstart = dra;
+            document.getElementById("stone1").ondrop = slipp;
+            document.getElementById("stone1").ondragover = tillat;
+        }
+
+        function dra(evt) {
+            evt.dataTransfer.setData("text",evt.target.id);
+        }
+
+        function slipp(evt) {
+            evt.preventDefault();
+            // 1) Sjekk hvilket ord som ble sluppet
+            var ordId = evt.dataTransfer.getData("text");
+            ordId = document.getElementById(ordId);
+            // 2) Fjern understreker
+            var maalet = evt.target;
+            maalet.innerHTML = "";
+            // 2b) Legger til ordet i i Mål-taggen
+            maalet.appendChild(ordId);
+            // 3) Skjekk om det er riktig ord
+            var kodeord = maalet.dataset.kodeord;
+            if(ordId.innerHTML === kodeord) {
+                ordId.style.color ="green";
+                ordId.style.fontWeight = "bold";
+            }
+            else {
+                ordId.style.color ="red";
+                ordId.style.textDecoration = "line-through";
+            }
+            // 4) Legg til poeng
+        }
+
+        function tillat(evt) {
+            evt.preventDefault();
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<p id="tekst">
+    Hello, welcome to <span id="norway1" data-kodeord="Norway">___</span>!
+    Here we have <span id="mountains1" data-kodeord="mountains">_________</span>
+    where there are living <span id="trolls1" data-kodeord="trolls">______</span>.
+    They eat <span id="children1" data-kodeord="children">________</span>.
+    When exposed to <span id="sun1" data-kodeord="sunlight">________</span>
+    they turn to <span id="stone1" data-kodeord="stone">_____</span>.
+</p>
+
+<p id="flereOrd">
+    <span id="norway2" draggable="true">Norway</span> <br>
+    <span id="mountains2" draggable="true">mountains</span> <br>
+    <span id="trolls2" draggable="true">trolls</span> <br>
+    <span id="children2" draggable="true">children</span> <br>
+    <span id="sun2" draggable="true">sunlight</span> <br>
+    <span id="stone2" draggable="true">stone</span> <br>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>10.2</title>
+    <script>
+        window.onload = oppstart;
+
+        var lyd = new Audio("lyd.wav");
+
+        function oppstart() {
+            document.getElementById("opg2").onclick = oppgave102;
+            document.getElementById("opg3").onclick = oppgave103;
+
+        }
+
+        function oppgave102() {
+            lyd.play();
+        }
+        function oppgave103() {
+            setInterval(function () {
+                lyd.play();
+            },5000);
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="opg2">10.2 Spill av lyd</button><br>
+<button type="button" id="opg3">10.3 Spill av lyd hvert 5. sekund</button><br>
+
+</body>
+</html>

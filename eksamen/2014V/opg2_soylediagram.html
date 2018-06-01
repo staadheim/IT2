@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        var lovbrudd=[];
+        lovbrudd[0]=[9631,9863];
+        lovbrudd[1]=[8593,12217];
+        lovbrudd[2]=[8363,14920];
+        lovbrudd[3]=[8128,14929];
+        lovbrudd[4]=[8514,15425];
+        lovbrudd[5]=[8534,18010];
+        var skala = 0.03;
+        var innpakning;
+
+        function oppstart() {
+            //lager alle elementene
+            innpakning = document.createElement("div");
+            var overskrift = document.createElement("h1");
+            overskrift.innerHTML = "Vis statistikk";
+            innpakning.appendChild(overskrift);
+
+            var promille = document.createElement("div");
+            promille.innerHTML = "Promille ";
+            var inpPromille = document.createElement("input");
+            inpPromille.type = "radio";
+            inpPromille.name = "radLovbrudd";
+            inpPromille.id = "radPromille";
+            promille.appendChild(inpPromille);
+            innpakning.appendChild(promille);
+
+            var fart = document.createElement("div");
+            fart.innerHTML = "Fart ";
+            var inpFart = document.createElement("input");
+            inpFart.type = "radio";
+            inpFart.name = "radLovbrudd";
+            inpFart.id = "radFart";
+            fart.appendChild(inpFart);
+            innpakning.appendChild(promille);
+
+            document.body.appendChild(innpakning);
+        }
+
+        function visDiagram() {
+            //fjerner eventuelle elementer som alt er i diagram-diven
+            var diagram = document.getElementById("diagram");
+            while (diagram.firstChild) {
+                diagram.removeChild(diagram.firstChild);
+            }
+            //skaper det grafiske
+            var soyle = document.createElement("p");
+            var tekst = document.createElement("p");
+            for (var i = 0; i < lovbrudd.length; i++) {
+                //lager grafen
+                var nygraf = document.createElement("span");
+                nygraf.className = "graf";
+                nygraf.style.height = skala * lovbrudd[i][bruddindex] + "px";
+                //lager teksten til grafen
+                var nytekst = document.createElement("span");
+                nytekst.className = "tekst";
+                nytekst.innerHTML = lovbrudd[i][bruddindex];
+                //skaper elementen
+                soyle.appendChild(nygraf);
+                tekst.appendChild(nytekst);
+                diagram.appendChild(soyle);
+                diagram.appendChild(tekst);
+            }
+            innpakning.appendChild(diagram);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

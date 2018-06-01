@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [];
+        var gjennomsnitt;
+
+        function oppstart() {
+            d("btnAntall").onclick = leggtil;
+        }
+
+        function leggtil() {
+            var tallet = parseFloat(d("nbrAntall").value); //henter tallet
+            if(isNaN(tallet) === true) {
+                d("txtUtskrift").innerHTML = tall + " <br> Skriv inn ett gyldig tall";
+            }
+            else {
+                d("txtUtskrift").innerHTML = "";
+                tall.push(tallet);
+
+            }
+            console.log(tall);
+        }
+
+        function d(elm) { //elm for element
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Antall tall: <input id="nbrAntall" type="number">
+<button type="button" id="btnAntall">Angi</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

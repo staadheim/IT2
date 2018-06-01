@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2.3</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("riktig1").onclick = wrong1;
+            document.getElementById("galt1").onclick = correct1;
+            document.getElementById("riktig2").onclick = correct2;
+            document.getElementById("galt2").onclick = wrong2;
+            document.getElementById("riktig3").onclick = correct3;
+            document.getElementById("galt3").onclick = wrong3;
+            document.getElementById("riktig4").onclick = wrong4;
+            document.getElementById("galt4").onclick = correct4;
+
+        }
+
+        function correct1() {
+            document.getElementById("svar1").innerHTML = "RIKTIG SVAR";
+        }
+        function wrong1() {
+            document.getElementById("svar1").innerHTML = "FEIL SVAR";
+        }
+        function correct2() {
+            document.getElementById("svar2").innerHTML = "RIKTIG SVAR";
+        }
+        function wrong2() {
+            document.getElementById("svar2").innerHTML = "FEIL SVAR";
+        }
+        function correct3() {
+            document.getElementById("svar3").innerHTML = "RIKTIG SVAR";
+        }
+        function wrong3() {
+            document.getElementById("svar3").innerHTML = "FEIL SVAR";
+        }
+        function correct4() {
+            document.getElementById("svar4").innerHTML = "RIKTIG SVAR";
+        }
+        function wrong4() {
+            document.getElementById("svar4").innerHTML = "FEIL SVAR";
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Er Frida eldre enn Silje?
+<button id="riktig1">Ja</button>
+<button id="galt1">Nei</button>
+<span id="svar1"></span> <br><br>
+
+Er Espen med i jentegjengen?
+<button id="riktig2">Ja</button>
+<button id="galt2">Nei</button>
+<span id="svar2"></span> <br><br>
+
+Var navnet på verdens søteste pus "Lucy"?
+<button id="riktig3">Ja</button>
+<button id="galt3">Nei</button>
+<span id="svar3"></span> <br><br>
+
+Er Frida bedre enn Silje?
+<button id="riktig4">Ja</button>
+<button id="galt4">Nei</button>
+<span id="svar4"></span> <br><br>
+
+</body>
+</html>

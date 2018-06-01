@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tegn sirkel</title>
+    <script>
+        window.onload = oppstart;
+
+        var ctx;
+
+        function oppstart() {
+            ctx = document.getElementById("tegneFlate").getContext("2d");
+            document.getElementById("tegneFlate").onmousemove = tegnSirkel;
+        }
+
+        function tegnSirkel(evt) {
+            ctx.beginPath();
+            ctx.arc(evt.clientX, evt.clientY, 5, 0, 2*Math.PI);
+            ctx.strokeStyle = "hotpink";
+            ctx.stroke();
+
+        }
+
+    </script>
+    <style>
+        canvas {
+            border: solid;
+        }
+        .innpakning {
+            justify-items: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<canvas id="tegneFlate" width="1300" height="700"></canvas>
+
+</body>
+</html>

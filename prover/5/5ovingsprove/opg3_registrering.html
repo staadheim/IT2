@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        var arr = [];
+        arr[0] = ["Fornavn","Etternavn","Telefon","Alder"];
+
+        function oppstart() {
+            d("btnReg").onclick = registrer;
+        }
+
+        function registrer() {
+            //henter verdiene bruker skrev inn
+            var fornavn = d("txtFornavn").value;
+            var etternavn = d("txtEtternavn").value;
+            var tlf = d("txtTelefon").value;
+            var alder = d("nbrAlder").value;
+
+            //forterer alfabetisk etter etternavn
+            var robin = false;
+            for(var i=1; i<arr.length; i++) {
+                if(arr[i][1].toLowerCase() > etternavn.toLowerCase()) {
+                     arr.splice(i,0,[fornavn, etternavn, tlf, alder]);
+                     robin = true;
+                     break;
+                }
+            }
+            if(robin == false) {
+                arr.push([fornavn, etternavn, tlf, alder]);
+            }
+
+            utskrift();
+        }
+
+        function utskrift() {
+            //Fjerner tabell om den alt er i utskrift
+            var utskrift = d("txtUtskrift");
+            while(utskrift.firstChild) {
+                utskrift.removeChild(utskrift.firstChild);
+            }
+
+            //lager tabell
+            var tabell = document.createElement("table");
+            for(var j=0; j<arr.length; j++) {
+                var rad = document.createElement("tr");
+                for(var k=0; k<4; k++) {
+                    var celle = document.createElement("td");
+                    celle.innerHTML = arr[j][k];
+                    if(j===0) {
+                        celle.style.fontWeight = "bolder";
+                    }
+                    rad.appendChild(celle);
+                }
+
+                //lager sjekkbokser for sletting
+                if(j>0) {
+                    var chk = document.createElement("input");
+                    chk.type = "checkbox";
+                    chk.id = "chkSlett" + j;
+                    rad.appendChild(chk);
+                }
+
+                tabell.appendChild(rad);
+            }
+            utskrift.appendChild(tabell);
+
+            //lager knappen for sletting
+            var knapp = document.createElement("button"); 
+            knapp.innerHTML = "Slett avmerkede rader"; 
+            knapp.id = "btnSlett";
+            utskrift.appendChild(knapp);
+            knapp.onclick = slettRader;
+        }
+        
+        function slettRader() {
+            //finner hvilke rader som er sjekket og sletter de
+            //FUNKER IKKE. vil ikke lese av .checked
+            for(var i=1; i<arr.length; i++) {
+                var radnavn = "chkSlett" + i;
+                console.log(radnavn);
+                var raden = document.getElementById(radnavn).checked;
+                if(raden === true) {
+                    arr.pop(arr[i]);
+                }
+            }
+        }
+
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Registrer deg i dag</h1>
+
+Fornavn:
+<input id="txtFornavn" type="text">
+<br>
+
+Etternavn:
+<input id="txtEtternavn" type="text">
+<br>
+
+Telefonnummer:
+<input id="txtTelefon" type="text">
+<br>
+
+Alder:
+<input id="nbrAlder" type="number" min="0" max="150">
+<br>
+
+<button type="button" id="btnReg">Registrer</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

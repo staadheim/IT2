@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        var fibonacci = [];
+        // = [0,1, 1,2,3,5,8,13,21,34.... til 377];
+
+        function oppstart() {
+            document.getElementById("btnTall").onclick = skrivFibonacci;
+        }
+
+        function skrivFibonacci() {
+            var teller = 0;
+            for(var i=0; i<fibonacci.length; i++) {
+                if(fibonacci[teller] === fibonacci[teller] + fibonacci[teller+1]) {
+                    fibonacci[teller] = i;
+                    teller++;
+                }
+            }
+            console.log(fibonacci);
+            document.getElementById("txtUtskrift").innerHTML = fibonacci;
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="btnTall">GI MEG TALLENE</button>
+
+<p id="txtUtskrift"></p>
+</body>
+</html>

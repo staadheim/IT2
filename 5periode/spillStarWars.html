@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Star Wars</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.onkeyup = sjekkTaster;
+        }
+
+        function sjekkTaster(evt) {
+            //console.log(evt.keyCode);
+            var lyd = document.getElementById("lydavspiller");
+            if(evt.keyCode === 65) {
+                lyd.play();             //trykk a-knappen for å spille av
+            }
+            else if(evt.keyCode == 32) {
+                lyd.pause();           //trykk mellomrom for å pause
+            }
+            else if(evt.keyCode === 48) {
+                lyd.currentTime = 50;        //trykk 0-knappen for å begynne på nytt
+            }
+        }
+
+    </script>
+    <style>
+        div {
+            color: ;
+        }
+
+    </style>
+</head>
+<body>
+
+<audio controls="controls" id="lydavspiller">
+    <source src="imperialMarch.mp3" type="audio/mpeg">
+    Nettleseren din støtter ikke lydavspilling.
+</audio>
+
+</body>
+</html>

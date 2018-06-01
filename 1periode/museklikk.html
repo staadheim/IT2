@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Museklikk</title>
+	<script>
+		window.onload = oppstart;
+		
+		function oppstart() {
+			document.getElementById("tekst").onclick = trykket;
+			document.getElementById("over").oncmouseover = trykket;
+			document.getElementById("forlate").onmouseout = endreFont;
+		}
+		
+		function trykket(evt) {
+			alert("Du trykket på "+ evt.clientX + "," + evt.clientY);
+		}
+		function endreFont(evt) {
+			document.getElementById("forlate").style.fontSize=evt.clientX+"%";
+			document.getElementById("forlate").innerHTML = "Du forlot boksen i punktet " + evt.clientX + "," + evt.clientY + " px";
+		}
+	</script>
+	<style>
+	p {
+		border: solid black;
+	</style>
+</head>
+<body>
+
+<p id="tekst">Trykk her</p>
+
+<p id="over">Før musen hit</p>
+
+<p id="forlate">Tekst endrer seg når musen forlater</p>
+
+</body>
+</html>

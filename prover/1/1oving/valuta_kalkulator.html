@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Valuta-kalkulator</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = regnValuta;
+        }
+
+        function regnValuta() {
+            var nok = parseFloat(document.getElementById("txtnok").value);
+            var valuta = parseFloat(radForm.elements.namedItem("valuta").value);
+            var sum = Math.floor(nok*valuta);
+            document.getElementById("txtUtskrift").innerHTML = nok + " norske kroner er omtrent <b>" + sum + "</b> av din valgte valuta.";
+
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="number" id="txtnok"> NOK
+
+<br>
+
+<form id="radForm">
+    Velg ønsket valuta:
+    <input type="radio" name="valuta" id="eur" value="9.36">Euro
+    <input type="radio" name="valuta" id="gbp" value="0.09477">Britisk pund
+    <input type="radio" name="valuta" id="sek" value="0.9826">Svensk krone
+    <input type="radio" name="valuta" id="usd" value="0.1282">Amerikansk Dollar
+</form>
+
+
+<button type="button" id="btnAngi">Regn</button>
+
+<br><br>
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

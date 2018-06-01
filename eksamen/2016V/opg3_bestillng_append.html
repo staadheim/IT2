@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        //ER NOE GALT MED DENNE
+
+        var byer = ["St. Petersburg","Amsterdam","New York","Roma"];
+        var hoteller = [];
+        hoteller[0] = ["Aurora",590,690];
+        hoteller[1] = ["Downtown",660,750];
+        hoteller[2] = ["Palace",800,970];
+        hoteller[3] = ["Imperial",1200,1450];
+        hoteller[4] = ["The London",780,890];
+        var totalpris;
+        var hotellpris = 0;
+
+        function oppstart() {
+            //lager innpakning og nødvendige elementer til opppgaven
+            var innpakning = document.createElement("div");
+            innpakning.id = "innpakning";
+            var overskrift = document.createElement("p");
+            overskrift.innerHTML = "Hvor vil du reise?";
+            overskrift.id = "overskrift";
+            innpakning.appendChild(overskrift);
+            var utskrift = document.createElement("p");
+            utskrift.id = "utskrift";
+            //Legger inn byene i nedtrekksmenyen
+            var dest = document.createElement("select");
+            dest.id = "selDestinasjon";
+            for (var i = 0; i < byer.length; i++) {
+                var by = document.createElement('option');
+                by.value = i;
+                by.innerHTML = byer[i];
+                dest.appendChild(by);
+            }
+            innpakning.appendChild(dest);
+            document.body.appendChild(innpakning);
+            document.body.appendChild(utskrift);
+            document.getElementById("selDestinasjon").onchange = steg1;
+        }
+
+        function steg1() {
+            //lager nedtrekksmeny for hoteller
+            document.getElementById("overskrift").innerHTML = "Hvilket hotell vil du bo på?";
+            var p = document.createElement("p");
+            var selHotell = document.createElement("select");
+            selHotell.id = "selHotell";
+            for(var i=0; i<hoteller.length; i++) {
+                var hotell = document.createElement('option');
+                hotell.value = i;
+                hotell.innerHTML = hoteller[i][0];
+                selHotell.appendChild(hotell);
+            }
+            p.appendChild(selHotell);
+            document.getElementById("innpakning").appendChild(p);
+            selHotell.onchange = steg2;
+        }
+        function steg2() {
+            //lager radioknappene for periode
+            document.getElementById("overskrift").innerHTML = "Når vil du reise?";
+            var p = document.createElement("p");
+            var radPeriode = document.createElement("form");
+            radPeriode.name = "radPeriode";
+            var txtSommer = document.createElement("div");
+            var txtVinter = document.createElement("div");
+            var sommer = document.createElement("input");
+            var vinter = document.createElement("input");
+            sommer.type = "radio";
+            vinter.type = "radio";
+            sommer.name = "radKnapp";
+            vinter.name = "radKnapp";
+            sommer.value = 1;
+            vinter.value = 2;
+            txtSommer.appendChild(sommer);
+            txtVinter.appendChild(vinter);
+            txtSommer.innerHTML += "Sommer";
+            txtVinter.innerHTML += "Vinter";
+            radPeriode.appendChild(txtSommer);
+            radPeriode.appendChild(txtVinter);
+            p.appendChild(radPeriode);
+            document.getElementById("innpakning").appendChild(p);
+
+            radPeriode.onchange = steg3;
+        }
+        function steg3() {
+            //sjekker hvilken periode som er valgt
+            var periode = radPeriode.elements.namedItem("radKnapp").value;
+            var hotellet = parseInt(document.getElementById("selHotell").value);
+            //velg antall rom
+            var p = document.createElement("p");
+            var dromdiv = document.createElement("div");
+            var eromdiv = document.createElement("div");
+            var drom = document.createElement("input");
+            var erom = document.createElement("input");
+            drom.type = "number";
+            erom.type = "number";
+            drom.id = "drom";
+            erom.id = "erom";
+            drom.min = "0";
+            erom.min = "0";
+            drom.max = "10";
+            erom.max = "10";
+            drom.defaultValue = 0;
+            erom.defaultValue = 0;
+            dromdiv.innerHTML = "Dobbeltrom: ";
+            eromdiv.innerHTML = "</br>Enkeltrom: ";
+            dromdiv.appendChild(drom);
+            eromdiv.appendChild(erom);
+            p.appendChild(dromdiv);
+            p.appendChild(eromdiv);
+            document.getElementById("innpakning").appendChild(p);
+            //regner ut pris av rom
+            var enkeltrom = parseInt(document.getElementById("erom").value);
+            var dobbeltrom = parseInt(document.getElementById("drom").value);
+            hotellpris = Math.round((parseInt(hoteller[hotellet][periode])*dobbeltrom) + (enkeltrom*300));
+            console.log(hotellpris);
+            totalpris = Math.round(totalpris + hotellpris);
+            //lager siste elementene til nettsiden
+            var p = document.createElement("p");
+            var kultur = document.createElement("input");
+            kultur.type = "checkbox";
+            kultur.id = "kulturpass";
+            p.innerHTML = "Kulturpass (700,-): ";
+            p.appendChild(kultur);
+            document.getElementById("innpakning").appendChild(p);
+            var kulturpass = document.getElementById("kulturpass").checked;
+            if(kulturpass = true) {
+                totalpris = Math.round(totalpris + 700);
+            }
+            //lager knapp til å angi
+            var angi = document.createElement("button");
+            angi.innerHTML = "Bestill";
+            document.getElementById("innpakning").appendChild(angi);
+
+            angi.onclick = steg6;
+        }
+        function steg6() {
+            document.getElementById("utskrift").innerHTML = "Din totalpris er " + totalpris + " kr."
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1> Bestill ditt hotell i dag! </h1>
+
+</body>
+</html>

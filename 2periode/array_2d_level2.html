@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gjett kordinaten</title>
+    <script>
+        window.onload = oppstart;
+
+        var y = [];
+        y[0] = ["","A","B","C","D","E","F","G","H","I","J"];
+        y[1] = [1,"","","","","","","","","",""];
+        y[2] = [2,"","","","","","","","","",""];
+        y[3] = [3,"","","","","","","","","",""];
+        y[4] = [4,"","","","","","","","","",""];
+        y[5] = [5,"","","","","","","","","",""];
+        y[6] = [6,"","","","","","","","","",""];
+        y[7] = [7,"","","","","","","","","",""];
+        y[8] = [8,"","","","","","","","","",""];
+        y[9] = [9,"","","","","","","","","",""];
+        y[10] = [10,"","","","","","","","","",""];
+
+        function oppstart() {
+            var table = document.createElement("table");
+
+            for(var i=0; i<y.length; i++) {
+                var buffer = y[i].length;
+                var tr = document.createElement("tr");
+
+                for(var j=0; j<buffer; j++) {
+                    var td = document.createElement("td");
+                    td.innerHTML =y[i][j];
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.getElementById("tabell").appendChild(table);
+        }
+
+    </script>
+    <style>
+        table,td {
+            border-color: darkolivegreen;
+            border-style: solid;
+            border-collapse: collapse;
+        }
+        table {
+            margin: 40px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+Gjett x-kordinaten: <input type="number" id="X"> <br>
+Gjett y-kordinaten: <input type="number" id="Y"> <br>
+
+<div id="tabell"></div>
+
+
+</body>
+</html>

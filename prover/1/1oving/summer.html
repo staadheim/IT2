@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = summer;
+
+        }
+        function tall(N) {
+            var tall = 0;
+            for(var i = 1; i <= N; i++){
+                tall += i;
+            }
+            return tall;
+        }
+
+        function summer(){
+            var verdi = parseFloat(document.getElementById("txtTall").value);
+            document.getElementById("txtUtskrift").innerHTML= "Summen av alle tallene fra 1 til " + verdi +" er <b> " + tall(verdi) + "</b>.";
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input id="txtTall">
+<button type="button" id="btnAngi">Angi</button>
+
+<p id="txtUtskrift"></p>
+<p id="forsok">Kake</p>
+
+</body>
+</html>

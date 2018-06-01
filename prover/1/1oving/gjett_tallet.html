@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gjett tallet</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = Math.floor((Math.random()*100)+1);          //tilfeldig tall mellom 1 og 100
+        var forsok = (function () {
+            var teller = 10;
+            return function () {
+                return teller -= 1;
+            }
+        })();
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = visSvar;
+            console.log(tall);
+            document.getElementById("btnFasit").onclick = visFasit;
+        }
+
+        function visSvar() {
+            var gjett = document.getElementById("txtGjett").value;
+            if (gjett < tall) {
+                document.getElementById("txtUtskrift").innerHTML = "Tallet er for lite. Prøv på nytt!" ;
+                document.getElementById("txtForsok").innerHTML ="Du har " + forsok() + " forsøk igjen.";
+            }
+            if (gjett > tall) {
+               document.getElementById("txtUtskrift").innerHTML = "Tallet er for stort. Prøv på nytt!";
+               document.getElementById("txtForsok").innerHTML ="Du har " + forsok() + " forsøk igjen.";
+            }
+            if (gjett == tall) {
+                document.getElementById("txtUtskrift").innerHTML = "Du gjettet tallet! Tallet er " + tall + " og du gjettet riktig med " + gjett;
+                document.getElementById("txtForsok").innerHTML = "";
+            }
+        }
+        function visFasit() {
+            document.getElementById("txtUtskrift").innerHTML = "Tallet er " + tall;
+            document.getElementById("txtForsok").innerHTML = "";
+        }
+    </script>
+    <style>
+        #btnFasit {
+            margin-top: 500px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>Gjett ett tall mellom 1 og 100</h2>
+
+<input type="number" id="txtGjett">
+<button type="submit" id="btnAngi">Jeg gjetter dette tallet</button>
+<br>
+
+<p id="txtUtskrift">Jeg skal hjelpe deg!</p>
+
+<p id="txtForsok">Du har 10 forsøk.</p>
+
+<button type="button" id="btnFasit">Psst! Det er lett å jukse</button>
+
+</body>
+</html>

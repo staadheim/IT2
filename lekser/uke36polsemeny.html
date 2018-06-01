@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pølser</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("bestill").onclick = lesbestilling;
+        }
+        function lesbestilling() {
+            var radioverdi = brodlompe.elements.namedItem("radKnapp").value;
+
+            var sjekkverdi1 = document.getElementById("sennep").checked;
+            var sjekkverdi2 = document.getElementById("ketchup").checked;
+
+            var verdi = parseFloat(document.getElementById("antall").value); //parseFloat = tolker som et desimaltall
+
+            document.getElementById("txtUtskrift").innerHTML = verdi + "stk bestilt i " + radioverdi +" med <br>"+
+                "Sennep: " + sjekkverdi1 +"<br>"+
+                "Ketchup: " + sjekkverdi2;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Pølsebestilling</h1>
+
+Type pølse:
+<br><br>
+
+<form name="brodlompe">
+    Brød / lompe:
+    <input type="radio" name="radKnapp" value="grovbrod">Grovt brød
+    <input type="radio" name="radKnapp" value="finbrod">Fint brød
+    <input type="radio" name="radKnapp" value="lompe">Lompe
+</form>
+<br>
+
+Sennep: <input type="checkbox" id="sennep"><br>
+Ketchup: <input type="checkbox" id="ketchup"><br><br>
+
+Antall: <input type="number" id="antall" min="0" max="10"><br><br>
+
+<button type="button" id="bestill">Bestill</button><br>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

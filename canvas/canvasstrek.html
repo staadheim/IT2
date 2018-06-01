@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Sebastian Bjørvik">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tegne streker</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            // Hovedprogramkode her...
+            var ctx = document.getElementById("tegneflate").getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(10,20);
+            ctx.lineTo(200,300);
+            ctx.lineTo(10,300);
+            ctx.lineTo(10,20);
+            ctx.moveTo(10,280);
+            ctx.lineTo(30,280);
+            ctx.lineTo(30,300);
+            ctx.strokeStyle = "dodgerblue";
+            ctx.lineWidth = "4";
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(10,20);
+            ctx.lineTo(200,20);
+            ctx.lineTo(200, 300);
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = "1";
+            ctx.stroke();
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+<canvas id="tegneflate" width="500" height="500"></canvas>
+</body>
+</html>

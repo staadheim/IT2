@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fibonacci</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = tall;
+        }
+
+        var fibonacci = [0,1];
+
+        function tall() {
+            for (i = 1; i <= 50; i++) {
+                fibonacci.push(fibonacci[i] + fibonacci[i - 1]);
+            }
+            document.getElementById("txtUtskrift").innerHTML = fibonacci + " ";
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button id="btnAngi">Neste tall</button>
+
+<p id="txtUtskrift">Her kommer koden </p>
+
+</body>
+</html>

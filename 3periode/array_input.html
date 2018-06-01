@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skrive inn verdi i array</title>
+    <script>
+        window.onload = oppstart;
+        
+        var array = [];
+
+        function oppstart() {
+            document.getElementById("btnKnapp").onclick = leggTil; 
+        }
+        
+        function leggTil() {
+            var tekst = document.getElementById("txtIn").value;
+            var p = document.getElementById("txtUtskrift");
+            var finnes = array.indexOf(tekst);
+
+            /* Sjekker kun like, ikke med store og små bokstaver
+            if(finnes !== -1 ) {
+                p.innerHTML = "Fant duplikat";
+                return;                                      //returnerer til der du kalte opp funksjonen (der du kalte opp funksjonen)
+            }*/
+
+            var duplikat = ifExist(tekst,array);
+            if(duplikat === 1 ) {
+                p.innerHTML = "Fant duplikat";
+                return;                                      //returnerer til der du kalte opp funksjonen (der du kalte opp funksjonen)
+            }
+
+            array.push(tekst);
+            p.innerHTML = array;
+        }
+
+        //funksjon returnerer 1 hvis den fant søkeordet og 0 hvis ikke
+        function ifExist(ord,arr) {
+            ord = ord.toLowerCase();
+            for(var i=0; i<arr.length; i++) {
+                var buffer = arr[i].toLowerCase();
+                if (ord === buffer) {
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="text" id="txtIn">
+<button type="button" id="btnKnapp">Knapp</button>
+<br>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

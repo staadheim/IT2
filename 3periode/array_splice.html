@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Splice</title>
+    <script>
+        window.onload = oppstart;
+
+        var array = [1,2,3,4,5]
+
+        function oppstart() {
+            document.write(array + "<br>");             // 1,2,3,4,5
+
+            //array.splice(index_start,hvormangeskalslettesderfra,nyttelement1,nyttelement2,osv.)
+
+            array.splice(3,0,"banan","ananas");         // 1,2,3,banan,ananas,4,5
+            document.write(array + "<br>");
+
+            array.splice(0,3);                          // banan,ananas,4,5        - sletter 3 første tingene
+            document.write(array + "<br>");
+
+            var etterSisteplass = array.length;
+            array.splice(etterSisteplass,0,6,7,8,9,10);      // banan,ananas,4,5,6,7,8,9,10
+            document.write(array + "<br>");
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

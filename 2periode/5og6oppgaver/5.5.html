@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5.5</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = regn;
+        }
+
+        function regn() {
+            var tall = document.getElementById("txtTall").value;
+            for(var i=1; i<tall; i++) {
+                if(i % 1 === 0) {
+                    document.getElementById("txtUtskrift").innerHTML = tall + "<br>";
+                }
+
+            }
+                    //i + " * " + i + " = " + (i*i) + "<br>";
+        }
+
+       // function oppstart() {
+         //   for(var i=1;i<100;i++) {
+          //      if(i % 2 === 0 ) {
+                    //document.write(i + "<br>");
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="string" id="txtTall">
+
+<button id="btnAngi">Angi</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

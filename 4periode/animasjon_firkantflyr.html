@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Firkanten kan fly</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("firkant1").onclick = flytt1;
+            document.getElementById("firkant2").onclick = hopp;
+
+            //setInterval(flytt2,10); //starter funkjsonen hvert 10. millisekund
+            //setInterval(flytt1,2000); //starter funkjsonen hvert 2. sekund
+
+            var firkant2 = document.getElementById("firkant2");
+            firkant2.style.left = "800px";
+
+            var firkant3 = document.getElementById("firkant3");
+            firkant3.style.backgroundColor = "salmon";
+            firkant3.style.top = "300px";
+            firkant3.style.transition = "0s";
+            firkant3.onclick = parabel;
+        }
+
+        function parabel() {
+            var firkant3 = document.getElementById("firkant3");
+            var v_y = 5;
+            var v_x = 2;
+            var a = -1;
+            for(var t=0; t<=10; t++) {
+                setTimeout(function () {
+                    firkant3.style.top = (v_y * t + (0.5 * a * t * t)) + "px";
+                    firkant3.style.left = (v_x * t) + "px";
+                    console.log("hola");
+                },t*2000);
+            }
+
+
+        }
+
+        function hopp() {
+            var firkant2 = document.getElementById("firkant2");
+            firkant2.style.top = "50px";
+            setTimeout(function (){
+                firkant2.style.top = "150px";
+            },500);
+        }
+        function flytt1() {
+            var firkant1 = document.getElementById("firkant1");
+            var tilfeldigX = Math.floor((Math.random()*500) +1);
+            var tilfeldigY = Math.floor((Math.random()*500) +1);
+            firkant1.style.left = tilfeldigX + "px";
+            firkant1.style.top = tilfeldigY + "px";
+            console.log(tilfeldigX,tilfeldigY);
+        }
+
+        function flytt2() {
+            var firkant2 = document.getElementById("firkant2");
+            var rektangel = firkant2.getBoundingClientRect();
+            if(rektangel.right > 800) {
+                firkant2.style.left = "0px";
+            }
+            else if(rektangel.left < 1) {
+                firkant2.style.left = "800px";
+            }
+
+
+        }
+
+    </script>
+    <style>
+        .firkant {
+            width: 60px;
+            height: 60px;
+            background-color: peru;
+            position: absolute;
+            left: 50px;
+            top: 150px;
+            transition: 2s;    /* får firkanten til å flytte seg jevnt */
+        }
+    </style>
+</head>
+<body>
+
+<div class="firkant" id="firkant1">Numero un</div>
+<div class="firkant" id="firkant2">Numero deux</div>
+<div class="firkant" id="firkant3">Numero trois</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Array med nummer</title>
+    <script>
+        window.onload = oppstart;
+
+        var tallArray = [];
+        var sum = 0;
+
+
+        function oppstart() {
+            for(var i=0; i<16; i++) {
+                tallArray[i] = Math.sin(i);
+            }
+
+            for(var i=0; i<tallArray.length; i++) {
+                document.write("sin(" + i + ") er " + tallArray[i].toFixed(2) + "<br>");
+                sum += tallArray[i];
+            }
+
+            document.write("Summen er lik " + sum.toFixed(2) + "<br>");
+
+            var gjennsomsnitt = sum/tallArray.length;
+            document.write("Gjennomsnittet er " + gjennsomsnitt.toFixed(2) + "<br>");
+
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

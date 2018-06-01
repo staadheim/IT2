@@ -1,0 +1,44 @@
+<!--- alerts og endring av tekst ved trykk -->
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Tittel</title>
+    <script>
+
+        window.onload = oppstart; //setter variabelen oppstart
+
+        function oppstart() {
+            //Programkode her som skal starte når lettleseren starter
+            alert("Denne popper opp som en varsel ved oppstart")
+
+            document.getElementById("klikktekst").onclick = trykket;
+
+            document.getElementById("svar").onclick = visSvar; //handlingern visSvar skjer når man trykker
+
+            document.getElementById("alder").innerHTML= "20"; //tallet endrer seg fra 18 til 20. Script manipulerer HTML teksten
+        }
+
+        function trykket() {
+            alert("Denne poppet opp fordi du trykket")
+        }
+        function visSvar() {
+            document.getElementById("svar").innerHTML = "Svaret er 42";
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+<p id="klikktekst">Trykk her</p>
+
+<p> Hva er svaret oå livet, universet og alt mulig?</p>
+<p id="svar"> Trykk her for svaret</p>
+
+<p>Jeg er <span id="alder">18</span> år gammel</p>
+
+</body>
+</html>

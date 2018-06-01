@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Honningtur</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("ja").onclick = startHistorie;
+            document.getElementById("nei").onclick = startHistorie;
+        }
+
+        function startHistorie() {
+            var valg = radForm.elements.namedItem("radKnapp").value;
+            var tekst = document.getElementById("tekst");
+            if (valg === "ja") {
+                tekst.innerHTML = "Nasse Nøff viser frem all honningen han har sjålet fra Ole Brumm. ";
+                tekst.innerHTML += "Vil du smake på honningen?";                         //+legger til det til srkiver = til det du alt har med
+
+                valg = radForm.elements.namedItem("radKnapp").value;                     //nestet if-test
+                if (valg = "ja") {
+                    tekst.innerHTML = "Mmmmm. Det smakte godt!"
+                }
+                else {
+                    tekst.innerHTML = "Nøff skjønner ikke hvorfor du ikke vil smake og ber deg gå hjem. ";
+                }
+
+            }
+            else {
+                tekst.innerHTML = "Du drar heller til Ole Brumm. ";
+                tekst.innerHTML += "Ole Brumm forteller deg at all honnningen er borte! "
+                tekst.innerHTML += "Vil du hjelpe han å finne den? "
+            }
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<p id="tekst">Du går tur i Hundremeterskogen og møter på Nasse Nøff. Blir du med han hjem?</p>
+<form name="radForm">
+    <input type="radio" name="radKnapp" id="ja" value="ja"> Ja
+    <input type="radio" name="radKnapp" id="nei" value="nei"> Nei
+</form>
+
+</body>
+</html>

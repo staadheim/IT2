@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://hmauroy.github.io/8bitHenrik.png">
+    <meta name="author" content="Henrik Mauroy">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crappy Bird IT2</title>
+    <script>
+        window.onload = oppstart;
+
+        var fuglen;
+        var g = 0.2;
+        var y = 192;
+        var dy = 0;
+        var fuglenFlyr = true;
+        var t = 0;
+        var tid = 0;
+        var gameDiv;
+        var xStolpe = 248;
+
+        function oppstart() {
+            // Hovedprogramkode her...
+            fuglen = document.getElementById("fuglen");
+            requestAnimationFrame(gameLoop);
+            document.onclick = flaks;
+            gameDiv = document.getElementById("game");
+        }
+
+        function gameLoop() {
+            tid++;
+            // Fuglen faller
+            fuglen.style.top = y + "px";
+            y += dy + g*t;
+            fuglen.style.transform = "rotate(" + g*t*8 + "deg)";
+
+            // hinder kommer tilfeldig
+            if(tid === 10 ) {
+                stolpe = document.createElement("div");
+                stolpe.className = "stolpe";
+                gameDiv.appendChild(stolpe);
+            }
+            // flytter hinderet
+            if(tid > 10) {
+                xStolpe -= 3;
+                fuglRect = fuglen.getBoundingClientRect();
+                stolpeRect = stolpe.getBoundingClientRect();
+                // fjerner stolpen på slutten
+                if(xStolpe <= 0) {
+                    stolpe.style.visibility = "hidden";
+                }
+                // sjekker om fuglen og stolpen kolliderer
+                else if(fuglRect.left <= stolpeRect.left + stolpeRect.width && stolpeRect.left <= fuglRect.left + fuglRect.width && fuglRect.top <= stolpeRect.top + stolpeRect.height && stolpeRect.top <= fuglRect.top + fuglRect.height) {
+                    fuglenFlyr = false
+                }
+                stolpe.style.left = xStolpe + "px";
+            }
+            // sjekk om fuglen treffer noe
+            if(y+20 >= 384 || y <= 0){
+                fuglenFlyr = false;
+            }
+            if(fuglenFlyr === true){
+                requestAnimationFrame(gameLoop); // 60fps
+            }
+            else {
+                // stopper spillet
+                var game = document.getElementById("game");
+                game.style.animation = "none";
+
+            }
+            t++;
+
+        }
+
+        function flaks() {
+            dy = -3;
+            t=0;
+            fuglen.style.transform = "rotate(" + dy*8 + "deg)";
+        }
+
+        function keyBoard(event) {
+            var tast = event.keyCode;
+            console.log(tast);
+            if(tast === 32) {  //starter funkjsonen om man trykker inn mellomromstasten
+                flaks();
+            }
+        }
+    </script>
+    <style>
+        @keyframes flytt {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: -288px 0;
+            }
+        }
+        #game {
+            width: 288px;
+            height: 384px;
+            margin-left: auto;
+            margin-right: auto;
+            background-image: url("bakgrunn.png");
+            animation: flytt 3s linear infinite;
+        }
+        #fuglen {
+            width: 34px;
+            height: 24px;
+            position: relative;
+            background-image: url("bird.png");
+            top: 192px;
+            left: 30px;
+            z-index: 2;
+        }
+        .stolpe {
+            width: 40px;
+            height: 150px;
+            background-color: palegreen;
+            top: 210px;
+            left: 248px;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body onkeypress="keyBoard(event)">
+<div id="game">
+    <div id="fuglen"></div>
+</div>
+
+</body>
+</html>

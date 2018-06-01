@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sjekkbokser</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLes").onclick = lesverdi;
+
+        }
+
+        function lesverdi() {
+            var sjekkverdi1 = document.getElementById("chkValg1").checked;
+            var sjekkverdi2 = document.getElementById("chkValg2").checked;
+            var sjekkverdi3 = document.getElementById("chkValg3").checked;
+            document.getElementById("txtUtskrift").innerHTML = "Sjekkverdi1: "+sjekkverdi1 + "<br> Sjekkverdi 2: "+sjekkverdi2 + "<br> Sjekkverdi 3: "+sjekkverdi3;
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Tekst 1: <input type="checkbox" id="chkValg1"><br>
+Tekst 2: <input type="checkbox" id="chkValg2"><br>
+Tekst 3: <input type="checkbox" id="chkValg3"><br>
+<br><br>
+<button type="button" id="btnLes">Les av</button>
+<br><br>
+<p id="txtUtskrift">Her kommer resultatet i true/false</p>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fanget</title>
+    <script>
+        window.onload = oppstart;
+
+        var ball;
+        var flytting;
+        var fart = 10;
+        var vinkel = 70;
+        var y = 50; //bør være samme som der div'en er satt
+        var x = 50;
+        var dy = parseFloat(fart*Math.sin(vinkel)); //regner ut farten i y-retning (positivt går NEDOVER på nettsiden)
+        var dx = parseFloat(fart*Math.cos(vinkel)); //regner ut farten i x-retning
+
+
+        function oppstart() {
+            flytting = setInterval(flytt,50);
+            ball = document.getElementById("ball");
+        }
+
+        function flytt() {
+            ball.style.top = y + "px";
+            ball.style.left = x + "px";
+            y += dy;
+            x += dx;
+            if(x <= 15 || x+50 >= 500) {
+                dx = -dx;
+            }
+            if(y <= 15 || y+50 >= 500) {
+                dy = -dy;
+            }
+        }
+
+    </script>
+    <style>
+        .ball {
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            background-color: #FF94B6;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+        .boks {
+            width: 500px;
+            height: 500px;
+            border-style: solid;
+            border-color: palevioletred;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="ball" id="ball"></div>
+
+<div class="boks" id="boks"></div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!--- ENDRER BILDE VED Å TRYKKE PÅ TEKST -->
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Farger</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+        	document.getElementById("bilde1").onclick = vis1;
+        	document.getElementById("bilde2").onclick = vis2;
+        	document.getElementById("bilde3").onclick = vis3;
+        	document.getElementById("bilde4").onclick = vis4;
+        	document.getElementById("bilde5").onclick = vis5;
+           }
+           
+        function vis1(){
+        	document.getElementById("bilde").src = "dp_rod.png";
+        }
+        function vis2(){
+        	document.getElementById("bilde").src = "dp_bla.png";
+        }
+        function vis3(){
+        	document.getElementById("bilde").src = "dp_gronn.png";
+        }
+        function vis4(){
+        	document.getElementById("bilde").src = "dp_gul.png";
+        }
+        function vis5(){
+        	document.getElementById("bilde").src = "dp_rosa.png";
+        }
+    </script>
+    <style>
+    li:hover {
+    	color: red; 
+    }
+    </style>
+</head>
+<body>
+<h2>Velg et bilde</h2>
+
+<ul>
+    <li id="bilde1">Rødt råd</li>
+    <li id="bilde2">Blå råd</li>
+    <li id="bilde3">Grønt råd</li>
+    <li id="bilde4">Gult råd</li>
+    <li id="bilde5">Rosa råd</li>
+</ul>
+
+<img id="bilde" src="42.png"></img>
+
+</body>
+</html>

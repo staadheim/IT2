@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.9</title>
+    <script>
+        window.onload = oppstart;
+
+        var array = [4,2,8,6,20,14];
+        tallArray = [];
+
+        function oppstart() {
+            document.getElementById("knapp").onclick = sjekkTall;
+        }
+
+        function sjekkTall() {
+            var tall = Math.floor(document.getElementById("tekstboks").value); //henter tallet vi skrev inn i tekstoksen
+
+            for(var i=0; i<array.length; i++) {
+                if(tall === array[i]) {
+                    document.getElementById("paragraf").innerHTML = "JA! <br> Tallet " + tall + " finnes i arrayen." //her kunne vi også brukt i siden de her skal være samme tall
+                    break; //hopper ut av koden om den finner en match
+                }
+                else {
+                    document.getElementById("paragraf").innerHTML = "Nei... <br> Tallet " + tall + " finnes IKKE i arrayen."
+                }
+            }
+
+
+
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="number" id="tekstboks">
+
+<button type="button" id="knapp">Sjekk tallet</button>
+
+<p id="paragraf"></p>
+
+</body>
+</html>

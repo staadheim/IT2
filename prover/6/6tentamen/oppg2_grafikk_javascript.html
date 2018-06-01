@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+        //denne oppgaven er egentlig veldig enkel å gjøre med hjelp av body og style, derfor skal jeg programmere absolutt alt i script
+
+        function oppstart() {
+            //lager overskriften til oppgaven
+            var overskrift = document.createElement("h3");
+            overskrift.innerHTML = "Oppgave 2";
+            document.body.appendChild(overskrift);
+            //lagr en div til å legge alle tingene i for ryddighetens skyld
+            var innpakning = document.createElement("div");
+            innpakning.id = "innpakning";
+
+            //oppgave a
+            //lager div-en
+            var bla = document.createElement("div");
+            bla.style.backgroundColor = "blue";
+            bla.style.height = "100px";
+            bla.style.width = "100px";
+            bla.style.visibility = "visible";
+            bla.id = "divBla";
+            //lager knappene for å vise og skjule den blå div-en
+            var btnBla = document.createElement("button");
+            btnBla.innerHTML = "Vis/Skjul den blå div-en";
+            btnBla.onclick = visellerskjul; //fint å ha en egen funksjon for dette så blir det noe mer oversiktlig
+            innpakning.appendChild(btnBla);
+            innpakning.appendChild(bla);
+
+            //oppgave b
+            //lager div-en
+            var rod = document.createElement("div");
+            rod.style.backgroundColor = "red";
+            var storrelse = 50;
+            rod.style.height = storrelse + "px";
+            rod.style.width = storrelse + "px";
+            rod.id = "divRod";
+            innpakning.appendChild(rod);
+
+
+
+            document.body.appendChild(innpakning);
+        }
+
+        //funksjon for den blå div-en i oppgave a
+        function visellerskjul() {
+            var diven = document.getElementById("divBla");
+            if(diven.style.visibility == "hidden") {
+                diven.style.visibility = "visible";
+            }
+            else if(diven.style.visibility == "visible") {
+                diven.style.visibility = "hidden";
+            }
+            else {
+                document.getElementById("innpakning").innerHTML = "Noe gikk galt med å skjule og vise den blå div-en";
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

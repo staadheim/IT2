@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 1</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = beregnRekkevidde;     //starter funksjonen når knappen trykkes
+        }
+
+        function beregnRekkevidde() {
+            var forbruket = document.getElementById("txtForbruk").value;       //henter verdiene som bruker skrev inn
+            var tanken = document.getElementById("txtTank").value;
+
+            var rekkevidde = Math.floor(tanken/forbruket).toFixed(0);          //regner ut rekkevidden, og rundet av uten desimaler
+
+            document.getElementById("txtUtskrift").innerHTML = "Du kan kjøre " +  rekkevidde + " km på full tank.";  //skriver ut rekkevidden til brukeren
+
+            //b
+            if(rekkevidde > 100) {
+                document.getElementById("txtUtskrift").innerHTML += "<br> Supert! Utrolig miljøvennlig :D";     //legger til en gladmelding på linja under dersom rekkevidden er over 100
+            }
+            else if(rekkevidde < 50) {
+                document.getElementById("txtUtskrift").innerHTML += "<br> Det er virkelig ikke langt... " +
+                    "Du burde skaffe deg en elbil for akkuratt nå er du et forurensende svin"; //legger til en deprimerende melding på linja under dersom rekkevidden er under 50 mil
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h3>Beregn hvor langt din bil kan kjøre på full tank</h3>
+
+<p>Literforbruk per km: <input id="txtForbruk"></p>
+<p>Literkapasitet i tank: <input id="txtTank"></p>
+<button type="button" id="btnAngi">Beregn</button>
+
+<p id="txtUtskrift">Hvor langt kan du kjøre?</p>
+
+
+</body>
+</html>

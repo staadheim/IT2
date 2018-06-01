@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teste mer arrayer</title>
+    <script>
+        window.onload = oppstart;
+
+        var arnavn = ["nullelement" , "ene" , "toeren", 23 ];
+
+        function oppstart() {
+            console.log(arnavn[3]);
+            var lengde = arnavn.length;
+            var sisteplass = lengde - 1;
+            console.log(arnavn[sisteplass]);
+
+            //skriv ut array
+            for(var i = 0; i<lengde; i++) {
+                document.write("index " + i + " = " + arnavn[i] + "<br>");
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

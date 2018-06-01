@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hente inn skjema-felt</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnNavn").onclick = hentNavn;
+        }
+
+        function hentNavn() {
+            var navn = document.getElementById("txtNavn").value;
+            document.getElementById("txtHer").innerHTML = navn;
+
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Ditt navn :  <input type="range" id="txtNavn">
+<button type="button" id="btnNavn">Legg til</button>
+
+<p id="txtHer"></p>
+</body>
+</html>

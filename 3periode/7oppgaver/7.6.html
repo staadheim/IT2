@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var forste = [1,1,1,1,1];
+            var andre = [5,0];
+
+            var sjekk = sammeSum(forste,andre);
+            document.write(sjekk);
+        }
+        
+        function sammeSum(listeA,listeB) {
+            sumA = 0;
+            sumB = 0;
+
+            for(var i=0; i<listeA.length;i++) {
+                 sumA += listeA[i];
+            }
+            for(var i=0; i<listeB.length;i++) {
+                 sumB += listeB[i];
+            }
+            if(sumA === sumB) {
+                return "De er like og summen er " + sumA;
+            }
+            else {
+                return "De er ikke like.";
+            }
+            
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

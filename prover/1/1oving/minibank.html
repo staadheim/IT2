@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minibanken</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("pluss").onclick = overforPluss;
+            document.getElementById("minus").onclick = overforMinus;
+        }
+
+        var saldo = 0;
+
+        function overforPluss() {
+            var belop = parseFloat(document.getElementById("txtPenger").value);
+            saldo = saldo + belop;
+            document.getElementById("txtSaldo").innerHTML = saldo;
+        }
+
+        function overforMinus() {
+            var belop = parseFloat(document.getElementById("txtPenger").value);
+            saldo = saldo - belop;
+            document.getElementById("txtSaldo").innerHTML = saldo;
+            if (saldo < 0) {
+                document.body.style.backgroundColor = "red";
+                document.getElementById("txtPengerTekst").style.visibility = "hidden";
+                document.getElementById("txtPenger").style.visibility = "hidden";
+                document.getElementById("pluss").style.visibility = "hidden";
+                document.getElementById("minus").style.visibility = "hidden";
+                document.getElementById("txtSaldo").style.visibility = "hidden";
+                document.getElementById("txtSaldoTekst").innerHTML = "KONTOEN ER OVERDRATT!";
+                alert("Nå gjorde du noe dumt");
+        }
+
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div id="txtPengerTekst">
+    Beløp i NOK:
+    <input type="number" id="txtPenger">
+</div>
+
+<br>
+<button type="button" id="pluss">Sett inn</button>
+<button type="button" id="minus">Ta ut</button>
+
+<br><br>
+<div id="txtSaldoTekst">
+    Beløp på konto:  <p id="txtSaldo"></p>
+</div>
+
+</body>
+</html>

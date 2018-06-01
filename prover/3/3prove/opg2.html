@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = lesTall;     //starter funksjonen når bruker trykker angi
+        }
+
+        function lesTall() {
+            var tall1 = document.getElementById("idTall1").value;     //henter verdiene brukeren skrev inn
+            var tall2 = document.getElementById("idTall2").value;
+
+            var antallGangerKjor = Math.floor(tall2-tall1);           //differansen mellom de to tallene er hvor mange tall som skal sjekker, altså hvor mange ganger loopen skal kjøre
+            var teller = tall1;                                       //setter teller lik første verdi, kunne bare kalt den telelr fra begynnelsen, men det er mindre oversiktlig
+
+            for(var i=0; i<=antallGangerKjor; i++) {                  //i=0 for å inkludere første verdien og <= antallGangerKjør for å inkludere største verdien
+                var kvadratet = Math.pow(teller,2);
+
+                //c
+                if(teller === 8) {                                     //under verdien 42 er det ingen andre tall enn 8 som teller som kan oppstå ettersom verken 18,28 eller 28 er kvadratet av noe
+                    document.getElementById("txtUtskrift").innerHTML += "Kvadratet av " + teller + " er større enn 42!.<br> 8 er her! <br>";
+                    teller++;
+                    continue;                                         //loopen for neste i-verdi startes
+                }
+                //b
+                if(kvadratet > 42) {                                   //sjekker om verdien er over 42, er den det blir dette skrevet ut
+                    document.getElementById("txtUtskrift").innerHTML += "Kvadratet av " + teller + " er større enn 42!<br>";
+                    teller++;
+                    continue;
+                }
+                else {
+                    document.getElementById("txtUtskrift").innerHTML += "Kvadratet av " + teller + " er " + kvadratet + ".<br>";   //Skriver ut tenksten med kvadratet
+                    teller++;
+                    continue;
+                }
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h3> Skriv inn to valgfrie tall</h3>
+
+<p>Start på:<input id="idTall1"></p>
+<p>Slutt på:<input id="idTall2"></p>
+<button type="button" id="btnAngi">Angi</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

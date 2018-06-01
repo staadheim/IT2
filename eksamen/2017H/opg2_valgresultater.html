@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        //404 tabellen fjernes ikke når en annen lages
+
+        var res = [];
+        res[0] = ["Parti","Prosen 2013"];
+        res[1] = ["Rødt",3.7];
+        res[2] = ["SV",5.0];
+        res[3] = ["Ap",23.0];
+        res[4] = ["SP",4.2];
+        res[5] = ["MDG",3.8];
+        res[6] = ["KrF",2.8];
+        res[7] = ["V",6.7];
+        res[8] = ["H",28.2];
+        res[9] = ["FrP",15.6];
+        res[10] = ["PIR",4.3];
+
+        function oppstart() {
+            visGraf();
+            document.getElementById("endre").onclick = prosent;
+        }
+
+        function visGraf() {
+            var innpakning = document.createElement("div");
+            for(var i=1; i<res.length; i++) {
+                var tekst = document.createElement("div");
+                tekst.innerHTML = res[i][0] + "<br>";
+                tekst.id = "tekst";
+                var graf = document.createElement("span");
+                graf.style.width = parseInt(res[i][1]*3) + "0px";
+                var rod = 255 - (i*25);   //fargene er tall mellom 0 og 255 avhengende av hvor sterke de er
+                var bla = (i*25);         //startet på sterk rød og går over i mer domenant blå
+                graf.style.backgroundColor = "rgba(" + rod + ",50," + bla + ",1)";
+                graf.innerHTML = res[i][1];
+                tekst.appendChild(graf);
+                innpakning.appendChild(tekst);
+            }
+            document.body.appendChild(innpakning);
+        }
+        function prosent() {
+            //skriver ut alle navnene i en liste i prompt
+            var partinavn = "";
+            for(i=1; i<res.length; i++) {
+                if(i === res.length - 1) {
+                    partinavn += i + " - " + res[i][0];  //ingen linjeskift på siste linje
+                }
+                else {
+                    partinavn += i + " - " + res[i][0] + "\n";
+                }
+            }
+            //prompt for partiene og prosentene
+            var parti = parseInt(prompt("Hvilket parti har du prosenten til?\n" + partinavn));
+            var prosent = parseInt(prompt("Hvor mange prosent fikk de?"));
+            //går igjennom alle verdiene og setter inn eventuell ny prosent i arrayen
+            for(i=1; i<res.length; i++) {
+                if(i == parti) {
+                    res[i][1] = prosent;
+                }
+            }
+            //skriver ut graf på nytt med eventyell ny prosent
+            oppstart();
+        }
+    </script>
+    <style>
+        span {
+            height: 20px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+
+        #meny {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        .parti {
+            width: 100px;
+            height: 100px;
+            padding-left: 20px;
+        }
+        .parti:hover {
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body>
+
+<div id="meny">
+    <img class="parti" src="raudt.png">
+    <img class="parti" src="sv.jpg">
+    <img class="parti" src="ap.png">
+    <img class="parti" src="sp.png">
+    <img class="parti" src="krf.jpg">
+    <img class="parti" id="mdg" src="miljopartiet.png">
+    <img class="parti" src="venstre.png">
+    <img class="parti" src="hoyre.png">
+    <img class="parti" src="frp.jpg">
+    <img class="parti" src="piratpartiet.png">
+</div>
+
+<button id="endre">Endre resultat</button>
+</body>
+</html>

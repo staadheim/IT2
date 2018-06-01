@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hvor er musa?</title>
+    <script>
+        window.onload = oppstart;
+
+        var breddegrad = [];
+        var lengdegrad = [];
+        var teller = 0;
+
+        function oppstart() {
+            document.onclick = trykket;
+            document.getElementById("btnTall").onclick = skrivUt;
+        }
+
+        function trykket(evt) {
+            for(var i=0; i<1; i++) {
+                breddegrad[teller] = evt.clientX;
+                lengdegrad[teller] = evt.clientY;
+                teller++;
+            }
+            console.log(breddegrad);
+            console.log(lengdegrad);
+
+            var nyPrikk = document.createElement("span");
+            nyPrikk.className = "prikk";
+            nyPrikk.style.top = lengdegrad[teller] + "px";
+            nyPrikk.style.left = breddegrad[teller] + "px";
+            document.body.appendChild(nyPrikk);
+            document.body.appendChild(prikk);
+        }
+
+        function skrivUt() {
+            document.getElementById("txtUtskrift").innerHTML =
+                "x-kordinatene er: " + breddegrad +
+                "<br> y-kordinatene er: " + lengdegrad;
+        }
+    </script>
+    <style>
+        span.prikk {
+            background-color: hotpink;
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="btnTall">Skriv ut</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

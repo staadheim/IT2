@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sjekkboks</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("usynlig").style.visibility = "hidden";
+            document.getElementById("chkVisTekst").onchange = visTekst;
+        }
+
+        function visTekst() {
+            var tekst = document.getElementById("usynlig");
+            if(tekst.style.visibility === "hidden"){
+                tekst.style.visibility = "visible";
+            }
+            else {
+                tekst.style.visibility = "hidden";
+            }
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="checkbox" id="chkVisTekst"> Vis teksten! <br>
+
+</body>
+</html>

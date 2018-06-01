@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Sebastian Bjørvik">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+        var ctx;
+        function oppstart() {
+            // Hovedprogramkode her...
+            ctx = document.getElementById("tegneflate").getContext("2d");
+            document.getElementById("tegneflate").onmousemove = tegnSirkel;
+        }
+
+        function tegnSirkel(evt) {
+
+            ctx.beginPath();
+            ctx.arc(evt.clientX, evt.clientY, getRandomArbitrary(5,50), 0, 2*Math.PI);
+            ctx.strokeStyle = getRandomColor();
+            ctx.stroke();
+        }
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+    </script>
+    <style>
+        canvas {
+            border: solid;
+        }
+    </style>
+</head>
+<body>
+<canvas id="tegneflate" width="500" height="500"></canvas>
+</body>
+</html>

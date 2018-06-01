@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>7.1</title>
+    <script>
+        window.onload = oppstart;
+
+        //a
+        function fraTommertilCm(tommer) {
+            var cm = parseFloat(tommer * 2.54).toFixed(1);         //ganger tommeren til cm med kun 1 desimaltall
+            document.getElementById("txtUtskrift").innerHTML = cm;
+        }
+
+        //b
+        function innenforInterall(tall,fra,til) {
+            if(tall>fra) {                                        //Sjekker om tallet er større enn "fra"
+                if(tall<til) {                                    //sjekker om taller er mindre enn "til"
+                    document.getElementById("txtUtskrift").innerHTML = "Ja, tallet " + tall + " er mellom " + fra + " og " + til +".";
+                }
+                else {
+                    document.getElementById("txtUtskrift").innerHTML = "Nei, tallet " + tall + " er IKKE mellom " + fra + " og " + til +".";
+                }
+            }
+            else {
+                document.getElementById("txtUtskrift").innerHTML = "Nei, tallet " + tall + " er IKKE mellom " + fra + " og " + til +".";
+            }
+        }
+
+        //c
+        function gjennomsnitt(tall1,tall2) {
+            var gjennomsnitt = parseFloat((tall1+tall2) / 2 ).toFixed(1); //regner gjennomsnittet av de to tallene med kun 1 desimaltall
+            document.getElementById("txtUtskrift").innerHTML = gjennomsnitt;
+        }
+
+        //d
+        function erPartall(tall) {
+            if(tall%2 === 0) {
+                document.getElementById("txtUtskrift").innerHTML = "Tallet " + tall + " er ett partall.";
+            }
+            else {
+                document.getElementById("txtUtskrift").innerHTML = "Tallet " + tall + " er ett oddetall.";
+            }
+        }
+
+        //e
+        function absoluttverdi(tall) {
+            if(tall < 0) {
+                var tall = parseFloat(tall * (-1)); //ganger med -1 for å gjøre tallet positivt
+            }
+            document.getElementById("txtUtskrift").innerHTML = tall;
+        }
+
+        //f
+        function tilfeldigTallFraNullTilHundre() {
+            var tall = Math.floor(Math.random() * 100) + 1;        //returnerer et tilfeldig tall mellom 100 og 1
+            document.getElementById("txtUtskrift").innerHTML = tall;
+        }
+
+        //g
+        function tilFeldigTall(fra,til) {
+            var tall = Math.floor((Math.random()*fra-til)+til);      //returnerer tall mellom "fra" og "til"
+            document.getElementById("txtUtskrift").innerHTML = tall;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Skriv inn: <input id="txtInn"><br>
+
+<button type="button" id="btnA">Oppgave A: Gjør om tommer til cm</button><br>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

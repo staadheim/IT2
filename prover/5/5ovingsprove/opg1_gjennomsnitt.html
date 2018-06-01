@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 1</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [];
+        var gjennomsnitt;
+        var minst = 1e64;
+        var storst = 0;
+
+        function oppstart() {
+            d("btnAntall").onclick = gjennomsnittet;
+
+        function gjennomsnittet() {
+            //tømmer arrayet hver gang vi setter inn nye tall så vi ikke regner med gjennomsnittet av de gamle tallene
+            var lengde = tall.length;
+            for(var i=0; i<lengde; i++) {
+                tall.pop();
+            }
+
+            //setter inn valgt anntall med tilfeldige tall
+            var antall = parseFloat(d("nbrAntall").value); //henter antall tall
+            for(var j=0; j<antall; j++) {
+                var nyttTall = Math.floor(Math.random()*100); //setter nye tilfeldige tall mellom 0 og 100 hver gang
+                tall.push(nyttTall); //fyller arrayet med de nye tallene
+            }
+
+            //NOE HER SOM FÅR DET TIL Å BLI NaN INNIMELLOM
+            //regner ut summen av alle tallene i arrayet
+            var sum = 0;
+            for(var k=0; k<antall; k++) {
+                var tallet = tall[k];
+                sum = Math.round(sum + tallet);
+            }
+            gjennomsnitt = Math.round(sum/lengde); //regner gjennomsnitt med å ta summen av alle tallene delt på antall tall som er hvor lang arrayet er
+
+            console.log(tall);
+            console.log(sum);
+            console.log("Gjennomsnitt: " + gjennomsnitt);
+
+            minstogstorst();
+        }
+
+        function minstogstorst() {
+            for(var i=0; i<tall.length; i++) {
+                if(tall[i]<minst) {
+                    minst = tall[i];
+                }
+            }
+            for(var j=0; j<tall.length; j++) {
+                if(tall[j]>storst) {
+                    storst = tall[j];
+                }
+            }
+
+            utskrift();
+        }
+
+        function utskrift() {
+            d("txtUtskrift").innerHTML = "Gjennomsnittet er " + gjennomsnitt + " i mens det minste tallet er " + minst + " og det største tallet er " + storst + ".";
+        }
+
+       //setter inn document.getElementById så jeg slipper å skrive de inn
+        function d(elm) { //elm for element
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Antall tall: <input id="nbrAntall" type="number">
+<button type="button" id="btnAntall">Angi</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

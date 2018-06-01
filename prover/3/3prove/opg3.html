@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        var biler = [];
+        //biler[x] = [navn, antall liter i tanken, drivstofforbruk, rekkevidde, co2-utslipp]
+        biler[0] = ["Ford Fiesta",35,0.51];        //informasjonen om fiestaen
+        biler[1] = ["Volfswagen Golf",64,0.95];
+        biler[2] = ["Audi A3",45,0.39];
+
+        function oppstart() {
+            //regner og lagrer resten av informasjonen og legger inn i arrayen vår
+            for (var i = 0; i < biler.length; i++) {
+                var rekkevidde = parseFloat(Math.floor(biler[i][1] / biler[i][2]).toFixed(0)); // liter i tanken (som hentes ved index til array) / drivstofforbruk (som også hentes ved index.
+                var co2 = parseFloat(3000 * biler[i][2] * 0.75);    //3000* drivstofforbruk (som hentes ved å plukke ut indexen) * 0,75
+                biler[i].push(rekkevidde,co2);                  //legger til den nye informasjonen på slutten av hver array
+            }
+
+            document.getElementById("selBiler").onchange = visInfo;
+        }
+
+        function visInfo() {
+            console.log(biler);
+            var bil = document.getElementById("selBiler").value;
+
+            var tabell = document.createElement("table");
+            var innpakning = document.createElement("div");
+            innpakning.innerHTML = "<h4>" + biler[bil][0] + "</h4>";
+            for(var i=0; i<biler[0].length-1; i++) {                     //-1 fordi jeg ekskludere navnet på bilen, den skal være overskrift, ikke i første kolonnen, så da blir arrayen 1 mindre
+                var rad = document.createElement("tr");
+                for(var j=1; j<biler.length; j++) {                      //her er j=1 for å utelukke navnet på bilen
+                    var celle = document.createElement("td");
+                    if( i==0 && j==1) {
+                        var beskrivelse = "Liter i full tank";           //finner riktig informasjon til hver celle
+                        var info = "";
+                    }
+                    if( i==1 && j==1) {
+                        var beskrivelse = "Drivstoffordbruk";
+                        var info = "";
+                    }
+                    if( i==2 && j==1) {
+                        var beskrivelse = "Rekkevidde";
+                        var info = "";
+                    }
+                    if( i==3 && j==1) {
+                        var beskrivelse = "CO2-utslipp";
+                        var info = "";
+                    }
+                    if( i==0 && j==2) {
+                        var beskrivelse = "";
+                        var info = biler[bil][i+1];
+                    }
+                    if( i==1 && j==2) {
+                        var beskrivelse = "";
+                        var info = biler[bil][i+1];
+                    }
+                    if( i==2 && j==2) {
+                        var beskrivelse = "";
+                        var info = biler[bil][i+1];
+                    }
+                    if( i==3 && j==2) {
+                        var beskrivelse = "";
+                        var info = biler[bil][i+1];
+                    }
+                    celle.innerHTML = beskrivelse + info;                   //setter inn informasjonen
+                    rad.appendChild(celle);
+                }
+                tabell.appendChild(rad);
+            }
+            innpakning.style.margin = "auto";
+            innpakning.appendChild(tabell);
+
+            //b
+            innpakning.innerHTML += "<img src='" + bil + ".png' height='200px'> <br>";   //setter inn bilde av bilene fra oppgaven , men jeg har andre bilnavn
+
+            //c
+            var grafikk = document.createElement("span");    //lager elementet
+            grafikk.style.width = biler[bil][3]  + "0px";    //setter lengden i forhold til rekkevidden på bilen
+            innpakning.appendChild(grafikk);                 //setter elementet inne i innnpakningen
+
+            document.body.appendChild(innpakning);           //lager innpakningen
+        }
+
+        //eneste jeg ikke rakk var å fjerne den før, sånn at når du velger en ny kommer den ikke under den forrige
+
+    </script>
+    <style>
+        table, td {
+            border: solid;
+            border-collapse: collapse;
+        }
+        span {
+            height: 20px;
+            margin-left: 20px;
+            background-color: black;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>Velg din bil i dag</h2>
+
+
+<select id="selBiler">
+    <option>Velg din bil</option>
+    <option name="bil" value="0">Ford Fiesta</option>
+    <option name="bil" value="1">Volfswagen Golf</option>
+    <option name="bil" value="2">Audi A3</option>
+</select>
+
+</body>
+</html>

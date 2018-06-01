@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Numeric Input</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLes").onclick = lesverdi;
+        }
+
+        function lesverdi() {
+            var verdi = parseFloat(document.getElementById("txtVerdi").value); //parseFloat = tolker som et desimaltall
+            document.getElementById("txtUtskrift").innerHTML = verdi;
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Tekst: <input type="number" id="txtVerdi" min="0" max="10">
+<button type="button" id="btnLes">Les av</button><br>
+
+<p id="txtUtskrift">Her kommer resultatet</p>
+</body>
+</html>

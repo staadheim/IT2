@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diverse JavaScript</title>
+    <script>
+        window.onload = oppstart;
+
+        var variabel = 99;                  // deklarer variabelen.
+
+        function oppstart() {
+            var tall1 = "003456";
+            console.log(tall1);
+            var tall2 = 3456;
+            console.log(tall2);
+
+            var bool = true;                // boolske verdier er true/false
+            console.log(bool);
+            console.log(!bool);             // ! foran vil si at vi ser på det motsatte av veriden. funker kun true/false
+            console.log(!(!bool));          // ! foran ! gir motsatt av motsatt = tilbake til true
+
+            if (bool === true) {
+                console.log(!(!bool));
+            }
+            if (bool === false) {
+                console.log(bool);
+            }
+
+            var variabel = 3+4;              // Privat variabel
+            console.log(variabel);
+
+                                             // Rekkefølge har noe å si. Programmet kan matteregler
+            var tall3 = (3+4)*5;  // = 7*5 = 35
+            console.log(tall3);
+            var tall4 = 3+4*5;    // = 4+(4*5) = 2+20 = 23
+            console.log(tall4);
+
+                                             // Konkatinering
+            var langtTall = tall3 + tall4; //addering: 35+23 = 58
+            console.log(langtTall);
+            var langtTallHele = String(tall3)  + 500 +1+23; // = 35500123 = String gjør at tallene blir satt etter hverandre
+            console.log(langtTallHele);
+
+                                             //Modulo!
+            console.log(314%77);            //= 6 = Divisjon OG du får igjen den delen som er igjen
+            console.log(100%20);            //= 0 = for ingen rest
+
+            var tall5 = 15;
+            if (tall5 % 3 === 0 && tall5 % 5 === 0) {  //sjekket om tall5 er delelig på 3 OG  5
+                console.log("Deleleig på 3 og 5");
+            }
+            else {
+                console.log("IKKE delelig på 3 og 5");
+            }
+
+        }
+
+        console.log(variabel);
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

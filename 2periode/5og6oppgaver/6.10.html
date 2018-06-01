@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.10</title>
+    <script>
+        window.onload = oppstart;
+
+        var navn = ["Frida","Silje","Espen","Karoline","Anine"];
+        var nyeNavn = [];
+
+        function oppstart() {
+            var lengde = navn.length;
+
+            for(var i=0;i<3;i++) {
+                var tilfeldig = Math.floor(Math.random() * lengde);
+                nyeNavn[i] = navn[tilfeldig];
+            }
+            document.write(nyeNavn);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

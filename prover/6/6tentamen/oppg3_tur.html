@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        var bestillinger = [];
+        var prisBuss = 100;
+        var prisSovesal = 500;
+        var prisFrokost = 200;
+        var prisMiddag = 600;
+
+        function oppstart() {
+            d("btnReg").onclick = oppgavea;
+        }
+
+        function oppgavea() {
+            //henter navnet
+            var fornavn = d("txtFornavn").value;
+            var etternavn = d("txtEtternavn").value;
+
+            //regner pris SAMT sette valgfrie alternativer til 1 for ja og 0 for nei (pga jeg trenger det i oppgave 3b)
+            var enkeltrom = d("chkEnk").checked;
+            if(enkeltrom === true) {
+                enkeltrom = 1;
+                var prisEnkrom = 400;
+            }
+            else {
+                enkeltrom = 0;
+                var prisEnkrom = 0;
+            }
+            //finner hvilke måltider bruker ønsker
+            var maltid = parseInt(document.getElementById("selMaltid").value);
+            if(maltid === 0) {
+                var frokost = 0;
+                var middag = 0;
+            }
+            else if(maltid === 1) {
+                var frokost = 1;
+                var middag = 0;
+            }
+            else if(maltid === 2) {
+                var frokost = 1;
+                var middag = 1;
+            }
+            else{
+                d("txtUtskrift").innerHTML = "404 ERROR <br/> Noe gikk galt med måltidene";
+            }
+            //regner pris
+            var prisMaltider = frokost*prisFrokost + middag*prisMiddag;
+            var totalpris = prisBuss + prisSovesal + prisEnkrom + prisMaltider;
+
+            //sjekker om bruker har skrevet inn navnet sitt
+            if(fornavn == "" || etternavn == "") {
+                d("txtUtskrift").innerHTML = "Skriv inn fornavn og etternavn.";
+            }
+            else {
+                //setter bestillingen inn i slutten av arrayet om bruker har husket navn
+                bestillinger.push([fornavn, etternavn, enkeltrom, frokost, middag, totalpris]);
+
+                //skriver ut bestillingen
+                d("txtUtskrift").innerHTML = "Hallo " + fornavn + " " + etternavn + ".<br/> Din bestilling er registrert og kom totalt på " + totalpris + " kr.";
+
+                oppgaveb();
+                oppgavec();
+            }
+        }
+
+        function oppgaveb() {
+            //jeg ønsket at rutinen skulle oppdateres og skrives ut hver gang en bruker registrerer seg
+            var antDeltakere = bestillinger.length;
+            //nullstiller antallet hver gang
+            var antEnk = 0;
+            var antFro = 0;
+            var antMid = 0;
+            //teller antallet
+            for(var i=0; i<antDeltakere; i++) {
+                if(bestillinger[i][2] === 1) {
+                    antEnk++;
+                }
+                if(bestillinger[i][3] === 1) {
+                    antFro++;
+                }
+                if(bestillinger[i][4] === 1) {
+                    antMid++;
+                }
+            }
+            //skriver ut antallet
+            d("oppgb").innerHTML = "<b>Oppgave b</b>"
+                + "<br/>Antall deltakere så langt: " + antDeltakere
+                + "<br/>Antall som ønsker enkeltrom: " + antEnk
+                + "<br/>Antall som ønsker frokost: " + antFro
+                + "<br/>Antall som ønsker middag: " + antMid;
+        }
+
+        function oppgavec() {
+            var utskrift = d("oppgc");
+            //sletter alt som eventuelt er i utskriften til denne oppgaven
+            while (utskrift.firstChild) {
+                utskrift.removeChild(utskrift.firstChild);
+            }
+
+            utskrift.innerHTML = "<b>Oppgave c</b><br>Endre en bestillingen til: ";
+            //lager en nedtrekkmeny over alle personene
+            var meny = document.createElement("select");
+            meny.id = "selMeny";
+            for(var i=0; i<bestillinger.length; i++){
+                meny.innerHTML += "<option value='" + i + "'>" + bestillinger[i][0] + " " + bestillinger[i][1] + "</option>";
+            }
+            utskrift.appendChild(meny);
+
+            //oppgave c
+            var endre = document.createElement("button");
+            endre.innerHTML = "Endre personens bestilling";
+            utskrift.appendChild(endre);
+            endre.onclick = oppgavec2;
+
+            //oppgave d
+            var slett = document.createElement("button");
+            slett.innerHTML = "Slett personens bestilling";
+            utskrift.appendChild(slett);
+            slett.onclick = oppgaved;
+        }
+        
+        function oppgavec2() {
+            var utskrift = d("oppgc");
+            var person = parseInt(d("selMeny").value);
+
+            //gjør om det visuelle for brukeren slik at hen forstår at man nå er på registreringsnettsiden
+            d("btnReg").style.visibility = "hidden";
+            d("txtOverskrift").innerHTML = "Du endrer nå en bestilling!";
+            d("txtFornavn").value = bestillinger[person][0];
+            d("txtEtternavn").value = bestillinger[person][1];
+            //registreringsknappen er nå skjult og i stedet lager jeg en endreknapp på siden
+            var endreknapp = document.createElement("button");
+            endreknapp.innerHTML = "Endre registreringen til " + bestillinger[person][0] + " " + bestillinger[person][1];
+            d("knapper").appendChild(endreknapp);
+
+            endreknapp.onclick = function () {
+                //tilbakestiller det visuelle til den ordentlige registreringsnettsiden
+                d("txtOverskrift").innerHTML = "Velkommen til bestilling av tur";
+                d("btnReg").style.visibility = "visible";
+                d("knapper").removeChild(endreknapp);
+                //sletter personen fra lista
+                bestillinger.splice(person,1);
+                //og legger til personopplysningen på nytt gjennom den funkjsonen
+                oppgavea();
+            }
+        }
+
+        function oppgaved() {
+            //henter ut personen og sletter plassen dens i arrayet
+            var person = parseInt(d("selMeny").value);
+            bestillinger.splice(person,1);
+            console.log(person,  bestillinger[person][0] + " " + bestillinger[person][1]);
+            //starter disse funksjonene igjen så de viser riktige verdier i forhold til den slettede personen
+            oppgaveb();
+            oppgavec();
+        }
+
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+<h1 id="txtOverskrift">Velkommen til bestilling av tur</h1>
+
+Fornavn:<input id="txtFornavn" type="text"><br/>
+Etternavn:<input id="txtEtternavn" type="text"><br/><br/>
+
+<b> Allerede inkludert!</b><br/>
+Buss: 100 kr <br/>
+Overnatte i sovesalen: 500 kr <br/><br/>
+
+<b>Muligheter for deg:</b><br/>
+<input type="checkbox" id="chkEnk">Oppgradering til enkeltrom: 400 kr<br/>
+Måltider:
+<select id="selMaltid">
+    <option value="0">Ingen måltider</option>
+    <option value="1">Bare frokost: 200kr </option>
+    <option value="2">Frokost og middag: 800kr</option>
+</select>
+
+
+<br/><div id="knapper">
+    <button id="btnReg">Registrer</button>
+</div>
+
+<p id="txtUtskrift"></p><br/><br/>
+<p id="oppgb"></p>
+<p id="oppgc"></p>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        var arrRavare = [];
+        var arrBehov = [];
+        var arrMeny = [];
+        var arrBestilling = [];
+        var ukenr = 26;
+
+        function oppstart() {
+            arrRavare.torsk   = {brn:200, ung:300, vks:350};
+            arrRavare.sei     = {brn:200, ung:300, vks:350};
+            arrRavare.makrell = {brn:200, ung:300, vks:350};
+            arrRavare.reker   = {brn:250, ung:500, vks:500};
+            arrRavare.krabbe  = {brn:300, ung:500, vks:600};
+            arrRavare.laks    = {brn:200, ung:300, vks:350};
+            arrMeny = ["krabbe","torsk","laks"];
+
+            d("ukenr").innerHTML = ukenr;
+            d("btnReg").onclick = registrer;
+            d("btnBehov").onclick = beregnBehov;
+        }
+
+        //setter inn document.getElementById så jeg slipper å skrive de inn
+        function d(elm) { //elm for element
+            return document.getElementById(elm);
+        }
+
+        //registrerer bestillingen
+        function registrer() {
+            var arrLes = {};
+            arrLes.uke = parseInt(d("txtUke").value);
+            arrLes.mdg = parseInt(d("txtMdg").value);
+            arrLes.brn = parseInt(d("txtBrn").value);
+            arrLes.ung = parseInt(d("txtUng").value);
+            arrLes.vks = parseInt(d("txtVks").value);
+
+            if(arrLes.mdg < 1 || arrLes.mdg > 3) {
+                arrLes.mdg = 2;
+            }
+            arrBestilling.push(arrLes);
+            visBestilling();
+        }
+
+        function visBestilling() {
+            var utskrift = "<tr><th>Uke</th><th>Antall middager</th><th>Barn</th><th>Ungdom</th><th>Voksen</th></tr>";
+
+            for(var i=0; i<arrBestilling.length; i++) {
+                utskrift += "<tr><td>" + arrBestilling[i].uke + "</td>";
+                utskrift += "<td>" + arrBestilling[i].mdg + "</td>";
+                utskrift += "<td>" + arrBestilling[i].brn + "</td>";
+                utskrift += "<td>" + arrBestilling[i].ung + "</td>";
+                utskrift += "<td>" + arrBestilling[i].vks + "</td></tr>";
+            }
+
+            d("tabBestilling").innerHTML = utskrift;
+        }
+
+        function beregnBehov() {
+            arrBehov = {torsk:0, sei:0, makrell:0, reker:0, krabbe:0, laks:0};
+            for(var i=0; i<arrBestilling.length; i++) {
+                if(arrBestilling[i].uke == ukenr) {
+                    for(var j=0; j<arrBestilling[i].mdg; j++) {
+                        var ravare = arrMeny[j];
+                        var behov = arrRavare[ravare];
+                        var sum = behov.brn * arrBestilling[i].brn + behov.ung * arrBestilling[i].ung + behov.vks * arrBestilling[i].vks;
+                        arrBehov[ravare] += sum;
+                    }
+                }
+            }
+            visBehov();
+        }
+
+        function visBehov() {
+            var utskrift = "Torsk: " + arrBehov.torsk + " gram <br/><br/>" +
+                    "Sei: " + arrBehov.sei + " gram <br/><br/>" +
+                    "Makrell: " + arrBehov.makrell + " gram <br/><br/>" +
+                    "Reker: " + arrBehov.reker + " gram <br/><br/>" +
+                    "Krabbe: " + arrBehov.krabbe + " gram <br/><br/>" +
+                    "Laks: " + arrBehov.laks + " gram <br/><br/>";
+            d("txtBehov").innerHTML = utskrift;
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Registrer Bestilling</h1>
+<label for="txtUke">Ukenummer:</label>
+<input type="number" id="txtUke" min="1" max="52">
+<br/><br/>
+
+<label for="txtMdg">Antall middager:</label>
+<input id="txtMdg" type="number" value="2" min="2" max="3">
+<br>
+
+<label for="txtBrn">Antall barn:</label>
+<input id="txtBrn" type="number" value="0">
+<br>
+
+<label for="txtUng">Antall ungdom:</label>
+<input id="txtUng" type="number" value="0">
+<br>
+
+<label for="txtVks">Antall voksne:</label>
+<input id="txtVks" type="number" value="1">
+<br>
+
+<button type="button" id="btnReg">Registrer</button>
+
+<table id="tabBestilling"></table>
+<h1>Råvarebehov i uke <span id="ukenr"></span></h1>
+<button type="button" id="btnBehov">Beregn råvarebehov</button>
+<p id="txtBehov"></p>
+</body>
+</html>

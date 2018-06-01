@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>God tur!</title>
+    <script>
+        window.onload = oppstart;
+
+        var avstand = [];
+        avstand[0] = [0,62.3,58.8,44.6,33.2];
+        avstand[1] = [62.3,0,37.9,65.3,60.1];
+        avstand[2] = [58.8,37.9,0,40.5,78.5];
+        avstand[3] = [44.6,65.3,40.5,0,77.6];
+        avstand[4] = [33.2,60.1,78.5,77.6,0];
+
+        var sted = ["Askim","Halden","Fredrikstad","Moss","Ørje"];
+        var reiseliste = [];
+        var totalavstand = 0;
+        var stedsutskrift = "";
+        var fart = 20;
+
+
+        function oppstart() {
+            for(var i=0; i<sted.length; i++) {
+                var valg1 = document.createElement("option");
+                valg1.innerHTML = sted[i];
+                valg1.value = i;
+                document.getElementById("lstSted").appendChild(valg1);
+            }
+            document.getElementById("btnReg").onclick = registrer;
+            document.getElementById("btnReset").onclick = nullstill;
+        }
+
+        function registrer() {
+            var stedindex = parseInt(document.getElementById("lstSted").value);
+            reiseliste.push(stedindex);
+
+            if(stedindex === 0) {
+                askim.style.visibility = "visible";
+            }
+            else  if(stedindex === 1) {
+                halden.style.visibility = "visible";
+            }
+            else  if(stedindex === 2) {
+                fredrikstad.style.visibility = "visible";
+            }
+            else  if(stedindex === 3) {
+                moss.style.visibility = "visible";
+            }
+            else  if(stedindex === 4) {
+                orje.style.visibility = "visible";
+            }
+
+            for (var i=0; i<reiseliste.length; i++) {
+                stedsutskrift = stedsutskrift + "- " + sted[reiseliste[i]] + "<br/>";
+            }
+            document.getElementById("txtRute").innerHTML = stedsutskrift;
+            stedsutskrift = "";
+            beregn();
+        }
+
+        function beregn() {
+            for(var i =0; i<reiseliste.length-1; i++) {
+                var fraindex = reiseliste[i];
+                var tilindex = reiseliste[i+1];
+                var nyavstand = avstand[fraindex][tilindex];
+                totalavstand = totalavstand + nyavstand;
+            }
+            document.getElementById("txtAvstand").innerHTML = "Total avstand er: " + totalavstand.toFixed(1) + " km";
+
+            var tid = Math.round(totalavstand/fart);
+            document.getElementById("txtTid").innerHTML = "Det vil ta " + tid + " timer å sykle denne ruten";
+            totalavstand = 0;
+        }
+
+        function nullstill() {
+            tid = 0;
+            reiseliste = [];
+            stedsutskrift = "";
+            var liste = document.getElementById("lstSted");
+            while (liste.firstChild) { //så lenge det eksisterer ett første element
+                liste.removeChild(liste.firstChild);
+            }
+            askim.style.visibility = "hidden";
+            halden.style.visibility = "hidden";
+            fredrikstad.style.visibility = "hidden";
+            moss.style.visibility = "hidden";
+            orje.style.visibility = "hidden";
+            document.getElementById("txtRute").innerHTML = "";
+            document.getElementById("txtAvstand").innerHTML = "";
+            document.getElementById("txtTid").innerHTML = "";
+            oppstart();
+        }
+
+    </script>
+    <style>
+        #innpakning {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 500px;
+            padding-left: 50px;
+            padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-style: solid;
+            border-color: black;
+        }
+        #kart {
+            position: absolute;
+            top: 10px;
+            left: 560px;
+            border-style: solid;
+            border-color: black;
+        }
+        .by {
+           position: absolute;
+            z-index: 5;
+            background-color: red;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            visibility: hidden;
+        }
+        #askim {
+            top: 150px;
+            left: 255px;
+        }
+        #halden {
+            top: 520px;
+            left: 330px;
+        }
+        #fredrikstad {
+            top: 440px;
+            left: 150px;
+        }
+        #moss {
+            top: 250px;
+            left: 50px;
+        }
+        #orje {
+            top: 240px;
+            left: 450px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="innpakning">
+    <h1>Avstandsberegning</h1>
+    Velg sted: <select id="lstSted"></select><!-- Tagg til listen, alternayivene er programert i scrip -->
+    <button type="button" id="btnReg">Legg til sted</button>
+    <button type="button" id="btnReset">Nullstill</button><br/><br/>
+
+    <p id="txtRute">Her kommer utskriften</p>
+    <p id="txtAvstand">Her kommer avstanden</p>
+    <p id="txtTid">Her kommer tiden</p>
+</div>
+
+<div id="kart">
+    <img src="stortkartostfold.gif">
+    <div class="by" id="askim"></div>
+    <div class="by" id="halden"></div>
+    <div class="by" id="fredrikstad"></div>
+    <div class="by" id="moss"></div>
+    <div class="by" id="orje"></div>
+</div>
+</body>
+</html>

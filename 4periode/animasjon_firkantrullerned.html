@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rull firkant! Rull!</title>
+    <script>
+        window.onload = oppstart;
+
+        var firkant; //lager den her og deklarerer den i oppstartsfunkjsonen så man kan bruke den overalt
+        var animer;
+        var teller = 0;
+        var fart = 10;
+        var vinkel = 70;
+        var y = 50; //bør være samme som der div'en er satt
+        var x = 50;
+        var dy = parseFloat(fart*Math.sin(vinkel)); //regner ut farten i y-retning (positivt går NEDOVER på nettsiden)
+        var dx = parseFloat(fart*Math.cos(vinkel)); //regner ut farten i x-retning
+
+        function oppstart() {
+            animer = setInterval(flytt,80);          //startet funksjonen hvert 80. millisekund
+            firkant = document.getElementById("firkant");
+        }
+
+        function flytt() {
+            firkant.style.top = y + "px";
+            firkant.style.left = x + "px";
+            y += dy;
+            x += dx;
+            teller++;
+            if(teller % 25 === 0) {
+                fart = Math.floor((Math.random()*10) + 1);
+                vinkel = Math.floor((Math.random()*180) + 1);
+                beregn(vinkel,fart);
+            }
+            if(y >= 400) {
+               clearInterval(animer); //stopper intervallet du ønsker å stanse
+            }
+            console.log(vinkel);
+        }
+
+        function beregn(vinkel,fart) {
+            vinkel = parseFloat((vinkel/180)*Math.PI);  //gjør om vinkelen til radianer
+        }
+
+    </script>
+    <style>
+        .firkant {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            background-image: url("rosa.jpg");
+            background-size: cover;          /* Setter størrelsen så den dekker hele div-en */
+            background-position: center;     /* Sentrerer bildet inne i div-en */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="firkant" id="firkant"></div>
+
+</body>
+</html>

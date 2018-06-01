@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabell</title>
+    <script>
+        window.onload = oppstart;
+
+        //ønsker å lagre info i 2 dimensjoner
+
+        var array = [];
+        array[0] = ["Silje","Frida","Espen","Anine","Sandra"];
+        array[1] = ["Stadheim","Myking","Gokshol","Noren","Bergedalen"];
+        array[2] = ["3ST1", "3ST1", "3ST2","3IF1","3ST1"];
+
+        function oppstart() {
+            var table = document.createElement("table");
+
+            for(var i=0; i<array.length; i++) {
+                var buffer = array[i].length;
+                var tr = document.createElement("tr");
+                //var litenArray = array[i];
+
+                for(var j=0; j<buffer; j++) {
+                    var td = document.createElement("td");
+                    td.innerHTML = array[i][j];
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        }
+
+        function nyTabell() {
+            var tabell = document.createElement("table");
+
+        }
+    </script>
+    <style>
+        table, td {
+            border-color: deeppink;
+            border-style: solid;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

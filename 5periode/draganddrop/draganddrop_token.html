@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Betal</title>
+    <script>
+        window.onload = oppstart;
+
+        var snu = 1;
+        var mynt;
+        y = 200;
+        x = 150;
+
+        function oppstart() {
+            mynt = document.getElementById("mynt");
+            mynt.ondragstart = dra;
+            document.getElementById("boks").ondrop = slipp;
+            document.getElementById("boks").ondragover = tillat;
+        }
+
+        function dra(evt) {
+            evt.dataTransfer.setData("div",evt.target.id);
+
+            /*/får mynten til å snu seg hver gang jeg bruker en
+            if(snu === 1) {
+                snu = -1;
+            }
+            else {
+                snu = 1;
+            }
+            document.getElementById("bilde").style.transform = "scaleX( " + snu + ")";*/
+        }
+
+        function tillat(evt) {
+            evt.preventDefault();
+        }
+
+        function slipp(evt) {
+            evt.preventDefault();
+            //ny posisjon for myntne
+            x = Math.floor(Math.random()*80);
+            y = Math.floor(Math.random()*50);
+            //flytter mynten
+            mynt.style.marginTop = y + "%";
+            mynt.style.marginLeft = x + "%";
+            console.log(x,y);
+            //endrer bakgrunnsfarge
+            farge = document.getElementById("farge");
+            var R = Math.floor(Math.random() * 255);
+            var G = Math.floor(Math.random() * 255);
+            var B = Math.floor(Math.random() * 255);
+            document.body.style.backgroundColor = "rgba(" + R + "," + G + "," + B + ",1)";
+        }
+
+
+    </script>
+    <style>
+        .innpakning {
+            text-align: center;
+        }
+        #boks {
+            margin-left: 60%;
+            width: 20px;
+            height: 100px;
+            background-color: gray;
+        }
+        #mynt {
+            background-image: url("mynt.png");
+            width: 50px;
+            height: 63px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="innpakning">
+    <h3>Betal i luken for å endre bakgrunnsfargen</h3>
+
+    <div id="boks"></div>
+</div>
+
+<div id="mynt" draggable="true"></div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5.4</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = skrivUt;
+        }
+
+        function skrivUt() {
+            var utskrift = document.createElement("p");
+            var tekst = document.getElementById("txt1").value;
+            var gjenta = Math.floor(document.getElementById("txt2").value);
+
+            for(var i=0; i<gjenta; i++) {
+                utskrift.innerHTML += tekst + "<br>";
+            }
+            document.body.appendChild(utskrift);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Tekst: <input id="txt1"><br>
+Gjentagelser: <input id="txt2"><br>
+<button type="button" id="btnAngi">Angi</button>
+</body>
+</html>

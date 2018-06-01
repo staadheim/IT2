@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stortingsvalget</title>
+    <script>
+        window.onload = oppstart;
+
+        var bildenr = 1;
+        var karusell;
+        var innpakning;
+
+        function oppstart() {
+            innpakning = document.getElementById("innpakning");
+            document.getElementById("sp").onclick = infoSP;
+            document.getElementById("mdg").onclick = infoMDG;
+
+        }
+
+        function infoSP() {
+            clearTimeout(karusell);
+            innpakning.innerHTML = "";
+            var video = document.createElement("video");
+            video.controls = "controls";
+            video.style = "width: 320px; height: 180px; justify-self: center;";
+            video.innerHTML = "<source src='senterpartiet_redigert.mp4' type='video/mp4'> 404 ERROR <br> Nettleseren støtter ikke video";
+            innpakning.appendChild(video);
+        }
+
+        function infoMDG() {
+            var lyd = new Audio ("piano.mp3");
+                lyd.play();
+            innpakning.innerHTML = "";
+            bildenr++;
+            if(bildenr > 3) {
+                bildenr = 1;
+            }
+            var bilder = document.createElement("div");
+            bilder.style = "width: 320px; height: 240px; padding-top: 400px;" +
+                "background-image: url('bildegalleri0" + bildenr + ".jpg'); background-size: contain; background-repeat: no-repeat;";
+            innpakning.appendChild(bilder);
+            karusell = setTimeout(infoMDG, 2000);
+        }
+    </script>
+    <style>
+        .meny {
+            display: flex;
+            justify-content: center;
+        }
+        .parti {
+            width: 100px;
+            height: 100px;
+            padding-left: 20px;
+        }
+        .parti:hover {
+            transform: scale(1.5);
+        }
+
+        #innpakning {
+            display: flex;
+            justify-content: center;
+            padding-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="meny">
+    <img class="parti" src="raudt.png">
+    <img class="parti" src="sv.jpg">
+    <img class="parti" src="ap.png">
+    <img class="parti" id="sp" src="sp.png">
+    <img class="parti" src="krf.jpg">
+    <img class="parti" id="mdg" src="miljopartiet.png">
+    <img class="parti" src="piratpartiet.png">
+    <img class="parti" src="venstre.png">
+    <img class="parti" src="hoyre.png">
+    <img class="parti" src="frp.jpg">
+</div>
+
+<div id="innpakning"></div>
+
+</body>
+</html>

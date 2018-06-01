@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Battleship</title>
+    <script>
+        window.onload = oppstart;
+
+        var bs = [];          //for BattleShip
+
+        var xlengde = 10;
+
+        function oppstart() {
+            for(var i=0; i<xlengde; i++) {         //i går bort vannrett
+                bs.push([]);                       //setter inn arrayer i hver index i den vanrette arrayen og skaper de lodrette arrayene
+            }
+
+            bs[6][0] = 1;    //posisjoner for båten: (7,1) til (9,1)
+            bs[7][0] = 1;
+            bs[8][0] = 1;
+
+            bs[0][0] = 2;   //posisjonen for båten: (1,1) og (1,2)
+            bs[0][1] = 2;
+
+            bs[8][8] = 3;   //posisjonen for båten: (9,9)
+
+            document.getElementById("btnAngi").onclick = sjekkTreff;
+        }
+
+        function sjekkTreff() {
+            var xpos = parseInt(document.getElementById("txtX").value);
+            xpos = xpos - 1;
+
+            var ypos = parseInt(document.getElementById("txtY").value);
+            ypos--;
+
+            console.log("(x,y) = (" + xpos + "," + ypos + ")");
+
+            var resultat = document.getElementById("txtUtskrift");
+
+            if(bs[xpos][ypos] === 1) {
+                resultat.innerHTML = "TREFF!!! <br> Du traff båten som ligger på (7,1), (8,1) og (9,1)";
+            }
+            else if(bs[xpos][ypos] === 2) {
+                resultat.innerHTML = "TREFF!!! <br> Du traff båten som ligger på (1,1) og (1,2)";
+
+            }
+            else if(bs[xpos][ypos] === 3) {
+                resultat.innerHTML = "TREFF!!! <br> Du traff lille fåten på (9,9)";
+
+            }
+            else{
+                resultat.innerHTML = "Du bommet!";
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>BATTLESHIP</h1>
+
+x-kordinaten: <input id="txtX"> <br>
+y-kordinaten: <input id="txtY"> <br>
+<button id="btnAngi">Gjett nå</button>
+
+
+<p id="txtUtskrift">Her kommer resultatet</p>
+</body>
+</html>

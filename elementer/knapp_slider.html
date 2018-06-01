@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Slider</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("rngVerdi1").onmousemove = lesverdi;
+        }
+
+        function lesverdi() {
+            var rangeverdi = document.getElementById("rngVerdi1").value;
+            document.getElementById("txtUtskrift").innerHTML = rangeverdi;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Tekst: <input type="range" id="rngVerdi1" min="-100" max="100">
+
+<p id="txtUtskrift">Her kommer resultatet</p>
+
+</body>
+</html>

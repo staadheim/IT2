@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FizzBuzz</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            for (i=1;i<=100;i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log("FizzBuzz"); //Tallet er delelig på 3
+                }
+                else if (i % 5 === 0) {
+                    console.log("Buzz"); //Taller er delelig på 5
+                }
+                else if (i % 3 === 0) {
+                    console.log("Fizz"); //Tallet er delelig på 3 og 5
+                }
+                else {
+                    console.log(i);
+                }
+            }
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

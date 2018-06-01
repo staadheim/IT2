@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Høyreklikk</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var tekst2 = document.getElementById("tekst2");
+            tekst2.addEventListener('contextmeny',function (evt) {
+                evt.preventDefault();
+                document.body.style.backgroundColor = "red";
+            });
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<p id="tekst1" oncontextmenu="alert('Du trykket tekst 1'); return false;">Trykk meg</p>
+
+<p id="tekst2">Klikk meg</p>
+
+</body>
+</html>

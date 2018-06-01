@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Radioknapper</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLes").onclick = lesradioknapper;
+        }
+
+        function lesradioknapper() {
+            var radioverdi = radioForm.elements.namedItem("radKnapp").value;
+            document.getElementById("txtUtskrift").innerHTML = radioverdi;
+
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+<form name="radioForm">
+    Tekst foran knappene <br><br>
+    <input type="radio" name="radKnapp" value="valg1">Tekst1<br>
+    <input type="radio" name="radKnapp" value="valg2">Tekst2<br>
+    <input type="radio" name="radKnapp" value="valg3">Tekst3<br>
+</form> <br>
+
+<button type="button" id="btnLes">Les av</button>
+<p id="txtUtskrift">Her kommer resultatet</p>
+
+</body>
+</html>

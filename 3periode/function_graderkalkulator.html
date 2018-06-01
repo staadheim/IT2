@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Celsius til Fahrenheit</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var farenheit = prompt("Hvor mange grader F?");
+            var graderC = beregnFtilC(farenheit).toFixed(1);
+            document.write(farenheit + " °F = " + graderC + " °C ");
+
+        }
+
+        function beregnFtilC(graderF) {
+            var celsius = (graderF - 32) / 1.8;
+            return celsius;                           //returnerer variabelen til der funskjonen ble startet, best å kun returnere 1 ting
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

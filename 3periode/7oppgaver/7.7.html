@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>7.7</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var bokstaver = ["S","I","L","J","E"];
+            var lengde = bokstaver.length;
+            var tall1 = 5;
+            var tall2 = 2;
+            var tall3 = 7;
+
+            var p = document.createElement("p");
+           p.innerHTML = tilfeldigBokstav(bokstaver,lengde) + "<br>" +
+           ord(bokstaver,lengde,tall1) + "<br>" +
+           setning(bokstaver,lengde,tall1,tall2,tall3);
+           document.body.appendChild(p);
+
+            //ord(tilfeldigBokstav(bokstaver,lengde,tall1)) + "<br>" +
+            //setning(bokstaver,lengde,tall1,tall2,tall3);
+            //document.body.appendChild(p);
+        }
+
+        function tilfeldigBokstav(array,lengden) {
+            var tilfeldig = Math.floor(Math.random() * lengden);
+            var bokstav = array[tilfeldig];
+            return bokstav;
+        }
+
+        function ord(array,arrayLengde,ordLengde) {
+            ordet = "";
+            for(var i=0; i<ordLengde; i++) {
+                var tilfeldig = Math.floor(Math.random() * arrayLengde);
+                var bokstav = array[tilfeldig]
+                ordet += bokstav;
+            }
+            return ordet;
+
+        }
+
+        function setning(arraySetn,lengden,antallOrd,minsteOrdlengde,storsteOrdlengde) {
+            setningen = "";
+            for(var i=0; i<antallOrd; i++) {
+                ordet = "";
+                var ordLengde = Math.floor((Math.random()*(storsteOrdlengde-minsteOrdlengde+1)) + minsteOrdlengde);
+                console.log(ordLengde + "Skal være mellom 2 og 7");
+                for(var j=0; j<ordLengde; j++) {
+                    var tilfeldig = Math.floor(Math.random() * lengden);
+                    var bokstav = arraySetn[tilfeldig];
+                    ordet += bokstav;
+                }
+                setningen += ordet + " ";
+            }
+            return setningen;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

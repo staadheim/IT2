@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Enkel 2D</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var array = [];
+            for(var i=0; i<5; i++) {        //array er 5 i y-aksen, oppover, vertikalt
+                array[i] = [];
+                for(var j=0; j<3; j++) {    //array er 3 på x-aksen, bortover, horisonalt
+                    array[i][j] = i+j;
+                }
+            }
+            console.log(array);
+            //document.write(array);
+            for(var k=0; k<array.length; k++) {
+                //for(var m=0; m<array[k].length; m++)
+                var indreLengde = array[k].length;
+                for(var m=0; m<array[k].length; m++) {
+                    document.write(array[k][m] + ", ");
+                }
+                document.write("<br>");
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

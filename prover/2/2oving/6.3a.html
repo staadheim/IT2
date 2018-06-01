@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.3</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [34,53,2,3,34,26,26,85,3,4,98,2,12];
+        var teller = 0;
+        var b = [];
+        var c = [];
+        var d = [];
+        var e = [];
+
+
+        function oppstart() {
+            document.getElementById("a").onclick = a1;
+            document.getElementById("b").onclick = b2;
+            document.getElementById("c").onclick = c3;
+            document.getElementById("d").onclick = d4;
+            document.getElementById("e").onclick = e5;
+        }
+        
+        function a1() {
+            document.getElementById("txtUtskrift").innerHTML = tall;
+        }
+
+        function b2() {
+            for(var i=tall.length-1; i>=0; i--) {
+                b[teller] = tall[i];
+                teller++;
+            }
+            document.getElementById("txtUtskrift").innerHTML = b;
+            console.log(b);
+        }
+
+        function c3() {
+            for(var i=0; i<tall.length; i++) {
+                if(i % 2 === 0) {
+                    c[teller] = tall[i];
+                    teller++;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = c;
+        }
+
+        function d4() {
+            for(var i=0; i<tall.length; i++) {
+                if(tall[i] < 10) {
+                    d[teller] = tall[i];
+                    teller++;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = d;
+        }
+
+        function e5() {
+            for(var i=0; i<tall.length; i++) {
+                if(tall[i] % 2 === 0) {
+                    e[teller] = tall[i];
+                    teller++;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = e;
+
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+<button type="button" id="a">a: Skriv ut array</button><br>
+<button type="button" id="b">b: Skriv ut array baklengs</button><br>
+<button type="button" id="c">c: Skriv ut annethvert tall i array</button><br>
+<button type="button" id="d">d: Skriv ut tallene mindre enn 10</button><br>
+<button type="button" id="e">e: Skriv ut alle partallene i array</button><br>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!--- ENDRER UTSEENDE PÅ OVERSKRIFT VED Å TRYKKE PÅ TEKST -->
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Farger</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+        	document.getElementById("rod").onclick = red;
+        	document.getElementById("gronn").onclick = green;
+        	document.getElementById("bla").onclick = blue;
+        	document.getElementById("gul").onclick = yellow;
+        	document.getElementById("rosa").onclick = pink;
+           }
+          
+          function red() {
+          	document.getElementById("overskrift").className = "rod";
+          }
+          function green() {
+          	document.getElementById("overskrift").className = "gronn";
+          }
+          function blue() {
+          	document.getElementById("overskrift").className = "bla";
+          }
+          function yellow() {
+          	document.getElementById("overskrift").className = "gul";
+          }
+          function pink() {
+          	document.getElementById("overskrift").className = "rosa";
+          }
+    </script>
+    <style>
+    
+    .rod {
+    	color: red;
+    }
+    .gronn {
+    	color: green; 
+    }
+    .bla {
+    	color: blue;
+    }
+    .gul {
+    	color: yellow;
+    }   
+    .rosa {
+    	color: pink;
+    }
+</style>
+</head>
+<body>
+
+<h1 id="overskrift">Livet smiler</h1>
+
+<ul>
+<li id="rod" class="rod">Rød</li>
+<li id="gronn" class="gronn">Grønn</li>
+<li id="bla" class="bla">Blå</li>
+<li id="gul" class="gul">Gul</li>
+<li id="rosa" class="rosa">Rosa</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>opg. 1</title>
+    <script>
+        window.onload = oppstart;
+
+        var arr = [];
+        var antall = [];
+
+        function oppstart() {
+            var lengde = Math.floor((Math.random()*5)+5);
+            for(var i=0; i<lengde; i++) {
+                var tall = Math.floor(Math.random()*lengde);
+                arr[i] = tall;
+            }
+
+            for(var i=0; i<arr.length; i++) {
+                var teller = 0;
+                for(var j=0; j<arr.length; j++) {
+                    if(arr[i] === arr[j]) {
+                        antall[i] = teller;
+                    }
+                    else(
+                        console.log("FEIL:" + arr[i] + ","+ arr[j])
+                    )
+                }
+            }
+
+            console.log(arr);
+            console.log(antall);
+
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

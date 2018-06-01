@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>1 Henriks</title>
+    <script>
+        window.onload = oppstart;
+
+        var alder = 10;                           //global variabel.
+
+        function oppstart() {
+            // button.onclick = startRandomting;
+            // alert("Inni oppstart");
+            // var alder = 6;                       //privat variabel. Alderen er 6 inne i oppstart. har ingenting med 10 å gjøre.
+            alder = 4;                          //ender den globale variabelen til 4.
+            visAlder();                          //starter funksjonen
+
+            document.getElementById("tekst").onclick = byttFarge;
+
+            var knapp = document.getElementById("btnKnapp");
+            knapp.onmouseout = siIfra;
+        }
+
+        function visAlder() {
+            alert(alder);                        //viser alderen 4 fra oppstart
+        }
+
+        function byttFarge() {
+            document.body.style.backgroundColor = "red"; //ender bakgrunnsfarge til rør når jeg trypper på tekst
+
+        }
+
+        function siIfra() {
+            alert("Du traff nesten");            //Får opp alert når musen forlater knappen
+
+        }
+        //putter du noe her ute, utenfor funksjonene, kan det hende den blir kjørt med en gang
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<p id="tekst">Klikk her for død</p>
+
+<button type="button" id="btnKnapp">Klikk meg</button>
+
+</body>
+</html>

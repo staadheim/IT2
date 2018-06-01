@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5.4</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = visTall;
+        }
+
+        function visTall() {
+            var tekst = document.getElementById("txtBoks1").value;
+            var antall = parseFloat(document.getElementById("txtBoks2").value);
+
+            for(var i=0; i<antall; i++) {
+                document.getElementById("txtUtskrift").innerHTML += tekst + "<br>";
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="text" id="txtBoks1">
+<input type="number" id="txtBoks2">
+
+<button type="button" id="btnAngi">Angi</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

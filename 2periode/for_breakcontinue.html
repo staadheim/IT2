@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hoppe ut av loop</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var teller = -100;
+            for(var i=1; i<50; i++) {
+                teller += 5;
+                if (teller === 50) {
+                    console.log("Avbryter!");
+                    //break;                  //hopper ut av for-loopen¨
+                    continue;               //går rett til neste runde
+                }
+                else {
+                    console.log("i: " + i);
+                    console.log("j: " + j);
+                }
+                j++;
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

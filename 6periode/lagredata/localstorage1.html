@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Save 'em all!</title>
+    <script>
+        window.onload = oppstart;
+
+        //ordet kommer til å være der neste gang siden forfriskes
+
+        var ord = "";
+
+        function oppstart() {
+            ord = localStorage.getItem("ord"); //leser fra
+            document.getElementById("ut1").innerHTML = "Forrige ord: " + ord; //skriver ut
+            document.getElementById("btnOrd").onclick = lesOrd;
+        }
+
+        function lesOrd() {
+            var nyOrd = document.getElementById("txtOrd").value;
+            localStorage.setItem("ord",nyOrd); //henter elementet "ord" og bytter det ut med nyOrd
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Eksempel på local storage</h1>
+
+<p id="ut1"></p>
+<p>Skriv inn nytt ord: <input type="text" id="txtOrd">
+    <button type="button" id="btnOrd">Angi</button>
+</p>
+
+</body>
+</html>

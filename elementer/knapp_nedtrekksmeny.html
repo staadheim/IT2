@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nedtrekksmeny</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("selMeny").onchange = visTekst;
+
+            //automatisk nedtrekksmeny
+            var meny = document.getElementById("selAutoMeny");
+            for(var i=1; i<10; i++){
+                meny.innerHTML += "<option value='" + i + "'>" + i + "</option>";
+            }
+        }
+
+        function visTekst() {
+            var valget = document.getElementById("selMeny").value;
+            document.getElementById("txtUtskrift").innerHTML = "Du har valgt " + valget;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h2>Hva vil du velge?</h2>
+
+<select id="selMeny">
+    <option></option>
+    <option value="valg1">Valg 1</option>
+    <option value="valg2">Valg 2</option>
+    <option value="valg3">Valg 3</option>
+</select>
+
+<p id="txtUtskrift">Her kommer valget ditt</p>
+
+<select id="selAutoMeny"></select>
+
+</body>
+</html>

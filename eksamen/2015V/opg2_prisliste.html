@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        var lang=[];
+        lang[0]=["Saftpressekurs",190];
+        lang[1]=["Spasertur langs Olavsleden",150];
+        lang[2]=["Omvisning Rød Herregård",95];
+        lang[3]=["Tur med MS Strømsfoss",110];
+        lang[4]=["Skattejakt i Gamlebyen",95];
+        lang[5]=["Elvelangs Glomma",65];
+        lang[6]=["Minicruise på Glomma",145];
+        lang[7]=["Rammeverksted på Galleri Lund",120];
+        lang[8]=["Våler klatrepark",195];
+        lang[9]=["Pilegrimsveien",60];
+
+        var kort=[];
+        kort[0]=["Saftpressekurs",190];
+        kort[1]=["Skattejakt i Gamlebyen",95];
+        kort[2]=["Elvelangs Glomma",65];
+        kort[3]=["Minicruise på Glomma",145];
+        kort[4]=["Våler klatrepark",195];
+        kort[5]=["Pilegrimsveien",60];
+
+        var totalpris = 0;
+        var overnatt_lang = 7800;
+        var overnatt_kort = 3200;
+        var nattpris = 0;
+        var rute = "";
+        var lengde = 0;
+
+        function oppstart() {
+            document.getElementById("btnBeregn").onclick = beregnPris;
+        }
+
+        function beregnPris() {
+            totalpris = nattpris;
+            for(var i=0; i<lengde; i++) {
+                if(document.getElementById("attr" + i).checked === true) {
+                    if(rute === "lang") {
+                        totalpris = totalpris +lang[i][1];
+                    }
+                    else if(rute === "kort") {
+                        totalpris = totalpris + kort[i][1];
+                    }
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Totalprisen er kr " + totalpris;
+
+
+        }
+
+        function langrute() {
+            var ul = document.getElementById("ulAttraksjon");
+            document.getElementById("txtUtskrift").innerHTML = "";
+            //fjerner elementer fra lista om de er der
+            while(ul.firstChild) {
+                ul.removeChild(ul.firstChild);
+            }
+            for(var i=0; i<lang.length; i++) {
+                var li = document.createElement('li');
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = "attr" + i;
+                li.appendChild(checkbox);
+                var tekst = lang[i][0] + " - Pris kr: " + lang[i][1];
+                li.appendChild(document.createTextNode(tekst));
+                ul.appendChild(li);
+            }
+            nattpris = overnatt_lang;
+            rute = "lang";
+            lengde = lang.length;
+        }
+        function kortrute() {
+            var ul = document.getElementById("ulAttraksjon");
+            document.getElementById("txtUtskrift").innerHTML = "";
+            //fjerner elementer fra lista om de er der
+            while(ul.firstChild) {
+                ul.removeChild(ul.firstChild);
+            }
+            for(var i=0; i<kort.length; i++) {
+                var li = document.createElement('li');
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = "attr" + i;
+                li.appendChild(checkbox);
+                var tekst = kort[i][0] + " - Pris kr: " + kort[i][1];
+                li.appendChild(document.createTextNode(tekst));
+                ul.appendChild(li);
+            }
+            nattpris = overnatt_kort;
+            rute = "kort";
+            lengde = kort.length;
+        }
+
+    </script>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        #div1 {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 500px;
+            padding-left: 50px;
+            padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+        }
+        #div2 {
+            position: absolute;
+            top: 10px;
+            left: 560px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="div1">
+<h1>Velg rute og beregn pris</h1>
+
+Velg rute:
+<input type="radio" name="radRute" value="lang" onclick="langrute()">Lang
+<input type="radio" name="radRute" value="kort" onclick="kortrute()">Kort
+
+<ul id="ulAttraksjon"></ul>
+<br/> <br/>
+<button type="button" id="btnBeregn">Beregn totalpris</button>
+<p id="txtUtskrift"></p>
+</div>
+
+<div id="div2">
+    <img src="stortkartostfold.gif">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Leser fra en XML-film</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btn").onclick = loadXML;
+        }
+
+        function loadXML() {
+            var xmlReq = new XMLHttpRequest();  //kan gjøre ting i bakgrunnen av nettsiden
+            xmlReq.onreadystatechange = function () { //når den er klar kjører dette
+                if(this.readyState === 4 && this.status === 200) {
+                    lesFilen(this);
+                }
+            };
+            xmlReq.open("GET","cd_catalog.xml", true);
+            xmlReq.send();
+        }
+
+        function lesFilen(xml) {
+            var xmlDoc = xml.responseXML;
+            var txt = "";
+            console.log(xmlDoc);
+            var buffer = xmlDoc.getElementsByTagName("ARTISTS");
+            for(var i=0; i<buffer.length; i++) {
+                txt = buffer[i].childNodes[0].nodeValue;
+            document.getElementById("resultat").innerHTML += txt + "</br>";
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="btn">Vis CDer</button>
+<p id="resultat"></p>
+
+</body>
+</html>

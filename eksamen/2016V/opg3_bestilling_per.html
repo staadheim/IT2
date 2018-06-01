@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        //Array med hoteller og priser. Har også lagt inn by med tanke på at programmet skal kunne utvides til å håndtere reise til flere byer
+        var hotell=[];
+         hotell[0]=["New York","Aurora",590,690];
+         hotell[1]=["New York","Downtown",660,750];
+         hotell[2]=["New York","City Hall",450,530];
+         hotell[3]=["New York","Wilmont",660,880];
+         hotell[4]=["Amsterdam","Chelsea inn",450,560];
+         hotell[5]=["Amsterdam","Chelsea inn",450,560];
+         hotell[6]=["New York","Chelsea inn",450,560];
+
+        //Array med byer. Gjør det enkelt å utvide til flere byer senere
+        var by=["New York","Amsterdam","St Petersburg","Roma"];
+        var kulturpass = 700;
+
+        function oppstart() {
+            for(var i=0; i<by.length; i++) {
+                var valg1 = document.createElement("option");
+                valg1.innerHTML = by[i];
+                valg1.value = by[i];
+                document.getElementById("selBy").appendChild(valg1);
+            }
+            document.getElementById("btnReg").onclick = registrer;
+            document.getElementById("txtDobbel").defaultValue = 0;
+            document.getElementById("txtEnkel").defaultValue = 0;
+            document.getElementById("selBy").onclick = hotelliste;
+        }
+
+        function hotelliste() {
+            var nyby = document.getElementById("selBy").value;
+            var hot = document.getElementById("selHotell");
+            while(hot.firstChild) {
+                hot.removeChild(hot.firstChild);
+            }
+            for(var i=0; i<hotell.length; i++) {
+                if(hotell[i][0] === nyby) {
+                    var valg2 = document.createElement("option");
+                    valg2.innerHTML = hotell[i][1] + " Pris sommer: " + hotell[i][2] + " Pris vinter: " + hotell[i][3] + " Tilegg for enkeltrom kr 300";
+                    valg2.value = i;
+                    document.getElementById ///MANGLER NOE HER
+                }
+            }
+        }
+
+        function registrer() {
+            var reiseby = document.getElementById("selBy").value;
+            var reiseperiode = radForm1.elements.namedItem("radPeriode").value;
+            var reisedobbel = parseInt(document.getElementById("txtDobbel").value);
+            var reiseenkel = parseInt(document.getElementById("txtEnkel").value);
+            var hotellindex = parseInt(document.getElementById("selHotell").value);
+            var reisekultur = parseInt(radForm2.elements.namedItem("radKultur").value);
+            if(reiseperiode === "Sommer") {
+                prisindex = 2;
+            }
+            else {
+                prisindex = 3;
+            }
+            var hotellpris = reisedobbel*hotell[hotellindex][prisindex] + reiseenkel*(hotell[hotellindex][prisindex]+300);
+            var kulturpris = reisekultur * kulturpass;
+            var utskrift = "Hotell pr døgn kr: " + hotellpris + "<br/><br/>" + ///MANFER NOE HER
+            
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<>
+
+<h1>Velg reise</h1>
+
+By: <select id="selBy"></select>
+<br/><br/>
+
+<form name="radForm1">
+    <input type="radio" name="radPeriode" value="Vinter" />Vinter
+    <input type="radio" name="radPeriode" value="Sommer" />Sommer
+</form><br/><br/>
+
+Antall dobbeltrom: <input type="text" id="txtDobbel" /><br/><br/>
+Antall enkeltrom: <input type="text" id="txtEnkel" /><br/><br/>
+Hotell: <select id="selHotell"></select><br/><br/>
+
+<form name="radForm2">
+    <input type="radio" name="radKultur" value="1" />Ja
+    <input type="radio" name="radKultur" value="0" />Nei
+</form><br/><br/>
+
+<button type="button" id="btnReg">Beregn pris</button>
+
+<p id="txtUtskrift"></p>
+</body>
+</html>

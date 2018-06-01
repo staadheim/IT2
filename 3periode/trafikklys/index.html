@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mannen</title>
+    <script>
+        window.onload = blinkeMannRod;
+
+        var blink = 0;
+
+        function blinkeMannRod() {
+            document.getElementById("idLys").innerHTML = "<img src='lys_gronn.png'>";
+            document.getElementById("idMann").innerHTML = "<img src='mann_rod.jpg'>";
+            document.getElementById("btnKnapp").onclick = gultLys;           //ikke lov å med setTimeout på .onclick
+        }
+        function gultLys() {
+            setTimeout(function() {
+                document.getElementById("idLys").innerHTML = "<img src='lys_gul.png'>";
+            },2000);
+            setTimeout(function() {
+                gronnMann();
+            },4000);
+        }
+        
+        function gronnMann() {
+            document.getElementById("idLys").innerHTML = "<img src='lys_rod.png'>";
+            setTimeout(function() {
+                document.getElementById("idMann").innerHTML = "<img src='mann_gronn.jpg'>";
+            },2000);
+            setTimeout(function() {
+                blinkeMannSort();
+            },12000);
+        }
+        
+        function blinkeMannSort() {
+            document.getElementById("idMann").innerHTML = "<img src='mann_sort.jpg'>";
+                setTimeout(function() {
+                    blinkeMannGronn();
+                },500);
+        }
+        function blinkeMannGronn() {
+            document.getElementById("idMann").innerHTML = "<img src='mann_gronn.jpg'>";
+            blink++;
+            if(blink < 4) {
+                setTimeout(function () {
+                    blinkeMannSort();
+                }, 500);
+            }
+            else {
+                setTimeout(function () {
+                    gulrodLys();
+                }, 500);
+            }
+        }
+
+        function gulrodLys() {
+            document.getElementById("idLys").innerHTML = "<img src='lys_rodgul.png'>";
+            document.getElementById("idMann").innerHTML = "<img src='mann_rod.jpg'>";
+            setTimeout(function () {
+                    blinkeMannRod();
+                }, 2000);
+        }
+
+    </script>
+    <style>
+        body {
+            background-color: black;
+        }
+        .innpakning {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+        #idLys {
+            margin: auto;
+        }
+        #idMann {
+            margin: auto;
+            padding-right: 100px;
+        }
+        #btnKnapp {
+            background-color: red;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="innpakning">
+
+<button type="button" id="btnKnapp">GÅ</button>
+
+
+    <div id="idLys"></div>
+    <div id="idMann"></div>
+</div>
+
+</body>
+</html>

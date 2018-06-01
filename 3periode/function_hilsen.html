@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hilsen</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            //hilsen("Heisann!", "Frida");
+            var hilsenTekst = "Hei på deg";
+            var fornavn = "Espen";
+            hilsen(hilsenTekst,fornavn);
+        }
+
+        function hilsen(tekst,navn) { //første den finner i hilsen() blir varibalen tekst, og andre tingen blir navn
+            document.getElementById("txtHilsen").innerHTML = tekst + " " + navn; //her blir det altså "Heisann! Frida"
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<p id="txtHilsen"></p>
+
+</body>
+</html>

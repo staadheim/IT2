@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ha en god dag</title>
+    <script>
+        window.onload = oppstart;
+
+        var bilder = ["morn.jpg","dag.jpg","kveld.jpg","natt.jpg"];
+
+        function oppstart() {
+            setInterval(byttBilde,2000);                                   //setter tiden på 20000 mm =
+        }
+
+        var teller = 0;
+        function byttBilde() {                             //bytter ut bakgrunnsbildet
+            document.body.style.backgroundImage = "url('" + bilder[teller] + "')";
+            teller++;
+            if(teller === bilder.length) {          //hvis telleren har gått en runde og blitt like stor som array er lang starter den på nytt på 0 igjen
+                teller = 0;
+            }
+
+        }
+
+    </script>
+    <style>
+        body {
+            background-size: cover;
+            transition: 1s;
+        }
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

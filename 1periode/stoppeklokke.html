@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Tidtaker</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLeggtil").onclick = leggtil;
+        }
+
+        function leggtil() {
+            var tid = new Date();
+            var nyttElement = document.createElement("li");
+
+            nyttElement.innerHTML = tid.getHours()+":"+tid.getMinutes()+":"+tid.getSeconds();
+            document.getElementById("tider").appendChild(nyttElement);
+        }
+    </script>
+    <style>
+    body {
+        background-color: lightpink;
+    }
+    .innpakning {
+        text-align: center;
+        
+    }
+    li {
+        background-color: pink;
+        list-style-type: none;
+    }
+
+    </style>
+</head>
+<body>
+<div class="innpakning">
+<h1>Rundetider</h1>
+<button type="button" id="btnLeggtil">Legg til ny tid</button>
+<h3>Tider</h3>
+<li id="tider"></li>
+</div>
+
+</body>
+</html>

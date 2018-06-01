@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>10.5</title>
+    <script>
+        window.onload = oppstart;
+
+        var fart = 10;
+
+        function oppstart() {
+            document.getElementById("sakte").onclick = spinSakte;
+            document.getElementById("fort").onclick = spinFort;
+            document.getElementById("snu").onclick = snuHjulet;
+        }
+
+        function spinSakte() {
+            document.getElementById("tekst").innerHTML = "";
+            fart = fart + 1;
+            if(fart >= 40) {
+                fart = 4;
+                document.getElementById("tekst").innerHTML = "For sakte! Vi begynner på nytt";
+            }
+            document.getElementById("bilde").style.animation = "spin " + fart + "s linear infinite";
+            console.log(fart);
+        }
+        function spinFort() {
+            document.getElementById("tekst").innerHTML = "";
+            fart = fart - 1;
+            if(fart <= 0) {
+                fart = 4;
+                document.getElementById("tekst").innerHTML = "ALT for rakst! Vi begynner på nytt";
+            }
+            document.getElementById("bilde").style.animation = "spin " + fart + "s linear infinite";
+            console.log(fart);
+        }
+        function snuHjulet() {
+            document.getElementById("bilde").style.animation.spin = "0% { transform: rotate(360deg);} 100% { transform: rotate(0deg); }";
+
+        }
+
+
+    </script>
+    <style>
+        #bilde {
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="sakte">SAKTE</button>
+<button type="button" id="fort">FORT</button>
+<button type="button" id="snu">SNU</button>
+<br>
+<div id="tekst"></div>
+<br>
+
+
+<img src="sirkel.png" id="bilde">
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Olje</title>
+    <script>
+        window.onload = oppstart;
+
+        var felt = [];
+        var sjekk = 0;
+
+        function oppstart() {
+            document.getElementById("oljefeltInnpakning").innerHTML = "<h2>Oljefeltet</h2>";
+
+            var table = document.createElement("table");
+            for(i=0; i<=10; i++) {
+                felt.push([]);
+                var tr = document.createElement("tr");
+
+                for(var j=0; j<=15; j++) {
+                    felt[0][j] = j-1;
+                    felt[i][0] = i-1;
+                    felt[0][0] = "";
+                    if(felt[i][j] === undefined) {
+                        felt[i][j] = "";
+                    }
+                    var td = document.createElement("td");
+                    td.innerHTML = felt[i][j];
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            sjekk = 1;
+            document.getElementById("oljefeltInnpakning").appendChild(table);
+
+            document.getElementById("btnOpg1").onclick = kjopFelt;
+            document.getElementById("btnOpg2").onclick = listeSolgt;
+
+        }
+
+        function kjopFelt() {
+            document.getElementById("oppgaveInnpakning").innerHTML =
+                "Oljeselskap: <input id='navnOljeselskap'>" +
+                "<p> Oppgi feltet du ønsker </p> " +
+                "0-14: <input id='jKordinat'>" +
+                "0-9: <input id='iKordinat'> <br>" +
+                "<button type='button' id='btnAngiKordinater'>Kjøp felt</button> ";
+
+            document.getElementById("btnAngiKordinater").onclick = kjopFelt2;
+        }
+        function kjopFelt2() {
+            var oljeNavn = document.getElementById("navnOljeselskap").value;
+            var jKordinat = parseFloat(Math.floor(document.getElementById("jKordinat").value)+1);
+            var iKordinat = parseFloat(Math.floor(document.getElementById("iKordinat").value)+1);
+            var jSjekk = document.getElementById("jKordinat").value;
+            var iSjekk = document.getElementById("iKordinat").value;
+
+            if(jSjekk === "" || iSjekk === "" || jSjekk > 14 || iSjekk > 9 ) {
+                document.getElementById("oppgaveInnpakning").innerHTML = "<h4> 404 ERROR </h4> " +
+                    "<p> Feltet (" + document.getElementById("jKordinat").value + "," +
+                    document.getElementById("iKordinat").value + ") eksisterer ikke. </p>" +
+                    "<button type='button' id='btnAngiKordinater'>Prøv annet felt</button>";
+                document.getElementById("btnAngiKordinater").onclick = kjopFelt;
+            }
+            else if(felt[iKordinat][jKordinat] === "") {
+                felt[iKordinat][jKordinat] = oljeNavn;
+                document.getElementById("oppgaveInnpakning").innerHTML =
+                    "<p> Feltet (" + document.getElementById("jKordinat").value + "," +
+                    document.getElementById("iKordinat").value + ") er nå kjøpt av " + oljeNavn + ".</p>"
+                oppstart();
+            }
+            else {
+                if(felt[iKordinat][jKordinat] === oljeNavn) {
+                    document.getElementById("oppgaveInnpakning").innerHTML = "<h4> Du eier alt dette feltet </h4> " +
+                    "<p> Feltet (" + document.getElementById("jKordinat").value + "," +
+                    document.getElementById("iKordinat").value + ") er alt eid av " + oljeNavn + "</p>" +
+                    "<button type='button' id='btnAngiKordinater'>Kjøp annet felt</button>";
+                    document.getElementById("btnAngiKordinater").onclick = kjopFelt;
+                }
+                else {
+                    var eier = felt[iKordinat][jKordinat];
+                    document.getElementById("oppgaveInnpakning").innerHTML = "<h4> Beklager </h4> " +
+                    "<p> Feltet (" + document.getElementById("jKordinat").value + "," +
+                    document.getElementById("iKordinat").value + ") er alt kjøpt av " + eier + "</p>" +
+                        "<button type='button' id='btnKjopfeltfraeier'>Kjøp dette feltet fra " + eier + "</button>" +
+                    "<button type='button' id='btnAngiKordinater'>Kjøp annet felt</button>";
+
+                    document.getElementById("btnKjopfeltfraeier").onclick = function () {
+                        kjopFeltavEier(oljeNavn,jKordinat,iKordinat);};
+                    document.getElementById("btnAngiKordinater").onclick = kjopFelt;
+                }
+            }
+            function kjopFeltavEier(oljeNavn,jKordinat,iKordinat) {
+                felt[iKordinat][jKordinat] = oljeNavn;
+                document.getElementById("oppgaveInnpakning").innerHTML = "<h4> Gjennomført </h4> " +
+                    "<p> Feltet (" + jKordinat + "," + iKordinat + ") er nå kjøpt av " + oljeNavn + ".</p>";
+                oppstart();
+            }
+            oppstart();
+        }
+
+        function listeSolgt() {
+            var teller = 0;
+            document.getElementById("oppgaveInnpakning").innerHTML = "<h4>Oljefelt</h4>";
+                for (i = 1; i < 11; i++) {
+                    for (var j = 1; j < 16; j++) {
+                        if (felt[i][j] !== "") {
+                            document.getElementById("oppgaveInnpakning").innerHTML +=
+                                "Felt (" + parseFloat(i-1) + "," + parseFloat(j-1) + ") eies av " + felt[i][j] + ".<br>";
+                            teller++;
+                        }
+                    }
+                }
+                document.getElementById("oppgaveInnpakning").innerHTML += "<br> Antall solgte felt: " + teller;
+
+                oppstart();
+            }
+
+
+    </script>
+    <style>
+        #hovedInnpakning {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #menyInnpakning {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            margin-right: 50px;
+            margin-left: 20px;
+        }
+        button {
+            height: 50px;
+            width: 100px;
+            background-color: #FF94B6;
+            border-color: #FF94B6;
+            border-radius: 3px;
+        }
+
+        #oljefeltInnpakning {
+            display: flex;
+            flex-direction: column;
+        }
+        h2 {
+            text-align: center;
+            margin: 10px;
+            color: #FF94B6;
+            font-size: 50px;
+        }
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            margin: auto;
+            width: 750px;
+            height: 500px;
+        }
+        td {
+            height: 50px;
+            width: 50px;
+            border: solid;
+            border-color: #FF94B6;
+            font-weight: bolder;
+            color: darkmagenta;
+        }
+
+        #oppgaveInnpakning {
+            display: flex;
+            flex-direction: column;
+            margin: 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="hovedInnpakning">
+    <div id="menyInnpakning">
+        <button type="button" id="btnOpg1">Kjøp felt</button> <br>
+        <button type="button" id="btnOpg2">Liste over solgte felt</button>
+    </div>
+
+    <div id="oljefeltInnpakning">
+
+    </div>
+
+    <div id="oppgaveInnpakning">
+
+    </div>
+</div>
+
+</body>
+</html>

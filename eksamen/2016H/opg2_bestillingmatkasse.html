@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            d("rad2middag").onclick = antallMid;
+            d("rad3middag").onclick = antallMid;
+            d("nbrPers").onchange = antallPers;
+            bestill();
+        }
+
+        function antallMid() {
+            var valg = parseInt(radForm.elements.namedItem("radKnapp").value);
+
+            d("bilder").innerHTML = "";
+            d("bilder").style = "display: flex; flex-direction: row;";
+            for(var i=1; i<=3; i++) {
+                d("bilder").innerHTML += "<img src='middag" + i + ".jpg' height='200px'> <br>";
+                if(valg === 2 && i === 2) {
+                    break;
+                }
+            }
+        }
+
+        function antallPers() {
+            var pers = parseInt(d("nbrPers").value);
+            if(pers < 1 || pers > 10) {
+                //skriv ut feilmelding her
+            }
+        }
+
+        function bestill() {
+            var valg = parseInt(radForm.elements.namedItem("radKnapp").value);
+            var pers = parseInt(d("nbrPers").value);
+            if(isNaN(valg) === true || isNaN(valg) === true) {
+                d("txtUtskrift").innerHTML = "Fyll inn antall personer som skal "
+            }
+            else {
+                console.log("FAIL")
+            }
+
+
+        }
+
+        //setter inn document.getElementById så jeg slipper å skrive de inn
+        function d(elm) { //elm for element
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h2>Matkasse</h2>
+
+<div id="innapkning">
+    Antall middager:
+    <form name="radForm">
+        <input type="radio" name="radKnapp" id="rad2middag" value="2">2 middager <br>
+        <input type="radio" name="radKnapp" id="rad3middag" value="3">3 middager <br>
+    </form>
+
+    Antall personer hver middag er til (1-10):
+    <input type="number" id="nbrPers" min="1" max="10">
+
+    <div id="bilder"></div>
+</div>
+
+</body>
+</html>

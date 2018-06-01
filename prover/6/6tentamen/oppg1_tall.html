@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 1</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            d("btnRegn").onclick = regnut;
+        }
+
+        function regnut() {
+            //oppgave a
+            var tall1 = parseInt(d("nbrTall1").value);
+            var tall2 = parseInt(d("nbrTall2").value);
+            var metode = radForm.elements.namedItem("radKnapp").value;
+            var svar = "";
+            var regneart = "";
+            if(metode == "sum") {
+                svar =  tall1+tall2;
+                regneart = "+";
+            }
+            else if(metode == "diff") {
+                svar = tall1 - tall2;
+                regneart = "-";
+            }
+            else if(metode == "gang") {
+                svar = tall1*tall2;
+                regneart = "*"
+            }
+            else if(metode == "dele") {
+                svar = tall1/tall2;
+                regneart = "/";
+            }
+            else{
+                svar = "404 ERROR <br/> Noe gikk galt";
+            }
+            //oppgave c - kunne hatt ulik utskrift i hver if-test, men mye lettere å ha variabelen regneart
+            d("txtUtskrift").innerHTML = tall1 + " " + regneart + " " + tall2 + " = " + svar;
+
+            //oppgave b
+            if(tall1 > 100 || tall1 < -100 || tall2 > 100 || tall2 < -100) {
+                d("txtUtskrift").innerHTML = "404 ERROR <br/> Input er feil. Ett av tallene er ikke mellom -100 og 100" ;
+            }
+
+            //oppgave d
+            if(svar >= 0) {
+                document.body.style.backgroundColor = "green";
+            }
+            else if(svar < 0) {
+                document.body.style.backgroundColor = "red";
+            }
+            //strengt tatt ikke nødvendig, else if over kunne bare vært else, men liker å ha med feilmelding i tilfelle noe merkelig skulle skje
+            else {
+                d("txtUtskrift").innerHTML += "<br/> Noe med endring av bakgrunnsfarge gikk galt...";
+            }
+        }
+
+        //funksjon så jeg slipper å skrive document.getElementById() hele tiden - denne kommer til å være med i alle oppgavene
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h3>Oppgave 1</h3>
+
+Tall1: <input id="nbrTall1" type="number"><br/>
+Tall2: <input id="nbrTall2" type="number"><br/><br/>
+
+<form name="radForm">
+    Velg ønsket regnemetode <br/>
+    <input type="radio" name="radKnapp" value="sum">Pluss<br/>
+    <input type="radio" name="radKnapp" value="diff">Minus<br/>
+    <input type="radio" name="radKnapp" value="gang">Gange<br/>
+    <input type="radio" name="radKnapp" value="dele">Dele<br/>
+</form> <br/>
+<button type="button" id="btnRegn">Regn ut</button>
+
+<p id="txtUtskrift"></p>
+
+
+
+</body>
+</html>

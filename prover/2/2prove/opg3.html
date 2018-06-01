@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [];
+        var lengde = 10;
+
+        function oppstart() {
+            //lager 10x10 array med tallene fra 1 til 100
+            for (var i = 0; i<lengde; i++) {
+                tall.push([]);                              //fyller array med 10 arrayer, for 2D
+                for(var j=0; j<lengde; j++) {
+                    tall[i].push((i*10)+j+1);               //fyller array med tallene 1 til 100
+                    //Tankegangen er at starten er hver hele 10 tall, og så fyller den på hver verdi for den videre. Se konsoll for logikk ved tabellen.
+                }
+            }
+
+            //kjører gjennom hele tabellen og leter etter tallet. Om taller blir funnet blir tallet skrevet ut og funksjonen stoppet.
+            for (var i=0; i<lengde; i++ ) {
+                for(var j=0; j<lengde; j++) {
+                    if(tall[i][j] === 42) {
+                        document.write(tall[i][j]);
+                        break;
+                    }
+                }
+            }
+
+            //FØRSTE LØSNING. som ble levert på prøven som ikke var så bra
+            //console.log(tall);                   //logger bare arrayen i konsoll så man kan se oppsettet av tabellen
+            //document.write(tall[4][1]);   //skriver ut array-verdien.
+
+            /* pga logikken med hvordan jeg satte opp tabell kan vi tenke at første tallet er ti-plassen og andre er éner-plassen <3
+            VIKTIG! Array begynner på 0, så for å skrive ut ønsket verdi skriver jeg tallen, men MINUS 1
+            ville jeg skrevet inn 2 hadde jeg måttet skrive [0][1]
+            for å få 50 hadde jeg bare skrevet [4][9]
+            64 blir [6][3]
+            10 blir [0][9]
+            osv.
+             */
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

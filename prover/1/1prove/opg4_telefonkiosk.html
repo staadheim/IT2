@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kjøp din telefon i dag!</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = lesBestilling;
+        }
+
+        function lesBestilling() {
+            var skjermstorrelse = document.getElementById("skjerm").value;  //Henter ut verdien som bruker satte inn som ønsket skjermstørrelse
+            var pris = skjermstorrelse * 1000;                                 //ganger prisen med 1000
+            var farge = radForm.elements.namedItem("radKnapp").value;
+
+            var merke = document.getElementById("selMeny").value;             //henter valget vi tok i nedrekksmenyen over merkene
+            if (merke === "Apple") {                                            //dette skjer HVIS merket vi valgte er apple
+                var pris = pris * 1.3;                                                  //1,3  = øker pris med 30%
+                if (merke === "Apple" && farge === "sort") {                  //dette skjer hvis vi har valgt Apple OG den skal være sor
+                     var pris = pris * 0.95;                                           //0,95 = minker pris med 5% (prisen som alt har økt med 30 minker nå med 5 igjen.
+                }
+            }
+            if (farge === "sort") {
+                var pris = pris * 0.95;                                                 //0,95 = minker pris med 5%
+            }
+            else {                                                           //er det noen av de andre alternativene får man ikke tilleg eller rabatt og prisen er bare ordinære prisen
+                var pris = pris;
+            }
+
+            var prisTotal = pris.toFixed(0);                                     //tar vekk desimaler på prisen for at den skal se finere ut. Ingen kjøper en sort iphone for 3087 kroner og 50 øre, så gjør om til kun 3087.
+
+            document.getElementById("txtUtskrift").innerHTML =
+                "Du har bestilt en <b>" + farge + "</b> mobil fra <b>" + merke + "</b> til en pris på <b>" + prisTotal + "</b> kroner.";  //Utskrift med valg fra bruker, valg er fet skrift for å gjøre valgene tydeligere å se
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Merke:
+<select id="selMeny">
+    <option></option>
+    <option value="Apple">Apple</option>
+    <option value="Huawei">Huawei</option>
+    <option value="Sony">Sony</option>
+</select>
+
+<br>
+Skjermstørrelse: <input type="number" id="skjerm" min="2" max="10">
+
+<form name="radForm">
+    Farge:
+    <input type="radio" name="radKnapp" value="sort">Svart
+    <input type="radio" name="radKnapp" value="hvit">Hvit
+</form>
+<button type="button" id="btnAngi">OK</button>
+
+<p id="txtUtskrift">Her kommer bestillingen</p>
+</body>
+</html>

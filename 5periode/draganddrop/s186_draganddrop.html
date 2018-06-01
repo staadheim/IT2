@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>s. 186</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("tekst").ondragstart = dra;
+            document.getElementById("boks").ondrop = slipp;
+            document.getElementById("boks").ondragover = tillat;
+        }
+
+        function dra(evt) {
+            evt.dataTransfer.setData("text",evt.target.id);
+        }
+
+        function tillat(evt) {
+            evt.preventDefault();
+        }
+
+        function slipp(evt) {
+            evt.preventDefault();
+            var elementId = evt.dataTransfer.getData("text");
+            evt.target.appendChild(document.getElementById(elementId));
+        }
+
+
+    </script>
+    <style>
+        #boks {
+            width: 500px;
+            height: 500px;
+            background-color: gray;
+        }
+
+    </style>
+</head>
+<body>
+
+<h3>Drag and drop</h3>
+
+<p id="boks"></p>
+<p id="tekst" draggable="true">Hei</p>
+
+</body>
+</html>

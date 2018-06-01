@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spill film!</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("play").onclick = playVideo;
+            document.getElementById("pause").onclick = pauseVideo;
+            document.getElementById("replay").onclick = tilStart;
+        }
+
+        function playVideo() {
+            document.getElementById("videoVann").play();
+        }
+        function pauseVideo() {
+            var video = document.getElementById("videoVann");
+            if(video.paused === true) {
+                video.play();
+            }
+            else if(video.paused === false) {
+                video.pause();
+            }
+        }
+        function tilStart() {
+            var video = document.getElementById("videoVann");
+            video.currentTime = 0;
+            video.play();
+        }
+
+
+    </script>
+    <style>
+        .knapp {
+            width: 50px;
+            height: 50px;
+            background-color: darkred;
+            border-radius: 5px; /* 50% gjør det til en sirkel */
+            margin-top:10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<video controls="controls" id="videoVann" style="width: 200px">
+    <source src="vann960fps.mp4" type="video/mp4">
+    404 ERROR <br> Nettleseren støtter ikke video
+</video>
+
+<br>
+
+<div id="play" class="knapp">Play</div>
+<div id="pause" class="knapp">Pause</div>
+<div id="replay" class="knapp">Replay</div>
+
+
+</body>
+</html>

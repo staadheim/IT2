@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tegne skreker</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var ctx = document.getElementById("tegneFlate").getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(10,20);
+            ctx.lineTo(200,300);
+            ctx.lineTo(10,300);
+            ctx.lineTo(10,20);
+            ctx.strokeStyle = "dodgerblue";
+            ctx.lineWidth = "5";
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(10,270)
+            ctx.lineTo(40,270);
+            ctx.lineTo(40,300);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(10,20);
+            ctx.lineTo(200,20);
+            ctx.lineTo(200,300);
+            ctx.strokeStyle = "red";
+            ctx.stroke();
+        }
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<canvas id="tegneFlate" width="500" height="500"></canvas>
+
+</body>
+</html>

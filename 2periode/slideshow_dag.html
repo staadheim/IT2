@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ha en god dag!</title>
+    <script>
+        window.onload = oppstart;
+
+        var date = new Date();                           //henter inn tiden
+        var time = date.getHours();
+        var min = date.getMinutes();
+
+        var dagbilder = ["morn.jpg", "dag.jpg"];
+        var nattbilder = ["kveld.jpg", "natt.jpg"];
+
+        var teller = 0;
+
+        function oppstart() {
+            if(min < 10) {
+                min = "0" + min;
+            }
+            setInterval(byttBilde,3000);
+        }
+
+        function byttBilde() {
+            var tid = time + ":" + min;
+            document.getElementById("txtTid").innerHTML = tid;
+
+            if(time > 6 && time < 22) {
+                document.body.style.backgroundImage = "url('" + dagbilder[teller] + "')";
+                teller++;
+                if(teller === dagbilder.length) {          //hvis telleren har gått en runde og blitt like stor som array er lang starter den på nytt på 0 igjen
+                    teller = 0;
+                    }
+                document.getElementById("txtTid").style = "color: green";
+            }
+            else {
+                document.body.style.backgroundImage = "url('" + nattbilder[teller] + "')";
+                teller++;
+                if(teller === nattbilder.length) {          //hvis telleren har gått en runde og blitt like stor som array er lang starter den på nytt på 0 igjen
+                    teller = 0;
+                }
+                document.getElementById("txtTid").style = "color: purple";
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-size: absolute;
+            transition: 1s;
+        }
+        #txtTid {
+            font-size: 100px;
+            width: 100%;
+            display: flex;
+            position: fixed;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="txtTid"></div>
+
+</body>
+</html>

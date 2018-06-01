@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Do-While-For</title>
+    <script>
+        window.onload = tallene0til10();
+
+        function tallene0til10() {
+            var teller = 0;
+            while (teller < 10) {
+                teller++;                  //øker teller med 1 for hver gang løkken kjører
+                console.log("while - teller: " + teller);
+            }
+
+            for(var i=1; i<=10; i++) {
+                console.log("for - teller: " + i);
+            }
+
+            do {
+                teller++;
+                console.log("do - teller: " + teller);
+            } while(teller === 11)
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>if-testing</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnKnapp").onclick = sjekkBoks;
+        }
+
+        function sjekkBoks() {
+            var sjekket = document.getElementById("chkValg").checked;
+            if (sjekket === true){
+                document.getElementById("resultat").innerHTML = "Du har sjekket boksen!";
+            }
+            else {
+                document.getElementById("resultat").innerHTML = "Boksen er ikke sjekket...";
+            }
+
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="checkbox" id="chkValg">Klikk meg
+
+<button type="button" id="btnKnapp">Oppdater</button>
+
+<p id="resultat">Her kommer resultatet</p>
+
+</body>
+</html>

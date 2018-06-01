@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [5, 3, 4, 1, -5];
+        // var minst = 1e32;                  // 1e32=1*10^30  =1000000000000000000000000... = STORT tall
+
+        function oppstart() {
+            var minsteTall = finnMinsteTall;
+            document.write(tall + "<br>");
+            document.write("Minste tall =" + minst)
+        }
+
+        function finnMinsteTall(array) {
+            var minst = 1e64;
+            for(var i=0; i<array.length; i++) {
+                if(array[i]<minst) {
+                    minst = array[i];
+                }
+            }
+            return minst;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

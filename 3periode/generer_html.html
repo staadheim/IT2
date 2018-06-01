@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        var farger = ["peachpuff","lightpink","salmon","pink","hotpink","deeppink"];
+
+        function oppstart() {
+            var teller = 0;
+            var tabell = document.createElement("table");
+            var innpakning = document.createElement("div");
+            for(var i=0; i<5; i++) {
+                var rad = document.createElement("tr");
+                for(var j=0; j<5; j++) {
+                    var celle = document.createElement("td");
+                    celle.style.backgroundColor = farger[teller % farger.length];
+                    teller++;
+                    rad.appendChild(celle);
+                }
+                tabell.style.width = "400px";
+                tabell.style.height = "400px";
+                tabell.appendChild(rad);
+            }
+            innpakning.style.margin = "auto";
+            innpakning.appendChild(tabell);
+            document.body.appendChild(innpakning);
+        }
+
+    </script>
+    <style>
+        body {
+            color: pin;
+        }
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

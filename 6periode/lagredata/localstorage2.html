@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+
+        //ordet kommer til å være der neste gang siden forfriskes
+
+        var ord;
+        var tall;
+
+        function oppstart() {
+            ord = localStorage.getItem("ord"); //leser fra
+            tall = localStorage.getItem("tall");
+            document.getElementById("ut1").innerHTML = "Forrige ord: " + ord + "<br>Forrige tall: " + tall; //skriver ut
+            document.getElementById("btnOrd").onclick = lesOrd;
+        }
+
+        function lesOrd() {
+            var nyOrd = document.getElementById("txtOrd").value;
+            var nyTall = parseInt(document.getElementById("txtTall").value);
+            localStorage.setItem("ord",nyOrd); //henter elementet "ord" og bytter det ut med nyOrd
+            localStorage.setItem("tall",nyTall);
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Eksempel på local storage</h1>
+
+<p id="ut1"></p>
+<p>
+    Skriv inn nytt ord: <input type="text" id="txtOrd"><br>
+    Skriv inn nytt tall: <input type="number" id="txtTall"><br>
+    <button type="button" id="btnOrd">Angi</button>
+</p>
+
+</body>
+</html>

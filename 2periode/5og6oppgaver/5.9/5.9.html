@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5.9</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = visBilder;
+        }
+
+        function visBilder() {
+            var fra = parseFloat(document.getElementById("txtFra").value);
+            var til = parseFloat(document.getElementById("txtTil").value);
+            var p = document.createElement("p");
+
+            for(var i=fra; i<=til; i++) {
+                //document.getElementById("bilder").innerHTML += "<img src='bilde" + i + ".jpg'>";
+                p.innerHTML += "<img src='bilde" + i + ".jpg'>"
+            }
+            document.body.appendChild(p);
+
+
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Du kan velge tall fra 1 opp til 6 <br>
+<input type="number" id="txtFra">
+opp til<input type="number" id="txtTil">
+<button type="button" id="btnAngi">Angi</button>
+
+<div id="bilder"></div>
+
+</body>
+</html>

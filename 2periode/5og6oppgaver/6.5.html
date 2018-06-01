@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.5</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [4,5,2,3,4,6,1,2,0,9,7,6,8,5,6,4,2,3,4,7,3];
+        var typer = [];
+        var antall = [];
+
+        function oppstart() {
+            for(var i=0; i<10; i++) {
+                antall[i] = 0;
+                typer[i] = i;
+            }
+
+            var p = document.createElement("p");
+            for(var i=0; i<typer.length; i++) {
+                for(var j=0; j<tall.length; j++) {
+                    if(typer[i] === tall[j]) {
+                        antall[i] += 1;
+                    }
+                }
+
+                //for å få gramatikken riktig
+                if(antall[i] === 1) {
+                    p.innerHTML += "Tallet " + i + " gjentas " + antall[i] + " gang i arrayen. <br>";
+                }
+                else {
+                    p.innerHTML += "Tallet " + i + " gjentas " + antall[i] + " ganger i arrayen. <br>";
+                }
+
+                document.body.appendChild(p);
+            }
+
+
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

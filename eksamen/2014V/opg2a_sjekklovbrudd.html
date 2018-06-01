@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2a</title>
+    <script>
+        window.onload = oppstart;
+
+        var lovbrudd=[];
+        lovbrudd[0]=[9631,9863];
+        lovbrudd[1]=[8593,12217];
+        lovbrudd[2]=[8363,14920];
+        lovbrudd[3]=[8128,14929];
+        lovbrudd[4]=[8514,15425];
+        lovbrudd[5]=[8534,18010];
+
+        function oppstart() {
+            document.getElementById("btnVis").onclick = vis;
+        }
+        
+        function vis() {
+            var fraar = parseInt(document.getElementById("txtFra").value);
+            var tilar = parseInt(document.getElementById("txtTil").value);
+            var endring = lovbrudd[tilar - 2002][0] - lovbrudd[fraar - 2002][0];
+            if(endring > 0) {
+                var tekst = "Negativ utvikling";
+            }
+            else if(endring < 0) {
+                var tekst = "Positiv utvikling";
+            }
+            else if(endring === 0) {
+                var teskt = "Det er ingen utvikling";
+            }
+            else {
+                var tekst = "404 ERROR <br/> Noe gikk galt"; 
+            }
+
+            document.getElementById("utskrift").innerHTML = tekst;
+         }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Utvikling i promillelovbrudd</h1>
+
+Fra år: <input type="number" id="txtFra"><br/>
+Til år: <input type="number" id="txtTil"><br/>
+
+<button type="button" id="btnVis">Vis</button>
+
+<p id="utskrift"></p>
+</body>
+</html>

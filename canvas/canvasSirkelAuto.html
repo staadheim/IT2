@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Sebastian Bjørvik">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script>
+        window.onload = oppstart;
+        var ctx;
+        var teller = 0;
+        function oppstart() {
+            // Hovedprogramkode her...
+            ctx = document.getElementById("tegneflate").getContext("2d");
+            setInterval(tegnSirkel, 0.10);
+            setInterval(tegnSirkel, 0.11);
+            setInterval(tegnSirkel, 0.12);
+            setInterval(tegnSirkel, 0.13);
+            setInterval(tegnSirkel, 0.14);
+            setInterval(tegnSirkel, 0.15);
+            setInterval(tegnSirkel, 0.16);
+            setInterval(tegnSirkel, 0.17);
+            setInterval(tegnSirkel, 0.18);
+            setInterval(tegnSirkel, 0.19);
+        }
+
+        function tegnSirkel() {
+            ctx.beginPath();
+            ctx.arc(getRandomArbitrary(0,1290), getRandomArbitrary(0,730), getRandomArbitrary(5,50), 0, 2*Math.PI);
+            ctx.strokeStyle = "white";
+            ctx.stroke();
+            teller++;
+            if(teller === 100) {
+                ctx.beginPath();
+                ctx.arc(getRandomArbitrary(0,1290), getRandomArbitrary(0,730), getRandomArbitrary(5,50), 0, 2*Math.PI);
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+                teller = 0;
+            }
+        }
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+    </script>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<canvas id="tegneflate" width="1290" height="740"></canvas>
+</body>
+</html>

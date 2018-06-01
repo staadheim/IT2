@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>7.4</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnDato").onclick = sjekkVerdier;
+        }
+
+        function sjekkVerdier() {
+            var dagen = parseInt(document.getElementById("txtDag").value);
+            var maneden = parseInt(document.getElementById("txtMaaned").value);
+            var aret = parseInt(document.getElementById("txtAar").value);
+            document.getElementById("txtUtskrift").innerHTML = dato(dagen,maneden,aret);
+
+        }
+
+        function dato(dag,maaned,aar) {
+            var feilmelding = "404 ERROR <br> Datoen " + dag + "/" + maaned + "-" + aar + " er IKKE gyldig";
+            var godkjent =  "Datoen " + dag + "/" + maaned + "-" + aar + " er en gyldig dato.";
+
+            if(aar<0 || aar>2100 || maaned<=0 || maaned>12) {
+                return feilmelding;
+            }
+
+            //annen if-test som ikke henger sammen med den over
+            if(maaned===1||maaned===3||maaned===5||maaned===7||maaned===8||maaned===10||maaned===12) {
+                if(dag<=0||dag>31) {
+                    return feilmelding;
+                }
+            }
+            else if(maaned===4||maaned===6||maaned===9||maaned===11) {
+                if(dag<0||dag>30) {
+                    return feilmelding;
+                }
+            }
+            else if(maaned===2) {
+                if(dag<0||dag>29) {
+                    return feilmelding;
+                }
+            }
+
+            return godkjent;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h3>Skriv inn en dato mellom år 0 og år 2100</h3>
+Dag:<input id="txtDag"><br>
+Måned:<input id="txtMaaned"><br>
+År:<input id="txtAar"><br>
+<button type="button" id="btnDato">Angi dato</button>
+
+<p id="txtUtskrift"></p>
+
+
+</body>
+</html>

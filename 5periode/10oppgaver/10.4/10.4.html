@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lyder</title>
+    <script>
+        window.onload = oppstart;
+
+        var lyden;
+
+        function oppstart() {
+            document.getElementById("knapp1").onclick = spillLyd1;
+            document.getElementById("knapp2").onclick = spillLyd2;
+            document.getElementById("knapp3").onclick = spillLyd3;
+            document.getElementById("knapp4").onclick = spillLyd4;
+            document.getElementById("knapp5").onclick = spillLyd5;
+        }
+
+        function spillLyd1() {
+            lyden = new Audio ("lyd1.wav");
+            if(lyden.paused === false){
+                lyden.currentTime = 0;
+            }
+            else if(lyden.paused === true){
+                lyden.play();
+            }
+        }
+        function spillLyd2() {
+            lyden = new Audio ("lyd2.wav");
+            lyden.play();
+        }
+        function spillLyd3() {
+            lyden = new Audio ("lyd3.wav");
+            lyden.play();
+        }
+        function spillLyd4() {
+            lyden = new Audio ("lyd4.wav");
+            lyden.play();
+        }
+        function spillLyd5() {
+            lyden = new Audio ("lyd5.wav");
+            lyden.play();
+        }
+
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="knapp1" value="1">Første lyd</button>
+<button type="button" id="knapp2" value="2">Andre lyd</button>
+<button type="button" id="knapp3" value="3">Tredje lyd</button>
+<button type="button" id="knapp4" value="4">Fjerde lyd</button>
+<button type="button" id="knapp5" value="5">Femte lyd</button>
+
+</body>
+</html>

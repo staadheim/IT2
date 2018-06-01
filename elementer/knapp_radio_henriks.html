@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Radioknapp</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("radKnapp1").onclick = visMelding;
+            document.getElementById("radKnapp2").onclick = visMelding;
+
+        }
+
+        function visMelding() {
+            var valg = radForm.elements.namedItem("radKnapp").value;
+            document.getElementById("usynlig").innerHTML = "Du har valgt valg nr. " + valg;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<form name="radForm">
+    <input type="radio" name="radKnapp" id="radKnapp1" value="1">Valg 1
+    <input type="radio" name="radKnapp" id="radKnapp2" value="2">Valg 2
+</form>
+
+<p id="usynlig"></p>
+
+</body>
+</html>

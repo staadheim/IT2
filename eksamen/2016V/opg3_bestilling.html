@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="no" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        var byer = ["St. Petersburg","Amsterdam","New York","Roma"];
+        var hoteller = [];
+        hoteller[0] = ["Aurora",590,690];
+        hoteller[1] = ["Downtown",660,750];
+        hoteller[2] = ["Palace",800,970];
+        hoteller[3] = ["Imperial",1200,1450];
+        hoteller[4] = ["The London",780,890];
+        var totalpris = 0;
+        var hotellpris = 0;
+
+        function oppstart() {
+            var innpakning = document.getElementById("innpakning");
+            //Legger inn byene i nedtrekksmenyen
+            var dest = document.getElementById("selDestinasjon");
+            for (var i = 0; i < byer.length; i++) {
+                var by = document.createElement('option');
+                by.value = i;
+                by.innerHTML = byer[i];
+                dest.appendChild(by);
+            }
+            dest.onchange = nybestilling1;
+        }
+        function nybestilling1() {
+            //Legger inn hotellene i nedtrekksmenyen
+            var hot = document.getElementById("selHotell");
+            for(var i=0; i<hoteller.length; i++) {
+                var hotell = document.createElement('option');
+                hotell.value = i;
+                hotell.innerHTML = hoteller[i][0];
+                hot.appendChild(hotell);
+            }
+
+            //starter bestillingsfunkjsonen når bruker legger inn informasjon
+
+            hot.onchange = nybestilling;
+            document.getElementById("kulturpass").onchange = nybestilling;
+        }
+
+        function nybestilling() {
+            var ut = document.getElementById("utskrift");
+            //nullstiller tidligere utskrift
+            while (ut.firstChild) {
+                ut.removeChild(ut.firstChild);
+            }
+            totalpris = 0;
+
+            bestilling();
+        }
+
+        function bestilling() {
+            //henter gitt informasjon
+            var hotellet = parseInt(document.getElementById("selHotell").value);
+            var periode = radPeriode.elements.namedItem("radKnapp").value;
+            var enkeltrom = parseInt(document.getElementById("erom").value);
+            var dobbeltrom = parseInt(document.getElementById("drom").value);
+            if(periode === "sommer") {
+                hotellpris = hoteller[hotellet][1];
+            }
+            else if(periode === "vinter") {
+                hotellpris = hoteller[hotellet][2];
+
+            }
+            else {
+                ut.inner = "404 ERROR <br/>Periode ikke valgt";
+            }
+            hotell = Math.floor(hotellpris*dobbeltrom) + Math.floor(enkeltrom*300);
+            totalpris += hotell;
+
+            var kultur = document.getElementById("kulturpass").checked;
+            if(kultur === true) {
+                totalpris += 700;
+                console.log("riktig - " + kultur);
+            }
+            else {
+                console.log("feil - " + kultur);
+            }
+
+            document.getElementById("btnAngi").onclick = bestilling;
+        }
+
+        function angiBestilling() {
+            document.getElementById("utskrift").innerHTML = "Total pris er " + totalpris.toFixed(0) + " kr.";
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div id="innpakning">
+    Destinasjon: <select id="selDestinasjon"></select> <br/><br/>
+
+    <form name="radPeriode">
+        Reiseperiode:
+        <input type="radio" name="radKnapp" value="sommer">Sommer
+        <input type="radio" name="radKnapp" value="vinter">Vinter
+    </form>
+
+    <br/>
+    Dobbeltrom: <input type="number" id="drom" min="0" max="10"><br/>
+    Enkeltrom: <input type="number" id="erom" min="0" max="10">
+
+    <br/><br/>
+    Hotell: <select id="selHotell"></select> <br/><br/>
+
+    Kulturpass: <input type="checkbox" id="kulturpass"><br>
+</div><br/>
+
+<button type="button" id="btnAngi">Bestill</button>
+
+<p id="utskrift"></p>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kalkulator</title>
+<script>
+window.onload = oppstart;
+ 
+function oppstart() {
+document.getElementById("add").onclick = addere;
+document.getElementById("sub").onclick = subtrakter;
+document.getElementById("mult").onclick = multipliser; 
+document.getElementById("divi").onclick = divider; 
+}
+ 
+function addere() {
+console.log("kom inn i addere-funkjsonen")
+var tall1=parseFloat(document.getElementById("tall1").value);
+var tall2=parseFloat(document.getElementById("tall2").value);
+var svar = tall1 + tall2;
+console.log(svar);
+document.getElementById("svar").innerHTML = svar; 
+}
+function subtrakter() {
+console.log("kom inn i addere-funkjsonen")
+var tall1=parseFloat(document.getElementById("tall1").value);
+var tall2=parseFloat(document.getElementById("tall2").value);
+var svar = tall1 - tall2;
+console.log(svar);
+document.getElementById("svar").innerHTML = svar; 
+}
+function multipliser() {
+console.log("kom inn i multiplikasjon-funkjsonen")
+var tall1=parseFloat(document.getElementById("tall1").value);
+var tall2=parseFloat(document.getElementById("tall2").value);
+var svar = tall1 * tall2;
+console.log(svar);
+document.getElementById("svar").innerHTML = svar; 
+}
+function divider() {
+console.log("kom inn i divitasjon-funkjsonen")
+var tall1=parseFloat(document.getElementById("tall1").value);
+var tall2=parseFloat(document.getElementById("tall2").value);
+var svar = tall1 / tall2;
+console.log(svar);
+document.getElementById("svar").innerHTML = svar; 
+}
+
+</script>
+</head>
+<body>
+<h1>Kalkulator</h1>
+Tall 1 : <input type="text" id="tall1"> <br>
+Tall 2 : <input type="text" id="tall2"> <br>
+ 
+<button id="add">Legg sammen</button>
+<button id="sub">Trekk fra</button>
+<button id="mult">Gang sammen</button>
+<button id="divi">Del opp</button>
+ 
+<p>Svaret er: <span id="svar">Error</span></p>
+ 
+</body>
+</html>

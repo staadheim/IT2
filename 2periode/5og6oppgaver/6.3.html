@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.3</title>
+    <script>
+        var tall = [34,53,2,3,34,26,26,85,3,4,98,2,12];
+        lengde = tall.length;
+
+        var annenhvertTall = [];  //til oppgave c
+        var baklengsarray = [];   //til oppgave b
+        var sisteTall = [];       //til oppgave d
+        var parTall = [];         //til oppgave e
+
+        function a() {
+            document.getElementById("txtUtskrift").innerHTML = "Arrayen er:<br>" + tall;                       //Skriv ut array
+        }
+
+        function b1() {
+            document.getElementById("txtUtskrift").innerHTML = "Baklengs er arrayen:<br>" + tall.reverse();   //Skriv ut array baklengs
+        }
+
+        function b2() {
+            var teller = 0;
+            for(var i=tall.length-1; i>=0; i--) {
+                baklengsarray[teller] = tall[i];
+                teller++;
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Baklengs er arrayen:<br>" + baklengsarray;
+
+        }
+
+        function c() {
+            var egenteller = 0;
+            for(var i=0; i<lengde; i++) {
+                if(i % 2 === 0) {
+                    annenhvertTall[egenteller] = tall[i];
+                    egenteller++;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Annenhvert tall i arrayen er:<br>" + annenhvertTall;   //Skriver annenhvert tall i arrat
+        }
+
+        function d() {
+            var teller = 0;
+            for(var i=0; i<lengde; i++) {
+                if(tall[i] < 10) {
+                    sisteTall[teller] = tall[i];
+                    teller++;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Tallene som er mindre enn 10 er:<br>" + sisteTall;   //Skriver tallene mindre enn 10
+        }
+
+        function e() {
+            var teller = 0;
+            for(var i=0; i<lengde; i++) {
+                if(tall[i] % 2 === 0) {
+                       parTall[teller] = tall[i];
+                       teller++;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Partallene i arrayen er:<br>" + parTall;            //Skriver ut alle partallene
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" onclick="a()">Oppgave a</button>
+<button type="button" onclick="b1()">Oppgave b1</button>
+<button type="button" onclick="b2()">Oppgave b2</button>
+<button type="button" onclick="c()">Oppgave c</button>
+<button type="button" onclick="d()">Oppgave d</button>
+<button type="button" onclick="e()">Oppgave e</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

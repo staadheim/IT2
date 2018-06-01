@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Klær til vær</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLes").onclick = lesVermelding;
+        }
+
+        function lesVermelding() {
+            var vindverdi = document.getElementById("chkVind").checked;
+            if (vindverdi === true) {
+                var vind = " og vindjakken.";
+            }
+            else {
+                var vind = ".";
+            }
+
+            var solregn = radForm.elements.namedItem("radVer").value;
+            if (solregn == 1) {
+                document.getElementById("resultat").innerHTML = "Ta på solhatten" + vind;
+            }
+            if (solregn == 2 ) {
+                document.getElementById("resultat").innerHTML = "Ta med paraplyen" + vind;
+
+            }
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<form name="radForm">
+    Er det sol eller regn i dag?
+    <input type="radio" name="radVer" id="sol" value="1">Sol
+    <input type="radio" name="radVer" id="regn" value="2">Regn
+</form><br>
+
+Huk av om det blir vind:
+<input type="checkbox" id="chkVind"> Vind
+<br><br>
+
+<button type="button" id="btnLes">Gi meg dagens antrekk</button>
+<br><br>
+
+<h3 id="resultat"></h3>
+</body>
+</html>

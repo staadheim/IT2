@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.4</title>
+    <script>
+        var tall = [34,53,2,3,34,26,26,85,3,4,98,2,12];
+        lengde = tall.length;
+        var sum = 0;
+
+        var minst = 1e64;      //til oppgave d
+        var partall = [];
+
+
+        function a() {                                                                                   //summen av alle tallene
+            for (var i=0; i<lengde; i++) {
+                sum += tall[i];
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Summen av tallene er " + sum + ".";
+        }
+
+        function b() {                                                                                   //alle negative tall
+            var teller = 0;
+            for (var i=0; i<lengde; i++) {
+                if(tall[i] < 0) {
+                    teller+=1;
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Det er " + teller + " negative tall i arrayen.";
+        }
+
+        function c() {
+            for (var i=0; i<lengde; i++) {
+                sum += tall[i];
+                gjennomsnitt = Math.floor(sum/lengde);
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Gjennomsnittet av tallene er omtrent " + gjennomsnitt + ".";
+        }
+
+        function d() {
+            for (var i=0; i<lengde; i++) {
+                if (tall[i] < minst) {
+                    minst = tall[i];
+                }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Det minste tallet er " + minst + ".";
+        }
+
+        function e() {
+            var j = 0;
+            for(var i=0; i<lengde; i++) {
+                if(tall[i] % 2 === 0) {
+                    partall[j] = tall[i];
+                    j++;
+                }
+                for(var j=0; j<lengde; j++) {
+                sum += partall[j];
+            }
+            }
+            document.getElementById("txtUtskrift").innerHTML = "Summen av alle partallene er" + sum + ".";
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" onclick="a()">Oppgave a</button>
+<button type="button" onclick="b()">Oppgave b</button>
+<button type="button" onclick="c()">Oppgave c</button>
+<button type="button" onclick="d()">Oppgave d</button>
+<button type="button" onclick="e()">Oppgave e</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

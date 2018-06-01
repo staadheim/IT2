@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>4.10</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnKnapp").onclick = lesTall;
+        }
+
+        function lesTall() {
+            var tall = document.getElementById("txtBoks").value;
+            if (tall % 2 == 0) {
+                document.getElementById("paragraf").innerHTML = "Tallet " + tall + " er et partall";
+            }
+            else {
+                document.getElementById("paragraf").innerHTML = "Tallet " + tall + " er et oddetall";
+            }
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="number" id="txtBoks">
+
+<button type="button" id="btnKnapp">Angi tall</button> <br>
+
+<p id="paragraf"></p>
+
+
+
+</body>
+</html>

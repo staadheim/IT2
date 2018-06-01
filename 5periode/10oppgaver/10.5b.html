@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>10.5</title>
+    <script>
+        window.onload = oppstart;
+
+        var grader = 0;
+        var hastighet = 0.2;
+
+        function oppstart() {
+            document.getElementById("bilde").style.transform = "rotate(" + grader + "deg)";
+            document.getElementById("sakte").onclick = spinSakte;
+            document.getElementById("fort").onclick = spinFort;
+            document.getElementById("snu").onclick = spinSnu;
+        }
+
+        function spinsakte() {
+
+        }
+    </script>
+    <style>
+        #bilde {
+            transition: infinite;
+            transform: rotate(2);
+        }
+
+    </style>
+</head>
+<body>
+
+<img src="sirkel.png" id="bilde">
+
+<br>
+<div id="tekst"></div>
+<br>
+
+<button type="button" id="sakte">SAKTE</button>
+<button type="button" id="fort">FORT</button>
+<button type="button" id="snu">SNU</button>
+
+
+</body>
+</html>

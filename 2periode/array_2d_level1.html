@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>4x6</title>
+    <script>
+        window.onload = oppstart;
+
+        var array = [];
+        array[0] = ["Første","Andre","Tredje","Fjerde"];
+        array[1] = [1,2,3,4];
+        array[2] = ["A","B","C","D"];
+        array[3] = ["a","b","c","d"];
+        array[4] = ["1","2","3","4"];
+        array[5] = ["I","II","III","IV"];
+
+        function oppstart() {
+            var table = document.createElement("table");
+
+            for(var i=0; i<array.length; i++) {
+                var buffer = array[i].length;
+                var tr = document.createElement("tr");
+
+                for(var j=0; j<buffer; j++) {
+                    var td = document.createElement("td");
+                    td.innerHTML = array[i][j];
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        }
+
+    </script>
+    <style>
+        table, td {
+            border-color: deeppink;
+            border-style: solid;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>

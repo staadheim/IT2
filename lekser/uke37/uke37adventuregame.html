@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>We're going on an adventure</title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLes").onclick = svar;
+        }
+
+        var answer = radForm.elements.namedItem("radKnapp").value;
+        function svar() {
+            if (answer == 1) {
+                document.body.innerHTML = "Riktig svar";
+            }
+            else {
+               document.innerHTML = "<style> body {background-color: darkred;} .overskrift {justify-content: center; font-size: 100px; font-weight: 900; color: black; </style>" +
+                "<body><div class='overskrift'>GAME OVER</div></body>";
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: url("blomstereng.jpg");
+            text-align: center;
+            margin-top: 10px;
+            font-size: 30px;
+            font-family: 'Indie Flower', cursive;
+            color: deeppink;
+        }
+    </style>
+</head>
+<body>
+
+<div class="innpakning">
+
+Du hopper over en blomstereng, plutselig ser du en magisk regnbue-portal foran deg.
+    <br> Går du inn?
+<br><br>
+
+<form name="radForm">
+    <input type="radio" name="radKnapp" value="1">Ja, selvfølgelig <3 <br>
+    <input type="radio" name="radKnapp" value="2">Nei, hopper forbi! <br> <br>
+</form>
+
+<button type="button" id="btnLes">Avgjørelse fastslått</button>
+
+</div>
+</body>
+</html>

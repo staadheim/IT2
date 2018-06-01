@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        //OPPGAVE C MED GRØNN DIV SUGER IKKE GJØR DET SÅNN
+        x=0;
+        var animasjon;
+
+        function oppstart() {
+            //oppgave a
+            d("btnBlaVis").onclick = visBla;
+            d("btnBlaSkjul").onclick = skjulBla;
+
+            //oppgave c
+            d("btnGronnStart").onclick = function() {
+                animasjon = setInterval(flyttGronn,50);
+            };
+            d("btnGronnStopp").onclick = function() {
+                clearInterval(animasjon);
+            };
+
+            //oppgave d
+            document.onmousemove = koordinater;
+        }
+
+        function visBla() {
+            d("divBla").style.visibility = "visible";
+        }
+        function skjulBla() {
+            d("divBla").style.visibility = "hidden";
+        }
+
+        function flyttGronn() {
+            d("divGronn").style.marginLeft = x + "px";
+            //var bredde = d("divGronn").style.marginLeft;
+            //bredde = x + "px";
+            x = x + 20;
+            if( x > 1000 ) {
+                x = -100;
+            }
+        }
+
+        function koordinater(evt) {
+            d("txtKord").innerHTML = "x-koordinat: " + evt.clientX + "<br/>y-koordinat: " + evt.clientY;
+        }
+
+
+
+
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+
+    </script>
+    <style>
+        /* oppgave a */
+        #divBla {
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+        }
+        /* oppgave b */
+        #divRod {
+            background-color: red;
+            height: 50px;
+            width: 50px;
+        }
+        #divRod:hover {
+            background-color: yellow;
+            height: 100px;
+            width: 100px;
+        }
+        /* oppgave c */
+        #divGronn {
+            background-color: green;
+            height: 75px;
+            width: 75px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h3>Oppgave 2</h3>
+
+a)<br/>
+<button id="btnBlaVis">Vis den blå diven</button>
+<button id="btnBlaSkjul">Skjul den blå diven</button> <br/>
+<div id="divBla"></div>
+
+<br/>b)<br/>
+<div id="divRod"></div>
+
+<br/>c)<br/>
+<button id="btnGronnStart">Start den grønne diven</button>
+<button id="btnGronnStopp">Stopp den grønne diven</button> <br/>
+<div id="divGronn"></div>
+
+<br/>d)<br/>
+<div id="txtKord"></div>
+</body>
+</html>

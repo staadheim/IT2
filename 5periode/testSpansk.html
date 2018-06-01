@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Español</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("hei2").ondragstart = dra;
+            document.getElementById("hei1").ondrop = slipp;
+            document.getElementById("hei1").ondragover = tillat;
+
+            document.getElementById("morgen").ondragstart = dra;
+            document.getElementById("madrugada").ondrop = slipp;
+            document.getElementById("madrugada").ondragover = tillat;
+        }
+
+        function dra(evt) {
+            evt.dataTransfer.setData("text",evt.target.id);
+        }
+
+        function slipp(evt) {
+            evt.preventDefault();
+            // 1) Sjekk hvilket ord som ble sluppet
+            var ordId = evt.dataTransfer.getData("text");
+            ordId = document.getElementById(ordId);
+            // 2) Fjern understreker
+            var maalet = evt.target;
+            maalet.innerHTML = "";
+            // 2b) Legger til ordet i i Mål-taggen
+            maalet.appendChild(ordId);
+            // 3) Skjekk om det er riktig ord
+            var kodeord = maalet.dataset.kodeord;
+            if(ordId.innerHTML === kodeord) {
+                ordId.style.color ="green";
+            }
+            else {
+                ordId.style.color ="red";
+            }
+            // 4) Legg til poeng
+        }
+
+        function tillat(evt) {
+            evt.preventDefault();
+        }
+
+
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<p id="tekst">
+    ¡Hola! = <span id="hei1" data-kodeord="Hei">___</span>! </br>
+    Madrugada = <span id="madrugada" data-kodeord="morgen">______</span>
+</p>
+<p id="flereOrd">
+    <span id="hei2" draggable="true">Hei</span>
+    <span id="morgen" draggable="true">morgen</span>
+</p>
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        var tabellArray = [];
+        var by = ["Oslo","Bergen","Trondheim"];
+        var utskrift = document.createElement("p");                    //lager et p-element jeg kan legge inn tekst i
+
+        function oppstart() {
+            document.getElementById("btnA").onclick = opg2a;
+            document.getElementById("btnB").onclick = opg2b;
+            document.getElementById("btnC").onclick = opg2c;
+        }
+
+        function opg2a() {
+            var bynavn = document.getElementById("txtBy").value;
+            //by[by.length]= bynavn;                                    //legger navnet som ble skrevet inn i boksen på enden av arrayen.
+            by.push(bynavn);                                            //gjør akkuratt samme som over, bare finere programmeringspråk
+            if(bynavn === "") {
+                by.pop();                                               //fjerner indexen med en gang om brukeren la inn tom tekst :)
+            }
+
+            for(var i=0; i<by.length-1; i++) {
+                if(by[i] === bynavn) {                                   //sjekker arrayen opp til det siste, nye elemetet for like byer
+                    utskrift.innerHTML = "404 ERROR <br><br>" + bynavn + " finnes alt i arrayen. <br>";
+                    by.pop(bynavn);                                     //fjerner bynavnet som du la inn, så den ikke blir med i arrayen
+                    break;
+                }
+                else {
+                    utskrift.innerHTML = by;                             //legger array inn i utskrift med nye bynavnet :) Dette skjer kun om bynavnet IKKE er likt en av de tidligere navnene
+                }
+                document.body.appendChild(utskrift);                       //"føder" p-elementet
+            }
+        }
+
+        function opg2b() {
+            by.sort();                                                  //sorter array alfabetisk
+
+            utskrift.innerHTML = by;
+            document.body.appendChild(utskrift);
+        }
+
+        function opg2c() {
+            for(var i=0; i<by.length; i++) {
+                tabellArray[i] = [i,by[i]];
+            }
+            utskrift.innerHTML = tabellArray;
+            console.log(tabellArray);
+            document.body.appendChild(utskrift);
+
+            /*Rekker ikke lage ordenlig tabell, men det er ferdiglagd tabell i konsollen :)
+            Hadde jeg hatt tid hadde jeg brukt appendchild for å lage tabell, tr og td og sette inn hver verdi slik at oppsettet blir som i konsollen
+
+            */
+
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+Navn på byen: <input type="text" id="txtBy"> <br>
+<button type="button" id="btnA">a: lagre navn i array</button> <br>
+<button type="button" id="btnB">b: sorter array alfabetisk</button> <br>
+<button type="button" id="btnC">c: skriv ut tabell</button> <br>
+
+
+
+</body>
+</html>

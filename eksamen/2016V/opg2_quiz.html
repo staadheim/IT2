@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        //Array med spørsmål og svaralternativer. For flere sorpk vil jeg opprette en kolonne med språk
+        var spm=[];
+        spm[0]=["Hva betyr Where ?","tekst","Hvor","Vi er","Var","Hvorfor"];
+        spm[1]=["Hvilket ord kan legges til her ? How are ...","tekst","you","John doing","things","the house","the wife"];
+        spm[2]=["oversetting.mp3","lyd","Hei, mitt navn er Tom","Jeg er Tom","Kjenner du Tom ?","Når kommer Tom ?"];
+
+        //Array med svar.
+        var svar=[];
+        svar[0]=["","","R","G","G","G"];
+        svar[1]=["","","R","G","R","G","G"];
+        svar[2]=["","","G","G","R","G"];
+
+        var antspm = spm.length;
+        var spmnr =- 1;
+        var poeng = 0;
+
+        function oppstart() {
+            document.getElementById("btnSvar").disabled = true;
+            document.getElementById("btnNeste").onclick = neste;
+            document.getElementById("btnSvar").onclick = sjekksvar;
+        }
+
+        function neste() {
+            document.getElementById("btnSvar").disabled = false;
+            document.getElementById("btnNeste").disabled = true;
+            document.getElementById("btnSvar").value = "";
+            document.getElementById("btnNeste").innerHTML = "Neste spørsmål";
+            spmnr++;
+
+            //Fjerner gamle svaralternativer
+            var liste = document.getElementById("olSvar");
+            while(liste.firstChild) {
+                liste.removeChild(liste.firstChild);
+            }
+            if(spmnr<antspm) {
+                var lengde = spm[spmnr].length;
+                for(var i=2; i<lengde; i++){
+                    var listeitem = document.createElement("li");
+                    listeitem.appendChild(document.createTextNode(spm[spmnr][i]));
+                    liste.appendChild(listeitem);
+                }
+                if(spm[spmnr][1] === "lyd") {
+                    document.getElementById("txtSporsmal").innerHTML = "Oversett det du hører"; 
+                    var lydfil = spm[spmnr][0];
+                    var lyd = new Audio(lydfil);
+                    lyd.play();
+                }
+                else if(spm[spmnr][1] === "tekst") {
+                    document.getElementById("txtSporsmal").innerHTML = spm[spmnr][0];
+                }
+                else {
+                    document.getElementById("txtSporsmal").innerHTML = "404 ERROR <br/> Noe gikk galt!"; 
+                }
+            }
+            else {
+                document.getElementById("txtRespons").innerHTML = "Ferdig"; 
+                document.getElementById("txtSporsmal").innerHTML = "";
+                document.getElementById("div1").style.visibility = "hidden";
+                if(poeng > 2) {
+                    document.getElementById("ferdigbilde").src = "opg2_smil.jpg";
+                }
+                else {
+                    document.getElementById("ferdigbilde").src = "opg2_sur.png";
+                }
+            }
+        }
+        
+        function sjekksvar() {
+            document.getElementById("btnSvar").disabled = true;
+            document.getElementById("btnNeste").disabled = false;
+            var svaralt = parseInt(document.getElementById("nbrSvar").value)+1;
+            var fasit = svar[spmnr][svaralt];
+            if(fasit === "G") {
+                document.getElementById("txtRespons").innerHTML = "Feil svar";
+                poeng = poeng - 1;
+            }
+            else {
+                document.getElementById("txtRespons").innerHTML = "Riktig svar!";
+                poeng = poeng + 1;
+            }
+            document.getElementById("txtPoeng").innerHTML = "Du har fått " + poeng + " poeng!"
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h1>Reisequiz</h1>
+
+<div id="div1">
+    <p id="txtSporsmal">Velkommen til reisequiz. Trykk start for å starte</p>
+    <ol id="olSvar"></ol>
+    Svar: <input type="number" id="nbrSvar" min="1" max="4">
+    <button type="button" id="btnSvar">Svar</button>
+    <button type="button" id="btnNeste">Start</button>
+</div>
+
+<p id="txtRespons">Respons</p>
+<p id="txtPoeng">Poeng</p>
+<img id="ferdigbilde">
+
+</body>
+</html>

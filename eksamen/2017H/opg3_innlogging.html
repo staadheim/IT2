@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <script>
+        window.onload = oppstart;
+
+        teller = 0;
+        var pas = ["Passord001","Passord002","Passord003","Passord004","Passord005","Passord006","Passord007","Passord008","Passord009","Passord010"];
+        var res = [];
+        res[0] = ["Parti","Prosen 2013"];
+        res[1] = ["Rødt",3.7];
+        res[2] = ["SV",5.0];
+        res[3] = ["Ap",23.0];
+        res[4] = ["SP",4.2];
+        res[5] = ["MDG",3.8];
+        res[6] = ["KrF",2.8];
+        res[7] = ["V",6.7];
+        res[8] = ["H",28.2];
+        res[9] = ["FrP",15.6];
+        res[10] = ["PIR",4.3];
+
+        function oppstart() {
+            var innpakning = document.createElement("div");
+            innpakning.id = "innpakning";
+            teller++;
+            innpakning.innerHTML = "Passord: ";
+            var passord = document.createElement("input");
+            var knapp = document.createElement("button");
+            knapp.innerHTML = "Angi";
+            innpakning.appendChild(passord);
+            innpakning.appendChild(knapp);
+            document.body.appendChild(innpakning);
+
+            knapp.onclick = function() {
+                document.body.removeChild(innpakning);
+                passordsjekk1(passord.value);
+            };
+
+            /* unødvendig tabell som kan skrives ut
+            var tabell = document.createElement("table");
+            for(var i=0; i<pas.length; i++) {
+                var rad = document.createElement("tr");
+                rad.innerHTML = pas[i];
+                tabell.appendChild(rad);
+            }
+            document.body.appendChild(tabell);*/
+        }
+
+        //oppgave 3 - oppgavedel 1
+        function passordsjekk1(passord) {
+            for (var i = 0; i < pas.length; i++) {
+                if (passord === pas[i]) {
+                    pas.splice(i, 1);   //fjerner passordet som ble brukt
+                    stemme2();
+                    break;
+                }
+            }
+            if(i === pas.length) {
+                var innpakning2 = document.createElement("div");
+                innpakning2.innerHTML = "<br> 404 ERROR <br>Pålogging feilet - ";
+                var knapp = document.createElement("button");
+                knapp.innerHTML = "Prøv igjen";
+                innpakning2.appendChild(knapp);
+                document.body.appendChild(innpakning2);
+                knapp.onclick = function () {
+                document.body.removeChild(innpakning2);
+                oppstart();
+                }
+            }
+        }
+
+        //oppgave 3 - oppgavedel 2
+        function stemme2() {
+            var innpakning = document.createElement("div");
+            //overskriften
+            var overskrift = document.createElement("h3");
+            overskrift.innerHTML = "Velg partiet du vil stemme på";
+            innpakning.appendChild(overskrift);
+            //skjema for å stemme
+            var skjema = document.createElement("form");
+            for(i=1; i<res.length; i++) {
+                var stemme = document.createElement("input");
+                var navn = document.createElement("span");
+                stemme.type = "radio";
+                stemme.name = "stemme";
+                stemme.value = i;
+                navn.innerHTML = res[i][0] + "<br>";
+                stemme.id = res[i][0];
+                skjema.appendChild(stemme);
+                skjema.appendChild(navn);
+            }
+            innpakning.appendChild(skjema);
+            //knappen til å angi stemmen
+            var angi = document.createElement("button");
+            angi.innerHTML = "Angi min stemme";
+            innpakning.appendChild(angi);
+
+            document.body.appendChild(innpakning);
+            angi.onclick = function() {
+                var partinummer = skjema.elements.namedItem("stemme").value;
+                document.body.removeChild(innpakning);
+                angiStemme(partinummer);
+            }
+        }
+
+        function angiStemme(parti) {
+            var angi = confirm("Vil du gi din stemme til " + res[parti][0] + " ?");
+            if(angi === true) {
+                utskrift(parti);
+            }
+            if(angi === false) {
+                alert("Stemmeavgivning avbrutt");
+                passordsjekk1();
+            }
+        }
+        function utskrift(parti) {
+            res[parti][2] += 1;
+            var innpakning = document.createElement("div");
+            innpakning.innerHTML = "Din stemme er avgitt";
+            document.body.appendChild(innpakning);
+        }
+    </script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

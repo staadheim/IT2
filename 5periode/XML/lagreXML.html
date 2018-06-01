@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lagrer en enkel XML-fil</title>
+    <script>
+        window.onload = oppstart;
+
+        var textFile;
+
+        function oppstart() {
+            document.getElementById("resultat").style.visibility = "hidden";
+            document.getElementById("btnLagre").onclick = lagLink;
+        }
+
+        function lagLink() {
+            var link = document.getElementById("resultat");
+            link.href = lagreFil(textFile);
+            link.style.visibility = "visible";
+        }
+
+        function lagreFil() {
+            var blob = new Blob(["Testtekst"],{type:"text/plain"}); //Binary Large OBject
+            textFile = window.URL.createObjectURL(blob);
+
+            return textFile;
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button type="button" id="btnLagre">Lagre fil</button><br>
+<a id="resultat">Lagrer</a>
+
+</body>
+</html>

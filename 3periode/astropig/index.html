@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grisen snurrer</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var div = document.createElement("div");
+            var teller = 1;
+            while(teller<421) {
+                var html = "<img src='astropig.png' class='gris'>";
+                div.innerHTML += html;
+                teller++;
+            }
+            document.body.appendChild(div);
+        }
+
+    </script>
+    <style>
+        img {
+            width: 40px;
+            transition: 1s;
+        }
+        img:hover {
+            transform: scale(3) rotate(2turn);
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="tegneflate"></div>
+
+</body>
+</html>

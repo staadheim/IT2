@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <script>
+        window.onload = oppstart;
+
+        var div;
+
+        function oppstart() {
+            //programmerer div'en her fordi det egt er lettere i å lage i body :)
+            div = document.createElement("div");
+            div.id = "div";
+            div.style.height = 50 + "px";
+            div.style.width = 50 + "px";
+            div.style.position = "absolute";
+            div.style.backgroundColor = "red";
+            document.body.appendChild(div);
+
+            document.onclick = flytt;
+        }
+
+        function flytt(evt) {
+            console.log("x - " + evt.clientX + ". y - " + evt.clientY);
+            //flytter div'en til midt i det pekeren trykker
+            var siden = evt.clientX - 25;
+            var toppen = evt.clientY - 25;
+            div.style.left = siden + "px";
+            div.style.top= toppen + "px";
+
+            //oppgave b
+            if(evt.clientX > 500) {
+                div.style.backgroundColor = "blue";
+            }
+            else {
+                div.style.backgroundColor = "red";
+            }
+            //oppgave c
+            if(evt.clientX > 500 && evt.clientY > 500) {
+                div.style.height = 100 + "px";
+                div.style.width = 100 + "px";
+            }
+            else {
+                div.style.height = 50 + "px";
+                div.style.width = 50 + "px";
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

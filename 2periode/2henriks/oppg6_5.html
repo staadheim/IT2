@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://hmauroy.github.io/8bitHenrik.png">
+    <meta name="author" content="Henrik Mauroy">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Finn hvor mange ganger tall forekommer</title>
+    <script>
+        window.onload = oppstart;
+
+        var tall = [4,5,2,3,4,6,1,2,0,9,7,6,8,5,6,4,2,3,4,7,3];
+        var telleArray = [];
+        var talltyper = [];
+
+        function oppstart() {
+
+
+            // Fyll opp arrayene telleArray og talltyper
+            for(var i=0; i<10; i++) {
+                telleArray[i] = 0;  // telleArray fylles med 0-er
+                talltyper[i] = i; // talltyper fylles opp med tallene 0-9
+            }
+
+            // Går gjennom talltyper-arrayet for å se hvor mange ganger de forskjellige tallene (0-9) forekommer i tall-arrayet
+            for(var i=0; i<talltyper.length; i++) {
+                detteTall = talltyper[i];   // f.eks. starter vi med tallet 1
+                console.log("detteTall=" + detteTall);
+                // Går gjennom tall-array for å se etter match
+                for(j=0; j<tall.length; j++) {
+                    // Sjekker
+                    if(detteTall === tall[j]){
+                        telleArray[i] += 1; // oppdaterer antall ganger detteTall forekommer i tall-array
+                    }
+                }//end for tall.length
+
+            }//end for talltyper.length
+
+
+            // Skriver ut informasjonen som tekst og graf
+            var utskrift = document.getElementById("utskrift");
+
+            utskrift.innerHTML = "<h2>Statistikk over tallene </h2>";
+
+            // looper gjennom telleArray
+            for(var i=0; i<telleArray.length; i++) {
+                var nyttElement = document.createElement("p");      // lager et barn til div-en
+                nyttElement.innerHTML = "Antall ganger  " + talltyper[i] + " forekommer: " + telleArray[i];    // fyller barnet med innhold
+                utskrift.appendChild(nyttElement);  // legger til det nye elementet inni div-elementet
+
+                // Lager graf
+                var nyGraf = document.createElement("span");
+                nyGraf.className = "graf";
+                nyGraf.style.width = 100*telleArray[i] + "px";       // Setter bredden til å være antall ganger tallet forekommer (MÅ HA "px" også!)
+                // Dersom tallet er partall settes fargen til grønn, ellers er den orange som utganspunktet
+                if(i % 2 === 0) {
+                    nyGraf.style.backgroundColor = "#86ff54";
+                }
+                nyttElement.appendChild(nyGraf);   // Legger det nye elementet som barnet til paragrafen nyttElement
+            }
+
+
+
+
+        }//end oppstart
+
+    </script>
+    <style>
+        span.graf {        /* lager en regel for å lage grafer */
+            background-color: #ff9454;
+            height: 20px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="utskrift">
+
+</div>
+
+</body>
+</html>

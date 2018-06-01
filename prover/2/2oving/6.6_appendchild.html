@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.6 AppendChild</title>
+    <script>
+        window.onload = oppstart;
+
+        var bokstaver = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        var teller = 1;
+
+        function oppstart() {
+            for(var i=0; i<bokstaver.length; i++) {
+                var p = document.createElement("p");          //skaper elementet og gir det variabelen "p"
+                p.innerHTML += i+1 + " : ";                   //starter hver p linje med 1: og så 2: osv. må ta i+1 fordi i starter på 0
+                for(var j=0;j<teller; j++) {
+                    p.innerHTML += bokstaver[i] + " ";        //fyller p linjen med den bokstaven der på ett stigende anntall ganger
+                }
+                teller++;
+                p.innerHTML += "<br>";
+                document.body.appendChild(p);
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

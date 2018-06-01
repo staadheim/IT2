@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>While</title>
+    <script>
+        window.onload = oppstart;
+        var teller = 0;
+
+        function oppstart() {
+            var svar = "nei";
+            while(svar === "nei") {
+                teller += 1;
+                document.write("Vil ikke <br>");
+                if (teller === 10) {
+                    var svar = "ja";
+                }
+
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

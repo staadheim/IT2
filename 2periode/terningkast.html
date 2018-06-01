@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistikk over terningkast</title>
+    <script>
+        window.onload = oppstart;
+
+        var oyne = [0, 0, 0, 0, 0, 0];
+        var terning = [1, 2, 3, 4, 5, 6];
+
+        //spør bruker om antall kast
+        var antKast = prompt("Hvor mange ganger kaster du terningen?");
+
+
+        function oppstart() {
+            for(var i=0; i<antKast; i++) {
+                var kast = Math.floor((Math.random() * 6 ) + 1 );
+                for(var j=0; j<terning.length; j++) {
+                    if(kast === terning[j]) {
+                        oyne[j] += 1; // oyne[j]++; <-- Samme
+                        break;
+                    }
+                }
+            } // end for antall kast
+
+            //Skriver ut statistikken
+            for(var i=0; i<oyne.length; i++) {
+                var nyttElement = document.createElement("p");                                 //definerer et p-element
+                nyttElement.innerHTML = "Antall " + terning[i] + "-ere er " + oyne[i];
+
+                var nyGraf = document.createElement("span");
+                nyGraf.className = "graf";
+                nyGraf.style.width = oyne[i] + "px";
+                nyttElement.appendChild(nyGraf);
+
+                document.getElementById("txtUtskrift").appendChild(nyttElement);               //setter p-elementet inn i txtUtskrift og dermed lager det
+            }
+        }
+
+    </script>
+    <style>
+        span.graf {
+            background-color: cornflowerblue;
+            height: 20px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="txtUtskrift"></div>
+</body>
+</html>

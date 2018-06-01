@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minesveiper</title>
+    <script>
+        window.onload = oppstart;
+
+        var arr = [];
+        var dimensjon = 50;
+
+        function oppstart() {
+            for(var i=0; i<dimensjon; i++) {
+                arr[i] = [];
+                var innpakning = document.createElement("div");
+                for(var j=0; j < dimensjon; j++) {
+                    arr[i][j] = Math.round(Math.random()+1);
+                    bit = document.createElement("div");
+                    bit.style = "height: 10px; width: 10px;";
+                    bit.id = "bit" + i + "og" + j;  //gir hver bit hvert sitt induviduelle navn
+                    bit.style.background = ""
+
+                    innpakning.style = "display: flex; flex-direction: row";
+                    innpakning.appendChild(bit);
+                }
+                document.body.appendChild(innpakning);
+            }
+        }
+
+    </script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>4.12</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnLes").onclick = visDager;
+        }
+
+        function visDager() {
+            var maned = document.getElementById("selValg").value;
+            if (maned == 28 ) {
+                document.getElementById("txtUtskrift").innerHTML = "Det er vanligvis 28 dager i denne måneden, men 29 når det er skuddår."
+            }
+            else {
+               document.getElementById("txtUtskrift").innerHTML = "Det er " + maned + " dager i denne måneden.";
+            }
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<select id="selValg">
+    <option value="31">Januar</option>
+    <option value="28">Februar</option>
+    <option value="31">Mars</option>
+    <option value="30">April</option>
+    <option value="31">Mai</option>
+    <option value="30">Juni</option>
+    <option value="31">Juli</option>
+    <option value="31">August</option>
+    <option value="30">September</option>
+    <option value="31">Oktober</option>
+    <option value="30">November</option>
+    <option value="31">Desember</option>
+</select>
+
+<button id="btnLes">Angi</button>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

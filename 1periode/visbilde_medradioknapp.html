@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bildevisning</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("radKnapp1").onclick = visBilde;
+            document.getElementById("radKnapp2").onclick = visBilde;
+            document.getElementById("radKnapp3").onclick = visBilde;
+            document.getElementById("radKnapp4").onclick = visBilde;
+            document.getElementById("radKnapp5").onclick = visBilde;
+
+        }
+
+        function visBilde() {
+            var valg = radForm.elements.namedItem("radKnapp").value;
+            if (valg==1) {
+                document.getElementById("usynlig").innerHTML = "<img src='dp_bla.png'>"
+            }
+            if (valg==2) {
+               document.getElementById("usynlig").innerHTML = "<img src='dp_gronn.png'>"
+            }
+            if (valg==3) {
+               document.getElementById("usynlig").innerHTML = "<img src='dp_gul.png'>"
+            }
+            if (valg==4) {
+               document.getElementById("usynlig").innerHTML = "<img src='dp_rod.png'>"
+            }
+            if (valg==5) {
+               document.getElementById("usynlig").innerHTML = "<img src='dp_rosa.png'>"
+            }
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<h3>What should you do?</h3>
+
+<form name="radForm">
+    <input type="radio" name="radKnapp" id="radKnapp1" value="1">Blue answer
+    <input type="radio" name="radKnapp" id="radKnapp2" value="2">Green answer
+    <input type="radio" name="radKnapp" id="radKnapp3" value="3">Yellow answer
+    <input type="radio" name="radKnapp" id="radKnapp4" value="4">Red answer
+    <input type="radio" name="radKnapp" id="radKnapp5" value="5">Pink answer
+</form>
+
+<p id="usynlig"></p>
+
+</body>
+</html>

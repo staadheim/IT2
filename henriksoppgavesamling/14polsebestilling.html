@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>14</title>
+    <script>
+        window.onload = oppstart;
+
+        var info = []; //[navn, pris, kcal,
+        info[0] = ["Grillpølse",20,76];
+        info[1] = ["Wienerpølse",20,53];
+        info[2] = ["Baconpølse",30,106];
+        info[3] = ["Chillipølse",30,98];
+        info[4] = ["Grovt brød",10,56];
+        info[5] = ["Fint brød",10,53];
+        info[6] = ["Glutenfritt brød",25,46];
+        info[7] = ["Lompe",10,32];
+        info[8] = ["Sennep",5,25];
+        info[9] = ["Ketchup",5,27];
+        info[10] = ["Sprøstekt løk",5,39];
+
+        var bestilling = [];
+
+        function oppstart() {
+            document.getElementById("angiBestilling").onclick = lesBestilling;
+            console.log(info);
+        }
+
+        function lesBestilling() {
+            var polseBestilling = radFormPolse.elements.namedItem("radPolse").value;
+            var brodBestilling = radFormBrod.elements.namedItem("radBrod").value;
+            var tilleggBestilling = radFormTillegg.elements.namedItem("radTillegg").value;
+
+            var polseNavn = info[polseBestilling][0];
+            var brodNavn = info[brodBestilling][0];
+            var tilleggNavn = info[tilleggBestilling][0];
+
+            var navn = [polseNavn, brodNavn, tilleggNavn];
+
+            var pris = parseFloat(Math.floor(info[polseBestilling][1] + info[brodBestilling][1] + info[tilleggBestilling][1]));
+            var kalorier = parseFloat(Math.floor(info[polseBestilling][2] + info[brodBestilling][2] + info[tilleggBestilling][2]));
+
+            bestilling = [navn, pris, kalorier];
+
+            for(var i=0; i<bestilling.length; i++) {
+                var buffer = array[i].length;
+                var tr = document.createElement("tr");
+
+                for(var j=0; j<buffer; j++) {
+                    var td = document.createElement("td");
+                    td.innerHTML = bestilling[i][j];
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<form name="radFormPolse">
+    <input type="radio" name="radPolse" value="0">Grillpølse
+    <input type="radio" name="radPolse" value="1">Wienerpølse
+    <input type="radio" name="radPolse" value="2">Baconpølse
+    <input type="radio" name="radPolse" value="3">Chillipølse
+</form>
+
+<form name="radFormBrod">
+    <input type="radio" name="radBrod" value="4">Grovt brød
+    <input type="radio" name="radBrod" value="5">Fint brød
+    <input type="radio" name="radBrod" value="6">Glutenfritt brød
+    <input type="radio" name="radBrod" value="7">Lompe
+</form>
+
+<form name="radFormTillegg">
+    <input type="checkbox" name="radTillegg" value="8">Sennep
+    <input type="checkbox" name="radTillegg" value="9">Ketchup
+    <input type="checkbox" name="radTillegg" value="10">Sprøstekt løk
+</form>
+
+<button type="button" id="angiBestilling">Bestill</button>
+
+<div id="kvittering"></div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>4.11b</title>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            document.getElementById("btnAngi").onclick = lesSekunder;
+        }
+
+        function lesSekunder() {;
+            var sek = document.getElementById("txtSekunder").value;  // f.eks. 3642
+            var time = Math.floor(sek/(60*60));     // 3642/3600=1.01166 runder av tallet ned.
+            sek -= time * 60 * 60;              // 3642- 1*3600 = 42 sekunder igjen
+            var min = Math.floor(sek/60);       // 42/60 = 0.7 som rundes av til null
+            sek -= min * 60 ;
+
+            if (time===1) {
+                var timeUtskrift = time + " time og ";
+            }
+            if (time /=1 ) {
+                var timeUtskrift = time + " timer og ";
+            }
+            if (time===0) {
+                var timeUtskrift = "";
+            }
+            if (min===1) {
+                var minUtskrift = min + " minutt og ";
+            }
+            if (min /=1 ) {
+                var minUtskrift = min + " minutter og ";
+            }
+            if (min===0) {
+                var minUtskrift = "";
+            }
+            if (sek===1) {
+                var sekUtskrift = sek + " sekund";
+            }
+            if (sek /=1 ) {
+                var sekUtskrift = sek + " sekunder";
+            }
+            if (sek===0) {
+                var sekUtskrift = "";
+            }
+
+            document.getElementById("txtUtskrift").innerHTML = timeUtskrift + minUtskrift + sekUtskrift;
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<input type="number" id="txtSekunder">
+
+<button type="button" id="btnAngi">Angi sekunder</button><br>
+
+<p id="txtUtskrift"></p>
+
+</body>
+</html>

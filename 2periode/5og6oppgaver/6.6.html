@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.6</title>
+    <script>
+        window.onload = oppstart;
+
+        var bokstaver = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        var teller = 1;
+
+        function oppstart() {
+            for(var i=0; i<bokstaver.length; i++) {
+                /*nytt p-element
+                var p = document.createElement("p");
+                p.innerHTML = "Hei";
+                body.appendChild(p);*/
+
+                document.write(teller + ": ");
+                for(var j=0; j<teller; j++) {
+                    //console.log(bokstav);
+                    document.write(bokstaver[i]);
+                }
+                teller++;
+                document.write("<br>");
+            }
+        }
+
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>

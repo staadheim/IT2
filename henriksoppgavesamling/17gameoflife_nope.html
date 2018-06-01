@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FML</title>
+    <script>
+        window.onload = oppstart;
+
+        var arr = [];
+        var bit;
+        var naboer;
+        var dimensjon;  //endre dennne variabelen for å endre størrelsen på spillet
+
+        function oppstart() {
+            var knapp = document.createElement("button");
+            knapp.type = "button";
+            knapp.style.margin = "10px";
+            knapp.innerHTML = "Start simulering av liv";
+            document.body.appendChild(knapp);
+            knapp.onclick = sim;
+
+            dimensjon = parseInt(prompt("Hvor stor lengde og bredde vil du ha? (mellom 2 og 150)"));
+
+            for(var i=0; i<dimensjon; i++) {
+                arr[i] = [];
+                var innpakning = document.createElement("div");
+                for(var j=0; j < dimensjon; j++) {
+                    arr[i][j] = Math.round(Math.random()+1);
+                    bit = document.createElement("div");
+                    var storrelse = parseInt(dimensjon/(dimensjon/10));
+                    bit.style = "height:" + storrelse + "px; width:"+ storrelse + "px;"; //7*7
+                    bit.id = "bit" + i + "og" + j;  //gir hver bit hvert sitt induviduelle navn
+                    if(arr[i][j] === 1) {
+                        bit.style.backgroundColor = "hotpink";
+                    }
+
+                    innpakning.style = "display: flex; flex-direction: row";
+                    innpakning.appendChild(bit);
+                }
+                document.body.appendChild(innpakning);
+            }
+        }
+
+        function sim() {
+            for (var i = 0; i < dimensjon; i++) {
+                for (var j = 0; j < dimensjon; j++) {
+                    naboer = 0;
+                    if (i === 0 && j === 0) {
+                        hjorneVenstreOppe(i,j);
+                    }
+                    else if (i === 0 && j === dimensjon-1) {
+                        hjorneHoyreOppe(i,j);
+                    }
+                    else if (i === dimensjon-1 && j === 0) {
+                        hjorneVenstreNede(i,j);
+                    }
+                    else if (i === dimensjon-1 && j === dimensjon-1) {
+                        hjorneHoyreNede(i,j);
+                    }
+                    else if (j === 0) { // i > 0 && i < dimensjon-1 &&
+                        sjekkVenstreKant(i,j);
+                    }
+                    else if (i === dimensjon-1) { //&& j > 0 && j < dimensjon-1
+                        sjekkNederst(i,j);
+                    }
+                    else if (i === 0 ) { //&& j > 0 && j < dimensjon-1
+                        sjekkOverst(i,j);
+                    }
+                    else if (j === dimensjon-1) {
+                        sjekkHoyreKant(i,j);
+                    }
+                    else {
+                        sjekkInnerst(i,j);
+                    }
+                }
+            }
+            tegn();
+        }
+
+        function hjorneVenstreOppe(i,j) {
+            if(arr[i][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j+1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+        function hjorneHoyreOppe(i,j) {
+            if(arr[i][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+
+        }
+        function hjorneVenstreNede(i,j) {
+            if(arr[i-1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j+1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+        function hjorneHoyreNede(i,j) {
+            if(arr[i-1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i][j-1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+
+        function sjekkVenstreKant(i,j) {
+            if(arr[i-1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j+1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+        function sjekkNederst(i,j) {
+            if(arr[i-1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j+1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+        function sjekkOverst(i,j) {
+            if(arr[i][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j+1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+        function sjekkHoyreKant(i,j) {
+            if(arr[i-1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+
+        function sjekkInnerst(i,j) {
+            if(arr[i-1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i-1][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i][j+1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j-1] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j] === 1) {
+                naboer++;
+            }
+            if(arr[i+1][j+1] === 1) {
+                naboer++;
+            }
+            slutt(i,j);
+        }
+
+        function slutt(i,j) {
+                    if (arr[i][j] === 1) {        // 1)
+                        if(naboer < 2) {
+                            arr[i][j] = 0; //bit'en dør
+                        }
+                        else if (naboer === 2 || naboer === 3) {
+                            arr[i][j] = 1;   // bit'en fortsetter å leve
+                        }
+                        else if (naboer > 3) {
+                            arr[i][j] = 0;
+                        }
+                    }
+                    else if (arr[i][j] === 0 && naboer === 3) {   // 3)
+                        arr[i][j] = 1;
+                    }
+                    else {
+                        arr[i][j] = 0;
+                    }
+        }
+
+        function tegn() {
+            for (var i = 0; i < dimensjon; i++) {
+                for (var j = 0; j < dimensjon; j++) {
+                    var biten = document.getElementById("bit" + i + "og" + j);
+                    if (arr[i][j] === 1) {
+                        biten.style.backgroundColor = "hotpink";
+                    }
+                    else if (arr[i][j] === 0) {
+                        biten.style.backgroundColor = "white";
+                    }
+                }
+            }
+            loop = setTimeout(sim,200); //får funkjsonen til å gå kontinuelig
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>
