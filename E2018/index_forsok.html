@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <title>Forsvaret</title>
+    <script>
+        window.onload = oppstart;
+
+        var dest = [];
+        //dest[i] = [sted, transportmiddel, tid];
+        dest[0] = ["Bardufoss","fly","1 time 50 min"];
+        dest[1] = ["Dombås","buss","3 timer 45 min"];
+        dest[2] = ["Kolsås","tog","2 timer 15 min"];
+        dest[3] = ["Madla","fly","50 min"];
+        dest[4] = ["Rena","buss","3 timer 15 min"];
+        dest[5] = ["Rygge","tog","3 timer 10 min"];
+
+        var pers = [];
+        //pers[i] = [destinasjon, fornavn, etternavn, kjonn, mat, pledd];
+
+        var bildenr = 3;
+
+        function oppstart() {
+            d("btnReg").onclick = avles;
+
+            bildekarusell();
+
+            //reg - lager nedtrekksmeny for destinasjoner
+            for(var i=0; i<dest.length; i++){
+                d("selBaseMeny").innerHTML += "<option value='" + i + "'>" + dest[i][0] + "</option>";
+            }
+            //pass - "fjerner" ombordstigningpasset til noen er registrert
+             d("divPass").style.visibility = "hidden";
+        }
+        
+        function avles() {
+            //henter verdiene som registrert
+            var destnr = d("selBaseMeny").value;
+            var fornavn = d("txtFornavn").value;
+            var etternavn = d("txtEtternavn").value;
+            var kjonn = radKjonn.elements.namedItem("radKnapp").value;
+            var mat = d("chkMat").checked;
+            var pledd = d("chkPledd").checked;
+
+            //rask sjekk om all informasjon er fullt ut
+            if(fornavn == "" || etternavn == "" || kjonn === "") {
+                //feilmelding ved knappen
+                d("txtVarsel").innerHTML = "Vennligst fyll ut all informasjonen.";
+                d("divPass").style.visibility = "hidden";
+            }
+            //SPØR PER OM DENNE BURDE VÆRE EGEN FUNKSJON
+            else {
+                //fjerner eventuell feilmelding
+                d("txtVarsel").innerHTML = "";
+                //gjør om inputene til informasjon som skal lagres
+                var destinasjon = dest[destnr][0];
+                if(mat === true) {
+                    mat = 1;
+                }
+                else {
+                    mat = 0;
+                }
+                if(pledd == true) {
+                    pledd = 1;
+                }
+                else {
+                    pledd = 0;
+                }
+                //lagrer informasjonen i array
+                pers.push([destinasjon, fornavn, etternavn, kjonn, mat, pledd]);
+
+                passet();
+                oversikt();
+            }
+        }
+
+        function passet() {
+            //gjør passet synlig
+            d("divPass").style.visibility = "visible";
+            d("divPass").style.borderStyle = "solid";
+            //informasjonen til den som nettopp ble registrert er sist i arrayet
+            var nr = pers.length - 1;
+            //sjekker kjønnet og setter inn benevnelse på passet
+            if(pers[nr][3] === "mann") {
+                var nevn = "Mr.";
+            }
+            else if(pers[nr][3] === "kvinne") {
+                var nevn = "Ms.";
+            }
+            else {
+                d("txtVarsel").innerHTML = "404 ERROR Noe gikk galt m/kjønnene";
+            }
+
+            //setter inn transportmiddelet som bakgrunnsbilde + tiden den bruker
+            var sted = pers[nr][0];
+            for(var i=0; i<dest.length; i++) {
+                if(sted === dest[i][0]) {
+                    var transport = dest[i][1];
+                    var tid = dest[i][2];
+                }
+            }
+            //setter inn bakgrunnsbildet
+            d("divPass").style.backgroundImage = "url('" + transport + ".png')";
+
+            //setter inn informasjonen på passet
+            d("divInfo").innerHTML = "<b>" + nevn + " " + pers[nr][1] + " " + pers[nr][2] + "</b><br/><br/>" +
+                "Fra: Sessvollmoen <br/> Til: " + pers[nr][0] + "<br/><br/>" + tid;
+
+            //Unødvendig bonus - legger inn tiden med riktig farge
+            if(transport === "tog") {
+                var farge = "black";
+            }
+            else if(transport === "buss") {
+                var farge = "rgba(0,163,12,0.62)";
+            }
+            else if(transport === "fly") {
+                var farge = "rgba(255,122,0,0.62)";
+            }
+            else {
+                d("txtVarsel").innerHTML = "404 ERROR Noe gikk galt m/fargen til transporttiden";
+            }
+            d("divPass").style.color = farge;
+        }
+
+        function oversikt() {
+            var utskrift = d("divOversikt");
+
+            //Fjerner tabell om den alt er i utskrift
+            while(utskrift.firstChild) {
+                utskrift.removeChild(utskrift.firstChild);
+            }
+
+            //underoverskrift
+            utskrift.innerHTML = "<b>Oversikt til avreisedagen</b>";
+
+            //teller anntall matpakker og pledd som trengs
+            var div = document.createElement("div");
+            var antMat = 0;
+            var antPledd = 0;
+            for(var k=0; k<pers.length; k++) {
+                if(pers[k][4] === 1) {
+                    antMat++;
+                }
+                if(pers[k][5] === 1) {
+                    antPledd++;
+                }
+            }
+            div.innerHTML = "Forbered " + antMat + " matpakker og " + antPledd + " pledd.";
+            utskrift.appendChild(div);
+
+            //lager tabelloversikt
+            var tabell = document.createElement("table");
+            for(var i=0; i<pers.length; i++) {
+                var rad = document.createElement("tr");
+                for(var j=1; j<=3; j++) {
+                    var celle = document.createElement("td");
+                    celle.innerHTML = pers[i][j];
+
+                    //destinasjonen til sist og litt lengre unna navnet (dette er hvorfor j begynner på 1)
+                    if(j === 3) {
+                        celle.innerHTML = pers[i][0];
+                        celle.style.paddingLeft = "50px";
+                    }
+                    rad.appendChild(celle);
+                }
+                tabell.appendChild(rad);
+            }
+            utskrift.appendChild(tabell);
+        }
+
+        function bildekarusell() {
+            var ramme = d("divBilde");
+            var storrelse = 400;
+            ramme.style.width = storrelse + "px";
+            ramme.style.backgroundRepeat = "no-repeat";
+            ramme.style.backgroundSize = "contain";
+            ramme.style.transition = "1s";
+            if(bildenr === 8) {
+                bildenr = 1;
+            }
+            else {
+                bildenr++;
+            }
+            d("divBilde").style.backgroundImage = "url('forsvaret" + bildenr + ".jpg')";
+            setTimeout(bildekarusell, 5000);
+        }
+
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Helvetica Neue";
+            margin: 0;
+        }
+        #divOverskrift {
+            width: 100%;
+            margin: 0;
+            font-size: 40px;
+            padding: 10px;
+            background-image: url("milligronn.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-bottom: 30px;
+            color: red;
+        }
+        #overskrift {
+            padding-bottom: 60px;
+        }
+        .innpakning {
+            display: flex;
+            margin: 30px;
+        }
+        #divPass {
+            font-family: 'Source Sans Pro', sans-serif;
+            height: 200px;
+            width: 400px;
+            margin: 25px;
+            padding: 10px;
+            background-repeat: no-repeat;
+            background-size: 150px 150px;
+            background-position: right;
+        }
+        #divOversikt {
+            padding: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="divOverskrift">
+    <img id="overBilde" src="forsvaret_logo.png" height="100px">
+    <span id="overskrift">FORSVARET - REIS TIL RIKTIG MILIÆRBASE</span>
+</div>
+
+<div class="innpakning">
+    <div id="divReg">
+        Fra Sessvollmoen -
+        Til <select id="selBaseMeny"></select><br/><br/>
+
+        Fornavn:<input id="txtFornavn" type="text"><br/>
+        Etternavn:<input id="txtEtternavn" type="text"><br/><br/>
+
+        <form name="radKjonn">
+            Kjønn:<br/>
+            <input type="radio" name="radKnapp" value="mann">Mann<br/>
+            <input type="radio" name="radKnapp" value="kvinne">Kvinne
+        </form><br/>
+
+        Valgfritt:<br/>
+        <input type="checkbox" id="chkMat">Mat<br/>
+        <input type="checkbox" id="chkPledd">Pledd<br/>
+
+        <button id="btnReg">Registrer</button>
+        <br/><div id="txtVarsel" style="color:red;"></div>
+
+
+        <div id="divPass">
+            <h2>Ombordstigningspass</h2>
+            <div id="divInfo"></div>
+        </div>
+    </div>
+
+    <div id="divBilde"></div>
+
+    <div id="divOversikt"></div>
+</div>
+
+</body>
+</html>
