@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Silje Stadheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="e2018.css">
+    <title>Forsvaret</title>
+    <script>
+        window.onload = oppstart;
+
+        var dest = [];
+        //dest[i] = [sted, transportmiddel, tid];
+        dest[0] = ["Bardufoss","fly","1 time 50 min"];
+        dest[1] = ["Dombås","buss","3 timer 45 min"];
+        dest[2] = ["Kolsås","tog","2 timer 15 min"];
+        dest[3] = ["Madla","fly","50 min"];
+        dest[4] = ["Rena","buss","3 timer 15 min"];
+        dest[5] = ["Rygge","tog","3 timer 10 min"];
+
+        var pers = [];
+        //pers[i] = [destinasjon, fornavn, etternavn, kjonn, mat, pledd];
+
+        var bildenr = 3;
+
+        function oppstart() {
+            d("btnReg").onclick = avles;
+
+            bildekarusell();
+
+            //reg - lager nedtrekksmeny for destinasjoner
+            for(var i=0; i<dest.length; i++){
+                d("selBaseMeny").innerHTML += "<option value='" + i + "'>" + dest[i][0] + "</option>";
+            }
+            //pass - "fjerner" ombordstigningpasset til noen er registrert
+             d("divPass").style.visibility = "hidden";
+        }
+        
+        function avles() {
+            //henter verdiene som registrert
+            var destnr = d("selBaseMeny").value;
+            var fornavn = d("txtFornavn").value;
+            var etternavn = d("txtEtternavn").value;
+            var kjonn = radKjonn.elements.namedItem("radKnapp").value;
+            var mat = d("chkMat").checked;
+            var pledd = d("chkPledd").checked;
+
+            //rask sjekk om all informasjon er fullt ut
+            if(fornavn === "" || etternavn === "" || kjonn === "") {
+                //feilmelding ved knappen
+                d("txtVarsel").innerHTML = "Vennligst fyll ut all informasjonen.";
+                d("divPass").style.visibility = "hidden";
+            }
+            //SPØR PER OM DENNE BURDE VÆRE EGEN FUNKSJON
+            else {
+                //gjør om inputene til informasjon som skal lagres
+                var destinasjon = dest[destnr][0];
+                if(mat === true) {
+                    mat = 1;
+                }
+                else {
+                    mat = 0;
+                }
+                if(pledd === true) {
+                    pledd = 1;
+                }
+                else {
+                    pledd = 0;
+                }
+
+                //lagrer informasjonen i array i alfabetisk rekkefølge etter etternavn
+                // Viktig! Hente ut indexen den settes inn i
+                var info = [destinasjon, fornavn, etternavn, kjonn, mat, pledd];
+                var sjekk = false;
+                for(var i=0; i<pers.length; i++) {
+                    if(pers[i][2].toLowerCase() > etternavn.toLowerCase()) {
+                        pers.splice(i,0,info);
+                        sjekk = true;
+                        var arrayplass = i;
+                        break;
+                    }
+                }
+                if(sjekk == false) {
+                    pers.push(info);
+                    var arrayplass = pers.length-1;
+                }
+
+                passet(arrayplass);
+                oversikt();
+            }
+        }
+
+        function passet(nr) {
+            console.log(pers[nr][1]+ " " + pers[nr][2]);
+            //gjør passet synlig
+            d("divPass").style.visibility = "visible";
+            d("divPass").style.borderStyle = "solid";
+
+            //sjekker kjønnet og setter inn benevnelse på passet
+            if(pers[nr][3] === "mann") {
+                var nevn = "Mr.";
+            }
+            else if(pers[nr][3] === "kvinne") {
+                var nevn = "Ms.";
+            }
+            else {
+                d("txtVarsel").innerHTML = "404 ERROR Noe gikk galt m/kjønnene";
+            }
+
+            //setter inn transportmiddelet som bakgrunnsbilde + tiden den bruker
+            var sted = pers[nr][0];
+            for(var i=0; i<dest.length; i++) {
+                if(sted === dest[i][0]) {
+                    var transport = dest[i][1];
+                    var tid = dest[i][2];
+                }
+            }
+            //setter inn bakgrunnsbildet
+            d("divPass").style.backgroundImage = "url('" + transport + ".png')";
+
+            //setter inn informasjonen på passet
+            d("divInfo").innerHTML = "<b>" + nevn + " " + pers[nr][1] + " " + pers[nr][2] + "</b><br/><br/>" +
+                "Fra: Sessvollmoen <br/> Til: " + pers[nr][0] + "<br/><br/>" + tid;
+
+            //unødvendig bonus - farge i forhold til transportmiddel
+            if(transport === "tog") {
+                var farge = "black";
+            }
+            else if(transport === "buss") {
+                var farge = "rgba(0,163,12,0.62)";
+            }
+            else if(transport === "fly") {
+                var farge = "rgba(255,122,0,0.62)";
+            }
+            else {
+                d("txtVarsel").innerHTML = "404 ERROR Noe gikk galt m/fargen til transporttiden";
+            }
+            d("divPass").style.color = farge;
+
+            fjerninfo();
+        }
+
+        function fjerninfo() {
+            //fjerner eventuell feilmelding og avmerkingen i boksene
+            d("txtVarsel").innerHTML = "";
+            d("selBaseMeny").value = 0;
+            d("txtFornavn").value = "";
+            d("txtEtternavn").value = "";
+            d("radMann").checked = false;
+            d("radKvinne").checked = false;
+            d("chkMat").checked = false;
+            d("chkPledd").checked = false;
+        }
+
+        function oversikt() {
+            var utskrift = d("divOversikt");
+
+            //Fjerner tabell om den alt er i utskrift
+            while(utskrift.firstChild) {
+                utskrift.removeChild(utskrift.firstChild);
+            }
+
+            //underoverskrift
+            utskrift.innerHTML = "<b>Oversikt til avreisedagen</b>";
+
+            //skriver ut oversikt over forsyninger som trengs
+            var div = document.createElement("div");
+            div.id = "divForsyninger";
+            utskrift.appendChild(div);
+            oversiktForsyninger();
+
+            //lager tabelloversikt
+            var tabell = document.createElement("table");
+            for(var i=0; i<pers.length; i++) {
+                var rad = document.createElement("tr");
+                for(var j=1; j<=3; j++) {
+                    var celle = document.createElement("td");
+                    celle.innerHTML = pers[i][j];
+
+                    //destinasjonen til sist og litt lengre unna navnet (dette er hvorfor j begynner på 1)
+                    if(j === 3) {
+                        celle.innerHTML = pers[i][0];
+                        celle.style.paddingLeft = "50px";
+                    }
+                    rad.appendChild(celle);
+                }
+                tabell.appendChild(rad);
+            }
+            utskrift.appendChild(tabell);
+
+            endreOversikt(utskrift);
+        }
+
+        //bonus - setningen med antall forsyninger
+        function oversiktForsyninger() {
+            //teller anntall matpakker og pledd som trengs
+            var antMat = 0;
+            var antPledd = 0;
+            for(var i=0; i<pers.length; i++) {
+                if(pers[i][4] === 1) {
+                    antMat++;
+                }
+                if(pers[i][5] === 1) {
+                    antPledd++;
+                }
+            }
+
+            //korrekt gramatikk
+            var navnMat = "matpakker";
+            if(antMat === 1)  {
+                navnMat = "matpakke";
+            }
+
+            //finner riktig utskrift som passer antallet
+            if(antMat === 0 && antPledd > 0) {
+                forsyninger = "Forbered " + antPledd + " pledd."
+            }
+            else if(antMat > 0 && antPledd === 0) {
+                forsyninger = "Forbered " + antMat + " " + navnMat + ".";
+            }
+            else if(antMat === 0 && antPledd === 0) {
+                var forsyninger = "";
+            }
+            else {
+                forsyninger = "Forbered " + antMat + " " + navnMat + " og " + antPledd + " pledd.";
+            }
+            console.log(antMat + " " + navnMat + " " + antPledd);
+            //skriver ut
+            d("divForsyninger").innerHTML = forsyninger;
+        }
+
+        function endreOversikt(utskrift) {
+            //lager en nedtrekkmeny over alle personene
+            var meny = document.createElement("select");
+            meny.id = "selOversiktMeny";
+            for(var i=0; i<pers.length; i++){
+                meny.innerHTML += "<option value='" + i + "'>" + pers[i][1] + " " + pers[i][2] + "</option>";
+            }
+            utskrift.appendChild(meny);
+
+            //lager en knapp for å endre personens opplysninger
+            var endre = document.createElement("button");
+            endre.innerHTML = "Endre";
+            utskrift.appendChild(endre);
+            endre.onclick = endrePers;
+
+            //lager en knapp for å slette personens opplysninger
+            var slett = document.createElement("button");
+            slett.type = "button";
+            slett.innerHTML = "Slett";
+            utskrift.appendChild(slett);
+            slett.onclick = slettPers;
+        }
+        
+        function endrePers() {
+            var utskrift = d("divOversikt");
+            var nr = parseInt(d("selOversiktMeny").value);
+
+            //gjør om det visuelle for brukeren slik at hen forstår at man nå er på registreringsnettsiden
+            document.body.backgroundColor = "red";
+            d("btnReg").style.visibility = "hidden";
+            d("divPass").style.visibility = "hidden";
+            d("txtVarsel").innerHTML = "";
+            //henter tilbake informasjonen personen har registrert og nå skal endre
+            endreHentInfo(nr);
+
+            //registreringsknappen er nå skjult og i stedet lager jeg en endreknapp på siden
+            var endreknapp = document.createElement("button");
+            endreknapp.innerHTML = "Endre registreringen til " + pers[nr][1] + " " + pers[nr][2];
+            d("txtVarsel").appendChild(endreknapp);
+
+            endreknapp.onclick = function () {
+                //tilbakestiller det visuelle til den ordentlige registreringsnettsiden
+                d("btnReg").style.visibility = "visible";
+                //sletter personen fra lista
+                pers.splice(nr,1);
+                //og legger til personopplysningen på nytt gjennom den funkjsonen
+                avles();
+                console.log(pers);
+            }
+        }
+
+        function endreHentInfo(nr) {
+            //destinasjon
+            var sjekk = false;
+            for(var i=0; i<dest.length; i++) {
+                if(pers[nr][0] === dest[i][0]) {
+                    var stedsverdi = i;
+                    sjekk = true;
+                }
+            }
+            if(sjekk === false) {
+                d("txtVarsel").innerHTML = "404 ERROR Noe gikk galt med m/stedsverdien ved endring";
+            }
+            d("selBaseMeny").value = stedsverdi;
+            //Navn
+            d("txtFornavn").value = pers[nr][1];
+            d("txtEtternavn").value = pers[nr][2];
+            //kjonn
+            if(pers[nr][3] === "mann") {
+                d("radMann").checked = true;
+                d("radKvinne").checked = false;
+            }
+            else if(pers[nr][3] === "kvinne"){
+                d("radMann").checked = false;
+                d("radKvinne").checked = true;
+            }
+            else {
+                 d("txtVarsel").innerHTML = "404 ERROR Noe gikk galt med m/kjønnene ved endring";
+            }
+            //valgfritt
+            if(pers[nr][4] === 1) {
+                d("chkMat").checked = true;
+            }
+            else {
+                d("chkMat").checked = false;
+            }
+            if(pers[nr][5] === 1) {
+                d("chkPledd").checked = true;
+            }
+            else {
+                d("chkPledd").checked = false;
+            }
+        }
+
+        function slettPers() {
+            //henter ut personen og sletter plassen dens i arrayet
+            var nr = parseInt(d("selOversiktMeny").value);
+            d("txtVarsel").innerHTML = pers[nr][1] + " " + pers[nr][2] + " ble slettet fra listen.";
+            pers.splice(nr,1);
+            //fjerner passet og oppdaterer oversikten
+            oversikt();
+            d("divPass").style.visibility = "hidden";
+        }
+
+        function bildekarusell() {
+            //setter bakgrunnen på div-en til et neste bilde hver gang funksjonen gjentar seg selv
+            var ramme = d("divBilde");
+            ramme.style.width = "400px";
+            ramme.style.backgroundRepeat = "no-repeat";
+            ramme.style.backgroundSize = "contain";
+            ramme.style.transition = "1s";
+            if(bildenr === 8) {
+                bildenr = 1;
+            }
+            else {
+                bildenr++;
+            }
+            d("divBilde").style.backgroundImage = "url('forsvaret" + bildenr + ".jpg')";
+            setTimeout(bildekarusell, 5000);
+        }
+
+        function d(elm) {
+            return document.getElementById(elm);
+        }
+    </script>
+    <style>
+    </style>
+</head>
+<body>
+
+<div id="divOverskrift">
+    <img id="overBilde" src="forsvaret_logo.png" height="100px">
+    <span id="txtOverskrift">FORSVARET - REIS TIL RIKTIG MILITÆRBASE</span>
+</div>
+
+<div class="innpakning">
+    <div id="divReg">
+        Fra Sessvollmoen -
+        Til <select id="selBaseMeny"></select><br/><br/>
+
+        Fornavn:<input id="txtFornavn" type="text"><br/>
+        Etternavn:<input id="txtEtternavn" type="text"><br/><br/>
+
+        <form name="radKjonn">
+            Kjønn:<br/>
+            <input type="radio" name="radKnapp" id="radMann" value="mann">Mann<br/>
+            <input type="radio" name="radKnapp" id="radKvinne" value="kvinne">Kvinne
+        </form><br/>
+
+        Valgfritt:<br/>
+        <input type="checkbox" id="chkMat">Mat<br/>
+        <input type="checkbox" id="chkPledd">Pledd<br/>
+
+        <button id="btnReg">Registrer</button>
+        <br/><div id="txtVarsel" style="color:red;"></div>
+
+
+        <div id="divPass">
+            <h2>Ombordstigningspass</h2>
+            <div id="divInfo"></div>
+        </div>
+    </div>
+
+    <div id="divBilde"></div>
+
+    <div id="divOversikt"></div>
+</div>
+
+</body>
+</html>
