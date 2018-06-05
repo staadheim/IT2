@@ -1,0 +1,35 @@
+body {
+    font-family: "Helvetica Neue";
+    margin: 0;
+}
+#divOverskrift {
+    width: 100%;
+    margin: 0;
+    font-size: 40px;
+    padding: 10px;
+    background-image: url("milligronn.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 30px;
+    color: red;
+}
+#overskrift {
+    padding-bottom: 60px;
+}
+.innpakning {
+    display: flex;
+    margin: 30px;
+}
+#divPass {
+    font-family: 'Source Sans Pro', sans-serif;
+    height: 200px;
+    width: 400px;
+    margin: 25px;
+    padding: 10px;
+    background-repeat: no-repeat;
+    background-size: 150px 150px;
+    background-position: right;
+}
+#divOversikt {
+    padding: 40px;
+}
